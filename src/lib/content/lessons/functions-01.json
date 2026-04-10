@@ -1,0 +1,69 @@
+{
+	"id": "functions-01",
+	"titleEn": "Your Own Commands (Functions)",
+	"titleMm": "သင့်ကိုယ်ပိုင် command တွေ (Functions)",
+	"category": "Getting Stronger",
+	"difficulty": 6,
+	"ageGroupMin": "10-12",
+	"orderIndex": 13,
+	"prerequisites": ["lists-01"],
+	"estimatedMinutes": 22,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "A **function** is a reusable block of code you can run anytime by calling its name. You've already used functions like `print()`, `len()`, and `input()`. Now you'll make your **own**!\n\n```python\ndef function_name():\n    # code here\n    # indented!\n\nfunction_name()  # call it to run it\n```\n\n- `def` means \"define\"\n- Name follows Python variable naming rules\n- Call it (run it) by writing the name with `()`",
+				"mm": "**Function** တစ်ခုက နာမည်ကို ခေါ်ယူခြင်းဖြင့် ဘယ်အချိန်မဆို run နိုင်တဲ့ ပြန်သုံးနိုင်သော code block တစ်ခုပါ။ `print()`၊ `len()`၊ `input()` ကဲ့သို့ function တွေ ကိုယ်တိုင် သုံးဖူးပြီးပါပြီ။ အခု **ကိုယ်ပိုင်** ဖန်တီးမယ်!\n\n```python\ndef function_name():\n    # code ဒီမှာ\n    # indent လုပ်ထားရမည်!\n\nfunction_name()  # run ဖို့ ခေါ်ပါ\n```\n\n- `def` ဆိုတာ \"define\" ပါ\n- နာမည်က Python variable naming rules ကို လိုက်နာပါ\n- `()` ပါ နာမည် ရေးပြီး ခေါ်ပါ (run ပါ)"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "def say_hello():\n    print(\"Hello!\")\n    print(\"Welcome to Python!\")\n\n# Call the function 3 times\nsay_hello()\nsay_hello()\nsay_hello()",
+			"expectedOutput": "Hello!\nWelcome to Python!\nHello!\nWelcome to Python!\nHello!\nWelcome to Python!",
+			"explanation": {
+				"en": "The function is **defined** once with `def`. Then **called** three times. Each call runs the full function body. This avoids repeating the same code!",
+				"mm": "Function ကို `def` ဖြင့် **တစ်ကြိမ်သာ define** လုပ်ပါတယ်။ ပြီးရင် **သုံးကြိမ် ခေါ်** ပါတယ်။ ခေါ်တိုင်း function body အပြည့်ကို run ပါတယ်။ ဒါက code ကို ထပ်ကာ ထပ်ကာ ရေးနေတာကို ရှောင်ပေးပါတယ်!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "def print_separator():\n    print(\"-\" * 20)\n\ndef show_student(name, score):\n    print_separator()\n    print(\"Student:\", name)\n    print(\"Score:\", score)\n\nshow_student(\"Aung\", 85)\nshow_student(\"Mya\", 92)",
+			"expectedOutput": "--------------------\nStudent: Aung\nScore: 85\n--------------------\nStudent: Mya\nScore: 92",
+			"explanation": {
+				"en": "Functions can call other functions! `show_student` calls `print_separator` to draw a line. Parameters (name, score) let us pass different values each time — covered in the next lesson.",
+				"mm": "Function တွေ function အခြားတွေကို ခေါ်နိုင်ပါတယ်! `show_student` က `print_separator` ကို ချောင်းတစ်ကြောင်း ဆွဲဖို့ ခေါ်ပါတယ်။ Parameter တွေ (name, score) က တိုင်းကြိမ် မတူတဲ့ value တွေ ပေးနိုင်အောင် လုပ်ပါတယ် — နောက်သင်ခန်းစာမှာ ကျော်ပြန်ဆောင်ပါမယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Write a function called `print_stars` that prints 10 stars `**********`. Then call it 3 times.",
+				"mm": "ကြယ် ၁၀ ပွင့် `**********` print ထုတ်သော `print_stars` ဟုခေါ်သည့် function ရေးပါ။ ပြီးရင် ၃ ကြိမ် ခေါ်ပါ။"
+			},
+			"starterCode": "def print_stars():\n    print(\"*\" * 10)\n\n# Call print_stars 3 times\n",
+			"validation": {
+				"mustContain": ["def", "print_stars", "print_stars()"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What is the keyword used to create a function in Python?",
+				"mm": "Python မှာ function ဖန်တီးဖို့ သုံးသော keyword က ဘာလဲ?"
+			},
+			"options": {
+				"en": ["function", "define", "def", "make"],
+				"mm": ["function", "define", "def", "make"]
+			},
+			"correct": 2,
+			"explanation": {
+				"en": "`def` (short for \"define\") is the keyword used to create a function in Python. Every function definition starts with `def`.",
+				"mm": "`def` (\"define\" ၏ အတိုကောက်) က Python မှာ function ဖန်တီးဖို့ သုံးသော keyword ပါ။ Function definition တိုင်း `def` ဖြင့် စပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["functions-01-p1", "functions-01-p2", "functions-01-p3"]
+}

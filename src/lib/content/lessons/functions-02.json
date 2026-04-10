@@ -1,0 +1,69 @@
+{
+	"id": "functions-02",
+	"titleEn": "Functions with Parameters",
+	"titleMm": "Parameter ပါသော Functions",
+	"category": "Getting Stronger",
+	"difficulty": 7,
+	"ageGroupMin": "10-12",
+	"orderIndex": 14,
+	"prerequisites": ["functions-01"],
+	"estimatedMinutes": 22,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "**Parameters** let you pass data into a function, so it can work with different values each time.\n\n```python\ndef greet(name):      # name is a parameter\n    print(\"Hello,\", name)\n\ngreet(\"Aung\")         # \"Aung\" is the argument\ngreet(\"Mya\")\n```\n\nA function can also **return** a value with `return`:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)    # result = 8\n```",
+				"mm": "**Parameter** တွေက function ထဲ data ဖြတ်ပေးနိုင်ပြီး တိုင်းကြိမ် မတူတဲ့ value တွေနဲ့ အလုပ်လုပ်နိုင်ပါတယ်။\n\n```python\ndef greet(name):       # name က parameter ပါ\n    print(\"Hello,\", name)\n\ngreet(\"Aung\")          # \"Aung\" က argument ပါ\ngreet(\"Mya\")\n```\n\nFunction တစ်ခုက `return` ဖြင့် value **ပြန်ပေး**လည်း နိုင်ပါတယ်:\n\n```python\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)     # result = 8\n```"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "def greet(name, language=\"English\"):\n    if language == \"Myanmar\":\n        print(f\"မင်္ဂလာပါ, {name}!\")\n    else:\n        print(f\"Hello, {name}!\")\n\ngreet(\"Aung\")\ngreet(\"Mya\", \"Myanmar\")\ngreet(\"Lin\", \"English\")",
+			"expectedOutput": "Hello, Aung!\nမင်္ဂလာပါ, Mya!\nHello, Lin!",
+			"explanation": {
+				"en": "`language=\"English\"` is a **default parameter** — if you don't provide it, it uses \"English\" automatically. This makes functions flexible!",
+				"mm": "`language=\"English\"` က **default parameter** ပါ — မပေးရင် \"English\" ကို အလိုအလျောက် သုံးပါတယ်။ ဒါက function တွေကို ပြောင်းလွယ်ဝင်လွယ် ဖြစ်စေပါတယ်!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "def calculate_area(length, width):\n    area = length * width\n    return area\n\ndef is_square(length, width):\n    return length == width\n\nroom_area = calculate_area(5, 4)\nprint(\"Area:\", room_area, \"square meters\")\nprint(\"Is square?\", is_square(4, 4))\nprint(\"Is square?\", is_square(5, 4))",
+			"expectedOutput": "Area: 20 square meters\nIs square? True\nIs square? False",
+			"explanation": {
+				"en": "Functions that `return` values can be used in expressions. `is_square` returns `True` or `False` (a boolean) directly from the comparison.",
+				"mm": "`return` value ရှိသော function တွေကို expression တွေမှာ သုံးနိုင်ပါတယ်။ `is_square` က နှိုင်းယှဉ်မှုမှ `True` သို့ `False` (boolean) ကို တိုက်ရိုက် ပြန်ပေးပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Write a function `multiply(a, b)` that returns `a * b`. Then print the result of `multiply(6, 7)`.",
+				"mm": "`a * b` ပြန်ပေးသော `multiply(a, b)` function ရေးပါ။ ပြီးရင် `multiply(6, 7)` ၏ ရလဒ်ကို print ထုတ်ပါ။"
+			},
+			"starterCode": "def multiply(a, b):\n    return \n\nresult = multiply(6, 7)\nprint(result)\n",
+			"validation": {
+				"mustContain": ["def", "return", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What does `return` do in a function?",
+				"mm": "Function ထဲမှာ `return` က ဘာလုပ်တာလဲ?"
+			},
+			"options": {
+				"en": ["Prints a value to screen", "Sends a value back to where the function was called", "Stops the whole program", "Loops back to the start"],
+				"mm": ["ဖန်သားပြင်ပေါ် value ပြပါတယ်", "Function ခေါ်ခဲ့တဲ့ နေရာသို့ value ပြန်ပေးပါတယ်", "Program တစ်ခုလုံး ရပ်ပါတယ်", "အစကို ပြန်ဆိုင်ပါတယ်"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`return` sends a value back to whoever called the function, so you can store it in a variable or use it in an expression.",
+				"mm": "`return` က function ကို ခေါ်သူထံ value ပြန်ပေးတဲ့အတွက် variable ထဲ သိမ်းထားနိုင်သည် သို့ expression တစ်ခုမှာ သုံးနိုင်ပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["functions-02-p1", "functions-02-p2", "functions-02-p3"]
+}

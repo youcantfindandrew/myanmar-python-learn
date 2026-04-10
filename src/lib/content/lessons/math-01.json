@@ -1,0 +1,69 @@
+{
+	"id": "math-01",
+	"titleEn": "Python as a Calculator",
+	"titleMm": "Python ကို ဂဏန်းပေါင်းစက်အဖြစ် သုံးခြင်း",
+	"category": "Building Blocks",
+	"difficulty": 3,
+	"ageGroupMin": "9-11",
+	"orderIndex": 15,
+	"prerequisites": ["print-01"],
+	"estimatedMinutes": 15,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "Python is a powerful calculator! Here are all the math operators:\n\n| Operator | Meaning | Example | Result |\n|---|---|---|---|\n| `+` | Add | `5 + 3` | `8` |\n| `-` | Subtract | `10 - 4` | `6` |\n| `*` | Multiply | `6 * 7` | `42` |\n| `/` | Divide | `15 / 4` | `3.75` |\n| `//` | Floor divide | `15 // 4` | `3` |\n| `%` | Remainder | `15 % 4` | `3` |\n| `**` | Power | `2 ** 8` | `256` |\n\n`//` gives the whole number part of division. `%` gives the remainder.",
+				"mm": "Python က စွမ်းအားကြီးသော ဂဏန်းပေါင်းစက်တစ်ခုပါ! Math operator အားလုံး ဒီမှာ:\n\n| Operator | အဓိပ္ပာယ် | ဥပမာ | ရလဒ် |\n|---|---|---|---|\n| `+` | ပေါင်း | `5 + 3` | `8` |\n| `-` | နှုတ် | `10 - 4` | `6` |\n| `*` | မြှောက် | `6 * 7` | `42` |\n| `/` | စား | `15 / 4` | `3.75` |\n| `//` | ကိန်းပြည့်စား | `15 // 4` | `3` |\n| `%` | အကြွင်း | `15 % 4` | `3` |\n| `**` | ထပ်ညွှန်း | `2 ** 8` | `256` |\n\n`//` က စားချင်း ကိန်းပြည့်ကို ပေးပါတယ်။ `%` က အကြွင်းကို ပေးပါတယ်။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "print(17 // 5)   # Floor division: 3\nprint(17 % 5)    # Remainder: 2\nprint(2 ** 10)   # 2 to the power 10: 1024\n\n# Check if a number is even\nnumber = 42\nif number % 2 == 0:\n    print(number, \"is even\")\nelse:\n    print(number, \"is odd\")",
+			"expectedOutput": "3\n2\n1024\n42 is even",
+			"explanation": {
+				"en": "The `%` (modulo) trick: any number `% 2` equals 0 if even, 1 if odd. This is used everywhere in programming!",
+				"mm": "`%` (modulo) လှည့်ကွက်: မည်သည့်ဂဏန်းမဆို `% 2` က စုံဂဏန်းဆိုရင် 0 ၊ မဂဏန်းဆိုရင် 1 ပေးပါတယ်။ Programming မှာ အနှံ့ သုံးပါတယ်!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "# Python follows math order of operations\nresult1 = 2 + 3 * 4      # Multiply first!\nresult2 = (2 + 3) * 4    # Brackets first!\n\nprint(result1)  # 14\nprint(result2)  # 20\n\n# Useful math functions\nimport math\nprint(math.sqrt(144))   # Square root: 12.0\nprint(round(3.7))       # Round: 4",
+			"expectedOutput": "14\n20\n12.0\n4",
+			"explanation": {
+				"en": "Python follows BODMAS/PEMDAS rules — multiplication before addition. Use parentheses to change the order. `math.sqrt()` gives the square root.",
+				"mm": "Python က BODMAS/PEMDAS စည်းမျဉ်းကို လိုက်နာပါတယ် — ပေါင်းခြင်းမတိုင်မီ မြှောက်ခြင်းကို ဦးစွာ။ အစဥ်ကို ပြောင်းဖို့ ကွင်းစကွင်းပိတ် သုံးပါ။ `math.sqrt()` က square root ပေးပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Calculate and print:\n1. `2 ** 16` (2 to the power 16)\n2. The remainder of `100 / 7`\n3. Whether 99 is odd (use `%`)",
+				"mm": "တွက်ချက်ပြီး print ထုတ်ပါ:\n1. `2 ** 16` (2 ၏ 16 ထပ်)\n2. `100 / 7` ၏ အကြွင်း\n3. 99 က မဂဏန်းဆိုတာ (`%` သုံးပါ)"
+			},
+			"starterCode": "# 2 to the power 16\nprint(2 ** 16)\n\n# Remainder of 100 / 7\nprint(100 % 7)\n\n# Is 99 odd?\nif 99 % 2 != 0:\n    print(\"99 is odd\")\n",
+			"validation": {
+				"mustContain": ["print", "**", "%"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What is the result of `13 % 4`?",
+				"mm": "`13 % 4` ၏ ရလဒ်က ဘာလဲ?"
+			},
+			"options": {
+				"en": ["3", "1", "4", "0.25"],
+				"mm": ["3", "1", "4", "0.25"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "13 ÷ 4 = 3 remainder **1**. The `%` operator gives the remainder. 4×3=12, and 13-12=1.",
+				"mm": "13 ÷ 4 = 3 အကြွင်း **1**။ `%` operator က အကြွင်းကို ပေးပါတယ်။ 4×3=12 ၊ နဲ့ 13-12=1 ပါ။"
+			}
+		}
+	],
+	"problemIds": ["math-01-p1", "math-01-p2", "math-01-p3"]
+}

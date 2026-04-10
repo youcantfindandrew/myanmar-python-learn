@@ -1,0 +1,69 @@
+{
+	"id": "loops-02",
+	"titleEn": "While Loops",
+	"titleMm": "While Loops",
+	"category": "Getting Stronger",
+	"difficulty": 5,
+	"ageGroupMin": "10-12",
+	"orderIndex": 11,
+	"prerequisites": ["loops-01"],
+	"estimatedMinutes": 18,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "A `for` loop runs a **set number** of times. A `while` loop runs **as long as a condition is true** — you don't need to know the count in advance.\n\n```python\nwhile condition:\n    # runs repeatedly until condition is False\n```\n\n⚠️ **Warning:** If the condition never becomes False, the loop runs **forever**! Always make sure something changes inside the loop.",
+				"mm": "`for` loop က **သတ်မှတ်ထားသော အကြိမ်** run ပါတယ်။ `while` loop က **condition မှန်နေသမျှ** run ပါတယ် — အကြိမ်ကို ကြိုသိနေဖို့ မလိုပါ။\n\n```python\nwhile condition:\n    # condition False ဖြစ်မချင်း ထပ်ကြိမ် run မယ်\n```\n\n⚠️ **သတိပေး:** Condition က ဘယ်တော့မှ False မဖြစ်ရင် loop က **အစဥ်** run နေမယ်! Loop ထဲမှာ တစ်ခုခု ပြောင်းလဲနေစေဖို့ သေချာပါ။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "count = 1\n\nwhile count <= 5:\n    print(\"Count:\", count)\n    count = count + 1\n\nprint(\"Done!\")",
+			"expectedOutput": "Count: 1\nCount: 2\nCount: 3\nCount: 4\nCount: 5\nDone!",
+			"explanation": {
+				"en": "`count` starts at 1. Each loop iteration prints it and adds 1. When count reaches 6, the condition `count <= 5` becomes False and the loop stops.",
+				"mm": "`count` က 1 ကနေ စပါတယ်။ Loop iteration တစ်ခုစီမှာ print ထုတ်ပြီး 1 ပေါင်းပါတယ်။ count က 6 ရောက်တဲ့အခါ condition `count <= 5` က False ဖြစ်ပြီး loop ရပ်ပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "# Countdown!\ntimer = 5\n\nwhile timer > 0:\n    print(timer, \"...\")\n    timer = timer - 1\n\nprint(\"Blast off! 🚀\")",
+			"expectedOutput": "5 ...\n4 ...\n3 ...\n2 ...\n1 ...\nBlast off! 🚀",
+			"explanation": {
+				"en": "Each loop iteration decreases `timer` by 1. When timer hits 0, `timer > 0` is False and the loop ends. This is a classic countdown pattern.",
+				"mm": "Loop iteration တစ်ခုစီမှာ `timer` ကို 1 ဖြင့် လျော့ပါတယ်။ timer က 0 ရောက်တဲ့အခါ `timer > 0` က False ဖြစ်ပြီး loop ရပ်ပါတယ်။ ဤသည် classic countdown pattern ပါ။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Use a while loop to print all even numbers from 2 to 20 (inclusive).",
+				"mm": "while loop ကိုသုံးပြီး 2 ကနေ 20 ထိ ရှိသော စုံဂဏန်းများ (20 ပါ) အားလုံး print ထုတ်ပါ။"
+			},
+			"starterCode": "number = 2\n\nwhile number <= 20:\n    print(number)\n    number = number + 2\n",
+			"validation": {
+				"mustContain": ["while", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "When does a `while` loop stop running?",
+				"mm": "`while` loop က ဘယ်အခါ run ရပ်မလဲ?"
+			},
+			"options": {
+				"en": ["After exactly 10 times", "When its condition becomes False", "When you write `stop`", "When the variable equals 0"],
+				"mm": ["တိတိကျကျ ၁၀ ကြိမ်ပြီးတဲ့နောက်", "ဒါရဲ့ condition က False ဖြစ်တဲ့အခါ", "`stop` ရေးတဲ့အခါ", "Variable က 0 ညီတဲ့အခါ"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "A `while` loop keeps running as long as its condition is True. The moment the condition becomes False, the loop stops. It could run 0 times, 10 times, or forever.",
+				"mm": "`while` loop က condition True နေသမျှ run ဆက်ပါတယ်။ Condition False ဖြစ်တဲ့ အချိန်မှာ loop ရပ်ပါတယ်။ ၀ ကြိမ်၊ ၁၀ ကြိမ် သို့ မဟုတ် အစဥ် run နိုင်ပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["loops-02-p1", "loops-02-p2", "loops-02-p3"]
+}

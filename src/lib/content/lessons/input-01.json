@@ -1,0 +1,76 @@
+{
+	"id": "input-01",
+	"titleEn": "Asking Questions (input)",
+	"titleMm": "မေးခွန်းမေးခြင်း (input)",
+	"category": "Building Blocks",
+	"difficulty": 3,
+	"ageGroupMin": "9-11",
+	"orderIndex": 6,
+	"prerequisites": ["print-01"],
+	"estimatedMinutes": 15,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "So far, our programs just run and show output. But what if we want the user to **type something**?\n\nThe `input()` function **pauses** the program and waits for the user to type something and press Enter. Whatever they type comes back as a **string**.\n\n```python\nname = input(\"What is your name? \")\nprint(\"Hello,\", name)\n```\n\nThe text inside `input()` is the **prompt** — it tells the user what to type.",
+				"mm": "ယခုထိ ကျွန်ုပ်တို့ program တွေက run ပြီး output ပြပဲပြပဲ ပြသပါတယ်။ ဒါပေမယ့် user ကို **တစ်ခုခုရိုက်ထည့်** စေချင်ရင်?\n\n`input()` function က program ကို **ရပ်ထား**ပြီး user ရိုက်ထည့်ပြီး Enter နှိပ်တာ စောင့်ပါတယ်။ user ရိုက်တာ **string** အဖြစ် ပြန်ပေးပါတယ်။\n\n```python\nname = input(\"သင့်နာမည်က ဘာလဲ? \")\nprint(\"မင်္ဂလာပါ,\", name)\n```\n\n`input()` ထဲက စာသားက **prompt** ပါ — user ကို ဘာရိုက်ရမယ်ဆိုတာ ပြောပါတယ်။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "name = input(\"Enter your name: \")\nprint(\"Hello,\", name + \"!\")\nprint(\"Welcome to Python!\")",
+			"expectedOutput": "Hello, Aung!\nWelcome to Python!",
+			"explanation": {
+				"en": "The program asks for a name, then greets the user. In the editor, we simulate `input()` — in the real app it would wait for you to type.",
+				"mm": "Program က နာမည်မေးပြီး user ကို နှုတ်ခွန်းဆက်ပါတယ်။ Editor မှာ `input()` ကို simulate လုပ်ပါတယ် — real app မှာ သင်ရိုက်တာ စောင့်ပါမယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "explanation",
+			"content": {
+				"en": "**Important:** `input()` always gives you a **string**, even if the user types a number!\n\n```python\nage = input(\"Your age: \")\nprint(age + 1)  # ERROR! Can't add string + number\n```\n\nTo use it as a number, convert it with `int()` or `float()`:\n```python\nage = int(input(\"Your age: \"))\nprint(age + 1)  # Works!\n```",
+				"mm": "**အရေးကြီး:** `input()` က အမြဲ **string** ပြန်ပေးပါတယ်၊ user ဂဏန်းရိုက်ထည့်ရင်တောင်!\n\n```python\nage = input(\"သင့်အသက်: \")\nprint(age + 1)  # ERROR! string + number ပေါင်းလို့မရ\n```\n\nဂဏန်းအဖြစ် သုံးဖို့ `int()` သို့ `float()` နဲ့ ပြောင်းပါ:\n```python\nage = int(input(\"သင့်အသက်: \"))\nprint(age + 1)  # အလုပ်လုပ်ပါတယ်!\n```"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "# We simulate input() here for the example\nage_text = \"13\"  # pretend this came from input()\nage = int(age_text)\n\nprint(\"You are\", age, \"years old\")\nprint(\"Next year you will be\", age + 1)",
+			"expectedOutput": "You are 13 years old\nNext year you will be 14",
+			"explanation": {
+				"en": "`int()` converts text to a whole number. `float()` converts to a decimal number. Always convert `input()` results when you need to do math!",
+				"mm": "`int()` က text ကို ကိန်းပြည့်အဖြစ် ပြောင်းပါတယ်။ `float()` က ဒဿမကိန်းအဖြစ် ပြောင်းပါတယ်။ သင်္ချာတွက်ဖို့ `input()` ရလဒ်ကို အမြဲပြောင်းပါ!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Create a program that asks for a number and prints double that number. Use `int(input(...))` to get a number, then multiply by 2.",
+				"mm": "ဂဏန်းမေးပြီး ထိုဂဏန်း၏ နှစ်ဆကို print ထုတ်သော program ဖန်တီးပါ။ ဂဏန်းရဖို့ `int(input(...))` ကိုသုံးပြီး 2 နဲ့ မြှောက်ပါ။"
+			},
+			"starterCode": "# Ask for a number and print double it\nnumber = int(input(\"Enter a number: \"))\n# Print double the number\n",
+			"validation": {
+				"mustContain": ["input", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "The user types `25` when asked. What type does `input()` return?",
+				"mm": "မေးရင် user က `25` ရိုက်ထည့်တယ်။ `input()` က ဘာ type ပြန်ပေးလဲ?"
+			},
+			"options": {
+				"en": ["Integer (whole number)", "Float (decimal)", "String (text)", "Boolean (true/false)"],
+				"mm": ["Integer (ကိန်းပြည့်)", "Float (ဒဿမကိန်း)", "String (စာသား)", "Boolean (မှန်/မှား)"]
+			},
+			"correct": 2,
+			"explanation": {
+				"en": "`input()` always returns a string, no matter what the user types. To use it as a number, wrap it in `int()` or `float()`.",
+				"mm": "`input()` က user ဘာရိုက်ထည့်ရိုက်ထည့် အမြဲ string ပြန်ပေးပါတယ်။ ဂဏန်းအဖြစ် သုံးဖို့ `int()` သို့ `float()` နဲ့ ထုပ်ပါ။"
+			}
+		}
+	],
+	"problemIds": ["input-01-p1", "input-01-p2", "input-01-p3"]
+}

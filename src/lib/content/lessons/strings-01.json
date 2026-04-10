@@ -1,0 +1,69 @@
+{
+	"id": "strings-01",
+	"titleEn": "Playing with Text (Strings)",
+	"titleMm": "စာသားနဲ့ ကစားခြင်း (Strings)",
+	"category": "Building Blocks",
+	"difficulty": 4,
+	"ageGroupMin": "9-11",
+	"orderIndex": 9,
+	"prerequisites": ["conditions-02"],
+	"estimatedMinutes": 18,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "Strings (text) have superpowers! Python has built-in **methods** for working with strings.\n\nA method is called using a **dot**: `string.method()`\n\nCommon string methods:\n- `.upper()` → ALL CAPS\n- `.lower()` → all lowercase\n- `.len()` → wait, that's `len(string)` not a method\n- `len(string)` → count characters\n- `.strip()` → remove spaces from start/end\n- `.replace(old, new)` → swap text\n- `.count(text)` → count occurrences",
+				"mm": "String (စာသား) တွေမှာ စွမ်းအားတွေ ရှိပါတယ်! Python မှာ string တွေနဲ့ အလုပ်လုပ်ဖို့ built-in **method** တွေ ရှိပါတယ်။\n\nMethod တစ်ခုကို **dot** ကိုသုံးပြီး ခေါ်ပါ: `string.method()`\n\nString method များ:\n- `.upper()` → ကြီးစာလုံး အားလုံး\n- `.lower()` → သေးစာလုံး အားလုံး\n- `len(string)` → စာလုံးအရေအတွက်\n- `.strip()` → အစ/အဆုံးမှ space ဖယ်\n- `.replace(old, new)` → စာသားပြောင်း\n- `.count(text)` → ပေါ်ထွက်ရေ"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "name = \"  Aung Kyaw  \"\n\nprint(name.upper())\nprint(name.lower())\nprint(name.strip())\nprint(len(name))\nprint(name.count(\"a\"))",
+			"expectedOutput": "  AUNG KYAW  \n  aung kyaw  \nAung Kyaw\n14\n1",
+			"explanation": {
+				"en": "Notice `.strip()` removes the spaces at the start and end. `len()` counts ALL characters including spaces. `.count()` is case-sensitive — it finds lowercase 'a' only.",
+				"mm": "`.strip()` က အစနဲ့ အဆုံးမှ space ကို ဖယ်တာ သတိပြုပါ။ `len()` က space အပါအဝင် စာလုံး **အားလုံး** ကို ရေပါတယ်။ `.count()` က case-sensitive ပါ — lowercase 'a' ကိုသာ ရှာပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "sentence = \"I love Python programming\"\n\nprint(sentence.replace(\"Python\", \"Myanmar\"))\nprint(sentence.upper())\nprint(\"Characters:\", len(sentence))\n\n# Check if text is in a string\nif \"Python\" in sentence:\n    print(\"Found Python!\")",
+			"expectedOutput": "I love Myanmar programming\nI LOVE PYTHON PROGRAMMING\nCharacters: 25\nFound Python!",
+			"explanation": {
+				"en": "`.replace()` creates a new string with the swap — it doesn't change the original. The `in` keyword checks if one string contains another.",
+				"mm": "`.replace()` က ပြောင်းလဲမှုနဲ့ string အသစ်တစ်ခု ဖန်တီးပါတယ် — မူရင်းကို မပြောင်းပါ။ `in` keyword က string တစ်ခုထဲမှာ နောက်တစ်ခု ပါမပါ စစ်ဆေးပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Given `word = \"hello world\"`, print it in uppercase, count its length, and check if \"world\" is in it.",
+				"mm": "`word = \"hello world\"` ပေးထားတယ်, ၎င်းကို uppercase နဲ့ print ထုတ်ပါ၊ length ကို ရေပါ၊ \"world\" ပါမပါ စစ်ဆေးပါ။"
+			},
+			"starterCode": "word = \"hello world\"\n\n# Print uppercase\n\n# Print length\n\n# Check if \"world\" is in it\n",
+			"validation": {
+				"mustContain": ["upper", "len", "in", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What does `\"Hello\".lower()` return?",
+				"mm": "`\"Hello\".lower()` က ဘာပြန်ပေးလဲ?"
+			},
+			"options": {
+				"en": ["\"HELLO\"", "\"hello\"", "\"Hello\"", "5"],
+				"mm": ["\"HELLO\"", "\"hello\"", "\"Hello\"", "5"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`.lower()` converts all letters to lowercase. \"Hello\" becomes \"hello\".",
+				"mm": "`.lower()` က စာလုံးအားလုံးကို lowercase ပြောင်းပါတယ်။ \"Hello\" က \"hello\" ဖြစ်ပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["strings-01-p1", "strings-01-p2", "strings-01-p3"]
+}

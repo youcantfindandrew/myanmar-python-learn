@@ -1,0 +1,69 @@
+{
+	"id": "loops-01",
+	"titleEn": "Repeating Things (for loops)",
+	"titleMm": "အကြိမ်ကြိမ် ပြုလုပ်ခြင်း (for loops)",
+	"category": "Getting Stronger",
+	"difficulty": 5,
+	"ageGroupMin": "10-12",
+	"orderIndex": 10,
+	"prerequisites": ["strings-01"],
+	"estimatedMinutes": 20,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "Imagine printing \"Hello\" 100 times. You'd need 100 `print()` lines!\n\nA **for loop** repeats code a set number of times:\n\n```python\nfor i in range(5):\n    print(\"Hello\")\n```\n\n- `range(5)` creates numbers 0, 1, 2, 3, 4\n- `i` is the **loop variable** — it holds the current number\n- The indented code runs **once per number**\n\n`range()` variations:\n- `range(5)` → 0, 1, 2, 3, 4\n- `range(1, 6)` → 1, 2, 3, 4, 5\n- `range(0, 10, 2)` → 0, 2, 4, 6, 8 (step by 2)",
+				"mm": "\"Hello\" ကို ၁၀၀ ကြိမ် print ထုတ်မယ်ဆိုပါစို့။ `print()` ၁၀၀ ကြောင်း လိုမယ်!\n\n**for loop** က code ကို သတ်မှတ်ထားသော အကြိမ် ကြိမ်ပြုလုပ်ပါတယ်:\n\n```python\nfor i in range(5):\n    print(\"Hello\")\n```\n\n- `range(5)` က 0, 1, 2, 3, 4 ဂဏန်းတွေ ဖန်တီးပါတယ်\n- `i` က **loop variable** ပါ — လက်ရှိဂဏန်းကို ထိန်းသိမ်းပါတယ်\n- Indent လုပ်ထားသော code က **ဂဏန်းတစ်ခုစီအတွက် တစ်ကြိမ်** run ပါတယ်\n\n`range()` ပုံစံများ:\n- `range(5)` → 0, 1, 2, 3, 4\n- `range(1, 6)` → 1, 2, 3, 4, 5\n- `range(0, 10, 2)` → 0, 2, 4, 6, 8 (2 ခုစီ ကျော်)"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "for i in range(5):\n    print(\"Count:\", i)\n\nprint(\"Done!\")",
+			"expectedOutput": "Count: 0\nCount: 1\nCount: 2\nCount: 3\nCount: 4\nDone!",
+			"explanation": {
+				"en": "The loop runs 5 times (0 through 4). After the loop ends, \"Done!\" prints once. Notice `range(5)` starts at 0, not 1!",
+				"mm": "Loop က ၅ ကြိမ် run ပါတယ် (0 ကနေ 4 ထိ)။ Loop ပြီးတဲ့နောက် \"Done!\" ကို တစ်ကြိမ် print ထုတ်ပါတယ်။ `range(5)` က 1 မဟုတ်ဘဲ 0 ကနေ စတာ သတိပြုပါ!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "# Loop over a list of items\nfruits = [\"mango\", \"banana\", \"papaya\"]\n\nfor fruit in fruits:\n    print(\"I like\", fruit)\n\n# Sum with a loop\ntotal = 0\nfor n in range(1, 6):\n    total = total + n\nprint(\"Sum 1-5:\", total)",
+			"expectedOutput": "I like mango\nI like banana\nI like papaya\nSum 1-5: 15",
+			"explanation": {
+				"en": "You can loop over a list directly — `fruit` takes each value in turn. The second loop adds numbers 1 through 5, showing how loops can build up a result.",
+				"mm": "List တစ်ခုကို တိုက်ရိုက် loop လုပ်နိုင်ပါတယ် — `fruit` က value တစ်ခုစီကို တဆင့်ပြီးတဆင့် ယူပါတယ်။ ဒုတိယ loop က 1 ကနေ 5 ထိ ဂဏန်းများကို ပေါင်းပြီး loop တွေဘယ်လို ရလဒ်တင်ဆောင်နိုင်တယ်ဆိုတာ ပြပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Print the multiplication table for 5 (5×1 through 5×10). Each line should look like: `5 x 1 = 5`",
+				"mm": "5 ၏ မြှောက်လဒ်ဇယားကို print ထုတ်ပါ (5×1 ကနေ 5×10 ထိ)။ ကြောင်းတစ်ကြောင်းစီ ဤသို့ ဖြစ်ရမည်: `5 x 1 = 5`"
+			},
+			"starterCode": "# Print multiplication table for 5\nfor i in range(1, 11):\n    print(f\"5 x {i} = \")\n",
+			"validation": {
+				"mustContain": ["for", "range", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "How many times does the loop body run?\n```python\nfor i in range(3, 8):\n    print(i)\n```",
+				"mm": "Loop body က ဘယ်နှစ်ကြိမ် run မလဲ?\n```python\nfor i in range(3, 8):\n    print(i)\n```"
+			},
+			"options": {
+				"en": ["3 times", "5 times", "8 times", "4 times"],
+				"mm": ["၃ ကြိမ်", "၅ ကြိမ်", "၈ ကြိမ်", "၄ ကြိမ်"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`range(3, 8)` gives 3, 4, 5, 6, 7 — that's 5 numbers, so the loop runs 5 times. The end value (8) is not included.",
+				"mm": "`range(3, 8)` က 3, 4, 5, 6, 7 ပေးပါတယ် — ဂဏန်း ၅ ခုဖြစ်တဲ့အတွက် loop က ၅ ကြိမ် run ပါတယ်။ အဆုံးတန်ဖိုး (8) က မပါပါ။"
+			}
+		}
+	],
+	"problemIds": ["loops-01-p1", "loops-01-p2", "loops-01-p3"]
+}

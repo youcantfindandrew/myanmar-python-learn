@@ -4,16 +4,18 @@
 	import { progressMap, getStreak } from '$lib/stores/progress';
 	import { locale } from '$lib/stores/locale';
 	import { t } from '$lib/i18n';
-	import { db } from '$lib/db/schema';
+	import { db, type LocalAttempt } from '$lib/db/schema';
 	import type { LocalLesson } from '$lib/db/schema';
 	import StatCard from '$lib/components/dashboard/StatCard.svelte';
 	import ProgressRing from '$lib/components/dashboard/ProgressRing.svelte';
 	import LessonCard from '$lib/components/lesson/LessonCard.svelte';
+	import { recommendNextLesson } from '$lib/utils/adaptive';
 
 	let lessons = $state<LocalLesson[]>([]);
 	let streak = $state(0);
 	let totalMinutes = $state(0);
 	let problemsSolved = $state(0);
+	let recentAttempts = $state<LocalAttempt[]>([]);
 
 	const completedCount = $derived(
 		[...$progressMap.values()].filter((p) => p.status === 'completed').length
@@ -31,16 +33,21 @@
 			allProgress.reduce((sum, p) => sum + p.timeSpentSeconds, 0) / 60
 		);
 
-		const attempts = await db.attempts.where('passed').equals(1).count();
-		problemsSolved = attempts;
+		const passed = await db.attempts.where('passed').equals(1).count();
+		problemsSolved = passed;
+
+		recentAttempts = await db.attempts.orderBy('attemptedAt').reverse().limit(20).toArray();
 	});
 
-	// Next recommended lesson
+	// Adaptive next lesson
 	const nextLesson = $derived(
-		lessons.find((l) => {
-			const prog = $progressMap.get(l.id);
-			return !prog || prog.status !== 'completed';
-		})
+		lessons.length === 0 ? null : recommendNextLesson(
+			$currentUser?.ageGroup ?? '9-11',
+			[...$progressMap.entries()].filter(([, p]) => p.status === 'completed').map(([id]) => id),
+			[...$progressMap.entries()].filter(([, p]) => p.status === 'in_progress').map(([id]) => id),
+			recentAttempts,
+			lessons
+		)
 	);
 </script>
 

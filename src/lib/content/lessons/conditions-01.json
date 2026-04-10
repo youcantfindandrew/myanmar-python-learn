@@ -1,0 +1,69 @@
+{
+	"id": "conditions-01",
+	"titleEn": "Making Decisions (if)",
+	"titleMm": "ဆုံးဖြတ်ချက်များ (if)",
+	"category": "Building Blocks",
+	"difficulty": 3,
+	"ageGroupMin": "9-11",
+	"orderIndex": 7,
+	"prerequisites": ["input-01"],
+	"estimatedMinutes": 18,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "Programs can make **decisions**! The `if` statement runs code only when a condition is **true**.\n\n```python\nif condition:\n    # code runs only if condition is True\n```\n\nThe **colon** `:` and **indentation** (4 spaces) are required — Python uses them to know what's inside the `if`.\n\nComparison operators:\n- `==` equals\n- `!=` not equal\n- `>` greater than\n- `<` less than\n- `>=` greater than or equal\n- `<=` less than or equal",
+				"mm": "Program တွေ **ဆုံးဖြတ်ချက်** ချနိုင်ပါတယ်! `if` statement က condition **မှန်တဲ့** အခါမှသာ code ကို run ပါတယ်။\n\n```python\nif condition:\n    # condition True ဖြစ်မှသာ code run ပါမယ်\n```\n\n**ကော်မာ** `:` နဲ့ **indentation** (space ၄ ခု) လိုအပ်ပါတယ် — ဘာ `if` ထဲမှာ ပါလဲဆိုတာ Python က ဒါနဲ့ သိပါတယ်။\n\nနှိုင်းယှဉ် operator တွေ:\n- `==` ညီသည်\n- `!=` မညီ\n- `>` ကြီးသည်\n- `<` ငယ်သည်\n- `>=` ကြီးသည် သို့ ညီသည်\n- `<=` ငယ်သည် သို့ ညီသည်"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "age = 14\n\nif age >= 13:\n    print(\"You are a teenager!\")\n\nif age == 14:\n    print(\"You are exactly 14!\")\n\nif age < 5:\n    print(\"You are very young!\")  # This won't print",
+			"expectedOutput": "You are a teenager!\nYou are exactly 14!",
+			"explanation": {
+				"en": "The first two conditions are `True` so their code runs. The third is `False` (14 is not less than 5), so nothing prints for it.",
+				"mm": "ပထမ condition နှစ်ခုက `True` ဖြစ်တဲ့အတွက် သူတို့ code run ပါတယ်။ တတိယက `False` ဖြစ်တာကြောင့် (14 က 5 အောက် မဟုတ်ပါ) ဘာမှ မပြပါ။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "score = 85\n\nif score >= 90:\n    print(\"Grade: A\")\n\nif score >= 80 and score < 90:\n    print(\"Grade: B\")\n\nif score < 50:\n    print(\"Need more practice\")",
+			"expectedOutput": "Grade: B",
+			"explanation": {
+				"en": "You can combine conditions with `and` (both must be true) and `or` (either can be true). Here, `score >= 80 and score < 90` means \"between 80 and 90\".",
+				"mm": "`and` (နှစ်ခုလုံး မှန်ရမည်) နဲ့ `or` (တစ်ခုခု မှန်ရုံနဲ့ ရသည်) ဖြင့် condition တွေကို ပေါင်းနိုင်ပါတယ်။ ဒီမှာ `score >= 80 and score < 90` ဆိုတာ \"80 နဲ့ 90 ကြား\" ဆိုတဲ့ သဘောပါ။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Write code that checks if `temperature = 35` is greater than 30. If so, print \"It's hot!\"",
+				"mm": "`temperature = 35` က 30 ထက်ကြီးမကြီး စစ်ဆေးသော code ရေးပါ။ ကြီးရင် \"It's hot!\" ဆိုပြီး print ထုတ်ပါ။"
+			},
+			"starterCode": "temperature = 35\n\n# Check if temperature is greater than 30\n",
+			"validation": {
+				"mustContain": ["if", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What does `==` mean in Python?",
+				"mm": "Python မှာ `==` ဆိုတာ ဘာကို ဆိုလိုလဲ?"
+			},
+			"options": {
+				"en": ["Assign a value to a variable", "Check if two values are equal", "Add two numbers", "Make something greater"],
+				"mm": ["Variable ထဲ value ထည့်သည်", "တန်ဖိုးနှစ်ခု ညီမညီ စစ်ဆေးသည်", "ဂဏန်းနှစ်ခု ပေါင်းသည်", "တစ်ခုခုကို ကြီးစေသည်"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`==` checks if two values are **equal** (comparison). It's different from `=` which **assigns** a value to a variable.",
+				"mm": "`==` က တန်ဖိုးနှစ်ခု **ညီမညီ** စစ်ဆေးသည် (နှိုင်းယှဉ်ခြင်း)။ Variable ထဲ value **ထည့်**သည့် `=` နဲ့ မတူပါ။"
+			}
+		}
+	],
+	"problemIds": ["conditions-01-p1", "conditions-01-p2", "conditions-01-p3"]
+}
