@@ -1,0 +1,69 @@
+{
+	"id": "intro-02",
+	"titleEn": "Meet Python",
+	"titleMm": "Python နဲ့ မိတ်ဆက်",
+	"category": "fundamentals",
+	"difficulty": 1,
+	"ageGroupMin": "6-8",
+	"orderIndex": 2,
+	"prerequisites": ["intro-01"],
+	"estimatedMinutes": 12,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "**Python** is a programming language — a special language for talking to computers. It was named after the comedy show \"Monty Python\", not the snake!\n\nPython is one of the most popular languages because:\n- It's **easy to read** (almost like English)\n- It's **powerful** (used by Google, YouTube, Instagram)\n- It's **great for beginners**\n\nLet's learn more about what Python can do!",
+				"mm": "**Python** ဆိုတာ programming language တစ်ခုပါ — ကွန်ပျူတာနဲ့ စကားပြောဖို့ အထူးဘာသာစကားပါ။ \"Monty Python\" ဆိုတဲ့ ဟာသရုပ်ရှင်ကို အမည်ပေးထားတာပါ၊ မြွေ python ကို မဟုတ်ပါ!\n\nPython က အကျော်ကြားဆုံး language တွေထဲက တစ်ခုပါ:\n- **ဖတ်ရလွယ်ပါတယ်** (English လိုပဲ)\n- **စွမ်းအားကြီးပါတယ်** (Google, YouTube, Instagram တို့ သုံးပါတယ်)\n- **အစပျိုးသူတွေအတွက် အကောင်းဆုံးပါ**\n\nPython ဘာတွေ လုပ်နိုင်တယ်ဆိုတာ ထပ်သင်ရအောင်!"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "# This is a comment - Python ignores it\n# Comments help us explain our code\n\nprint(\"Python can show text\")\nprint(2 + 3)\nprint(\"2 + 3 =\", 2 + 3)",
+			"expectedOutput": "Python can show text\n5\n2 + 3 = 5",
+			"explanation": {
+				"en": "Lines starting with `#` are **comments** — notes for humans that Python ignores. Python can also do math! `2 + 3` gives us `5`.",
+				"mm": "`#` နဲ့ စတဲ့ စာကြောင်းတွေက **comment** တွေပါ — Python က မဖတ်ပါ။ Python က သင်္ချာလည်း တွက်တတ်ပါတယ်! `2 + 3` ဆိုရင် `5` ထွက်ပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "print(10 + 5)\nprint(10 - 3)\nprint(4 * 6)\nprint(15 / 3)",
+			"expectedOutput": "15\n7\n24\n5.0",
+			"explanation": {
+				"en": "Python can do all basic math:\n- `+` for addition\n- `-` for subtraction\n- `*` for multiplication\n- `/` for division",
+				"mm": "Python က အခြေခံသင်္ချာ အားလုံး တွက်တတ်ပါတယ်:\n- `+` ပေါင်း\n- `-` နှုတ်\n- `*` မြှောက်\n- `/` စား"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Use Python as a calculator! Try printing the result of `25 * 4`.",
+				"mm": "Python ကို ဂဏန်းပေါင်းစက်လို သုံးကြည့်ပါ! `25 * 4` ရဲ့ ရလဒ်ကို print ထုတ်ကြည့်ပါ။"
+			},
+			"starterCode": "# Use Python to calculate 25 times 4\nprint()",
+			"validation": {
+				"mustContain": ["print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What does the `#` symbol do in Python?",
+				"mm": "Python မှာ `#` သင်္ကေတက ဘာလုပ်တာလဲ?"
+			},
+			"options": {
+				"en": ["It multiplies numbers", "It starts a comment (note) that Python ignores", "It prints text", "It causes an error"],
+				"mm": ["ဂဏန်းတွေကို မြှောက်ပါတယ်", "Python က မဖတ်ဘဲ ထားမယ့် comment (မှတ်ချက်) ကို စတင်ပါတယ်", "စာသားကို print ထုတ်ပါတယ်", "Error ဖြစ်ပါတယ်"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "The `#` symbol creates a comment. Anything after `#` on that line is ignored by Python. It's like a note to yourself!",
+				"mm": "`#` သင်္ကေတက comment ဖန်တီးပါတယ်။ ထိုစာကြောင်းမှာ `#` နောက်မှ ဘာပဲ ရှိရှိ Python က မဖတ်ပါ။ သင့်ကိုယ့်သင် မှတ်ချက်ရေးတာလိုပါပဲ!"
+			}
+		}
+	],
+	"problemIds": ["intro-02-p1", "intro-02-p2"]
+}

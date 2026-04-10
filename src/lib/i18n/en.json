@@ -1,0 +1,72 @@
+{
+	"app": {
+		"name": "Python Learn",
+		"tagline": "Learn to code, step by step"
+	},
+	"nav": {
+		"dashboard": "Dashboard",
+		"lessons": "Lessons",
+		"editor": "Code Editor",
+		"progress": "My Progress",
+		"teacher": "Teacher Dashboard"
+	},
+	"auth": {
+		"welcome": "Welcome!",
+		"selectName": "Select your name",
+		"enterPin": "Enter your PIN",
+		"login": "Start Learning",
+		"wrongPin": "Wrong PIN, try again",
+		"teacherLogin": "Teacher Login",
+		"classCode": "Class Code"
+	},
+	"dashboard": {
+		"greeting": "Hello, {name}!",
+		"continueLesson": "Continue Learning",
+		"streak": "Day Streak",
+		"lessonsCompleted": "Lessons Done",
+		"problemsSolved": "Problems Solved",
+		"timeSpent": "Time Spent",
+		"minutes": "min",
+		"nextLesson": "Next Lesson"
+	},
+	"lesson": {
+		"locked": "Complete previous lessons first",
+		"start": "Start Lesson",
+		"continue": "Continue",
+		"completed": "Completed!",
+		"tryIt": "Try it yourself!",
+		"runCode": "Run Code",
+		"output": "Output",
+		"error": "Error",
+		"practice": "Practice Problems",
+		"back": "Back to Lessons",
+		"next": "Next Lesson"
+	},
+	"problem": {
+		"submit": "Check Answer",
+		"hint": "Get a Hint",
+		"passed": "All tests passed!",
+		"failed": "Some tests failed",
+		"testsPass": "{passed} of {total} tests passed",
+		"tryAgain": "Try Again"
+	},
+	"editor": {
+		"title": "Code Playground",
+		"run": "Run",
+		"clear": "Clear",
+		"loading": "Loading Python...",
+		"ready": "Python is ready!"
+	},
+	"offline": {
+		"banner": "You're offline — your work is saved locally",
+		"syncing": "Syncing...",
+		"synced": "All synced",
+		"pending": "{count} changes pending sync"
+	},
+	"progress": {
+		"title": "My Progress",
+		"overview": "Overview",
+		"timeChart": "Time Spent",
+		"accuracy": "Accuracy"
+	}
+}

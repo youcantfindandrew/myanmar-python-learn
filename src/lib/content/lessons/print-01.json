@@ -1,0 +1,69 @@
+{
+	"id": "print-01",
+	"titleEn": "Saying Hello (print)",
+	"titleMm": "မင်္ဂလာပါ ပြောခြင်း (print)",
+	"category": "fundamentals",
+	"difficulty": 1,
+	"ageGroupMin": "6-8",
+	"orderIndex": 5,
+	"prerequisites": ["variables-02"],
+	"estimatedMinutes": 12,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "You've already used `print()` a lot! Let's learn all its tricks.\n\n`print()` can show:\n- Text: `print(\"Hello\")`\n- Numbers: `print(42)`\n- Multiple things: `print(\"Age:\", 12)`\n- Empty line: `print()`\n\nWhen you put a comma `,` between items, Python adds a space between them automatically!",
+				"mm": "`print()` ကို အများကြီး သုံးပြီးပြီ! သူ့ရဲ့ လှည့်ကွက်အားလုံး သင်ရအောင်။\n\n`print()` က ပြနိုင်တာတွေ:\n- စာသား: `print(\"Hello\")`\n- ဂဏန်း: `print(42)`\n- အရာများစွာ: `print(\"Age:\", 12)`\n- စာကြောင်းအလွတ်: `print()`\n\nComma `,` ထည့်ပြီး items တွေ ခွဲရေးရင် Python က အကြား space ထည့်ပေးပါတယ်!"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "name = \"Mya\"\nage = 11\nschool = \"Basic Education\"\n\nprint(\"Name:\", name)\nprint(\"Age:\", age)\nprint(\"School:\", school)\nprint()\nprint(name, \"is\", age, \"years old\")",
+			"expectedOutput": "Name: Mya\nAge: 11\nSchool: Basic Education\n\nMya is 11 years old",
+			"explanation": {
+				"en": "Using commas in `print()` is the easiest way to show variables with text. Python automatically converts numbers to text and adds spaces between items.",
+				"mm": "`print()` မှာ comma သုံးတာက variable တွေကို text နဲ့ တွဲပြဖို့ အလွယ်ဆုံး နည်းပါ။ Python က number ကို text အဖြစ် အလိုအလျောက် ပြောင်းပြီး items ကြားထဲ space ထည့်ပေးပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "# f-strings: a cool way to mix text and variables\nname = \"Zaw\"\nage = 13\n\nprint(f\"Hello, {name}!\")\nprint(f\"{name} is {age} years old\")\nprint(f\"Next year, {name} will be {age + 1}\")",
+			"expectedOutput": "Hello, Zaw!\nZaw is 13 years old\nNext year, Zaw will be 14",
+			"explanation": {
+				"en": "**f-strings** start with `f` before the quotes. Put variables inside `{curly braces}` and Python fills in the values! You can even do math inside the braces.",
+				"mm": "**f-string** တွေက quotes ရှေ့မှာ `f` နဲ့ စပါတယ်။ `{ကွင်းစကွင်းပိတ်}` ထဲမှာ variable ထည့်ပါ၊ Python က value တွေ ဖြည့်ပေးပါတယ်! ကွင်းထဲမှာ သင်္ချာလည်း တွက်လို့ ရပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Create variables for your name and your favorite color. Use an f-string to print: \"[name]'s favorite color is [color]\"",
+				"mm": "သင့်နာမည်နဲ့ သင်ကြိုက်တဲ့အရောင်အတွက် variable တွေ ဖန်တီးပါ။ f-string ကို သုံးပြီး print ထုတ်ပါ: \"[name]'s favorite color is [color]\""
+			},
+			"starterCode": "name = \ncolor = \n\nprint(f\"\")",
+			"validation": {
+				"mustContain": ["print", "f\""],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What does `print(\"Hello\", \"World\")` output?",
+				"mm": "`print(\"Hello\", \"World\")` ရဲ့ output က ဘာလဲ?"
+			},
+			"options": {
+				"en": ["HelloWorld", "Hello World", "Hello, World", "\"Hello\" \"World\""],
+				"mm": ["HelloWorld", "Hello World", "Hello, World", "\"Hello\" \"World\""]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "When `print()` gets multiple items separated by commas, it puts a single space between each item. So \"Hello\" and \"World\" become \"Hello World\".",
+				"mm": "`print()` က comma နဲ့ ခွဲထားတဲ့ item အများကြီး ရရင် item တစ်ခုနဲ့ တစ်ခုကြားမှာ space တစ်ခု ထည့်ပေးပါတယ်။ ဒါကြောင့် \"Hello\" နဲ့ \"World\" က \"Hello World\" ဖြစ်ပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["print-01-p1", "print-01-p2"]
+}

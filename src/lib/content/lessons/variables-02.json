@@ -1,0 +1,69 @@
+{
+	"id": "variables-02",
+	"titleEn": "Numbers and Text",
+	"titleMm": "ဂဏန်းနှင့် စာသား",
+	"category": "fundamentals",
+	"difficulty": 2,
+	"ageGroupMin": "6-8",
+	"orderIndex": 4,
+	"prerequisites": ["variables-01"],
+	"estimatedMinutes": 15,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "Python has different **types** of data:\n\n- **Strings** (text): Written inside quotes — `\"hello\"` or `'hello'`\n- **Integers** (whole numbers): Written without quotes — `42`, `100`, `-5`\n- **Floats** (decimal numbers): Numbers with a dot — `3.14`, `99.9`\n\nThe type matters! `\"5\"` (string) and `5` (number) are different things.",
+				"mm": "Python မှာ data **type** အမျိုးမျိုး ရှိပါတယ်:\n\n- **String** (စာသား): Quotes ထဲမှာ ရေးပါ — `\"hello\"` သို့ `'hello'`\n- **Integer** (ကိန်းပြည့်): Quotes မပါဘဲ ရေးပါ — `42`, `100`, `-5`\n- **Float** (ဒဿမကိန်း): အစက်ပါတဲ့ ဂဏန်းတွေ — `3.14`, `99.9`\n\nType က အရေးကြီးပါတယ်! `\"5\"` (string) နဲ့ `5` (number) က မတူပါ။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "text = \"5\"\nnumber = 5\n\nprint(text + text)\nprint(number + number)",
+			"expectedOutput": "55\n10",
+			"explanation": {
+				"en": "When you add strings, Python **joins** them together (\"5\" + \"5\" = \"55\"). When you add numbers, Python does **math** (5 + 5 = 10). Big difference!",
+				"mm": "String တွေ ပေါင်းရင် Python က **ဆက်ပေးပါတယ်** (\"5\" + \"5\" = \"55\")။ Number တွေ ပေါင်းရင် Python က **သင်္ချာတွက်ပေးပါတယ်** (5 + 5 = 10)။ ကွာခြားချက် ကြီးပါတယ်!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "code_example",
+			"code": "name = \"Thiha\"\nage = 14\n\n# Join text together with +\ngreeting = \"Hello, \" + name + \"!\"\nprint(greeting)\n\n# Use str() to turn a number into text\nprint(name + \" is \" + str(age) + \" years old\")",
+			"expectedOutput": "Hello, Thiha!\nThiha is 14 years old",
+			"explanation": {
+				"en": "You can join strings with `+`. But you can't mix strings and numbers — use `str()` to turn a number into text first!",
+				"mm": "String တွေကို `+` နဲ့ ဆက်နိုင်ပါတယ်။ ဒါပေမယ့် string နဲ့ number ကို ရောလို့ မရပါ — `str()` ကို သုံးပြီး number ကို text အဖြစ် အရင်ပြောင်းပါ!"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Create a variable `price` with the value 1500 and a variable `item` with the text \"rice\". Print a message like: \"rice costs 1500 kyat\"",
+				"mm": "`price` variable ကို 1500 ဆိုတဲ့ value နဲ့ `item` variable ကို \"rice\" ဆိုတဲ့ စာသားနဲ့ ဖန်တီးပါ။ \"rice costs 1500 kyat\" လိုမျိုး message print ထုတ်ပါ။"
+			},
+			"starterCode": "price = 1500\nitem = \"rice\"\n\n# Print: rice costs 1500 kyat\nprint()",
+			"validation": {
+				"mustContain": ["print", "price", "item"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What is the result of `\"3\" + \"7\"` in Python?",
+				"mm": "Python မှာ `\"3\" + \"7\"` ရဲ့ ရလဒ်က ဘာလဲ?"
+			},
+			"options": {
+				"en": ["10", "\"37\"", "\"10\"", "Error"],
+				"mm": ["10", "\"37\"", "\"10\"", "Error"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "Since `\"3\"` and `\"7\"` are strings (text in quotes), Python joins them together: `\"3\" + \"7\"` = `\"37\"`. To get 10, use numbers without quotes: `3 + 7`.",
+				"mm": "`\"3\"` နဲ့ `\"7\"` က string (quotes ထဲ စာသား) တွေ ဖြစ်တဲ့အတွက် Python က ဆက်ပေးပါတယ်: `\"3\" + \"7\"` = `\"37\"`။ 10 ရဖို့ quotes မပါဘဲ number ကို သုံးပါ: `3 + 7`။"
+			}
+		}
+	],
+	"problemIds": ["variables-02-p1", "variables-02-p2"]
+}

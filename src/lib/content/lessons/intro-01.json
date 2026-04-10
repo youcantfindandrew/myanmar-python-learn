@@ -1,0 +1,69 @@
+{
+	"id": "intro-01",
+	"titleEn": "What is Programming?",
+	"titleMm": "Programming ဆိုတာ ဘာလဲ?",
+	"category": "fundamentals",
+	"difficulty": 1,
+	"ageGroupMin": "6-8",
+	"orderIndex": 1,
+	"prerequisites": [],
+	"estimatedMinutes": 10,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "**Programming** is giving instructions to a computer. Just like you follow a recipe to cook food, a computer follows your instructions to do things.\n\nEvery app on your phone, every game you play, and every website you visit — someone **wrote instructions** (code) to make it work!\n\nToday, you'll learn to give your first instruction to a computer using **Python**.",
+				"mm": "**Programming** ဆိုတာ ကွန်ပျူတာကို ညွှန်ကြားချက်တွေ ပေးတာပါ။ ထမင်းချက်ဖို့ ချက်ပြုတ်နည်း လိုက်နာသလိုပဲ ကွန်ပျူတာကလည်း သင့်ညွှန်ကြားချက်တွေကို လိုက်နာပါတယ်။\n\nသင့်ဖုန်းထဲက app တိုင်း၊ ကစားတဲ့ game တိုင်း၊ ဝင်ကြည့်တဲ့ website တိုင်း — တစ်စုံတစ်ယောက်က **ညွှန်ကြားချက်တွေ** (code) ရေးထားတာပါ!\n\nဒီနေ့ **Python** ကို သုံးပြီး ကွန်ပျူတာကို ပထမဆုံးညွှန်ကြားချက် ပေးဖို့ သင်ယူမယ်။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "print(\"Hello, World!\")",
+			"expectedOutput": "Hello, World!",
+			"explanation": {
+				"en": "`print()` tells the computer to show text on the screen. The text inside the quotes is what gets displayed.",
+				"mm": "`print()` က ကွန်ပျူတာကို စာသားကို ဖန်သားပြင်ပေါ်မှာ ပြခိုင်းတာပါ။ quotation mark ထဲက စာသားကို ပြပေးပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Try printing your own name! Replace the text inside the quotes with your name.",
+				"mm": "သင့်နာမည်ကို print ထုတ်ကြည့်ပါ! Quotes ထဲက စာသားကို သင့်နာမည်နဲ့ အစားထိုးပါ။"
+			},
+			"starterCode": "print(\"Your name here\")",
+			"validation": {
+				"mustContain": ["print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "print(\"My name is Aung\")\nprint(\"I am learning Python\")\nprint(\"This is fun!\")",
+			"expectedOutput": "My name is Aung\nI am learning Python\nThis is fun!",
+			"explanation": {
+				"en": "You can use `print()` many times! Each `print()` shows text on a new line.",
+				"mm": "`print()` ကို အကြိမ်ကြိမ် သုံးလို့ ရပါတယ်! `print()` တစ်ခုစီက စာကြောင်းအသစ်မှာ ပြပေးပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What does `print(\"Hello\")` do?",
+				"mm": "`print(\"Hello\")` က ဘာလုပ်တာလဲ?"
+			},
+			"options": {
+				"en": ["Draws a picture", "Shows 'Hello' on the screen", "Turns off the computer", "Deletes a file"],
+				"mm": ["ပုံတစ်ပုံ ဆွဲပါတယ်", "ဖန်သားပြင်ပေါ်မှာ 'Hello' ပြပါတယ်", "ကွန်ပျူတာကို ပိတ်ပါတယ်", "ဖိုင်တစ်ခုကို ဖျက်ပါတယ်"]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`print()` shows whatever text is inside the parentheses on the screen.",
+				"mm": "`print()` က ကွင်းစကွင်းပိတ်ထဲမှာ ရှိတဲ့ စာသားကို ဖန်သားပြင်ပေါ်မှာ ပြပေးပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["intro-01-p1", "intro-01-p2"]
+}
