@@ -1,6 +1,6 @@
-// Use adapter-node locally (Windows symlink restriction).
-// On Vercel (Linux), swap this import to '@sveltejs/adapter-vercel' — or set VERCEL=1 to auto-switch.
-import adapter from '@sveltejs/adapter-node';
+// adapter-auto picks adapter-vercel on Vercel CI (Linux) and adapter-node locally.
+// This avoids the Windows symlink restriction with adapter-vercel.
+import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
