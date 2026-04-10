@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { restoreSession } from '$lib/stores/auth';
-	import { initOnlineListener, refreshPendingCount } from '$lib/stores/sync';
+	import { restoreSession, currentUser } from '$lib/stores/auth';
+	import { initOnlineListener, refreshPendingCount, isOnline } from '$lib/stores/sync';
 	import { loadProgress } from '$lib/stores/progress';
 	import { seedDatabase } from '$lib/db/seed';
+	import { syncToServer } from '$lib/db/sync-engine';
+	import { get } from 'svelte/store';
 	import OfflineBanner from '$lib/components/layout/OfflineBanner.svelte';
 	import '../app.css';
 
@@ -17,6 +19,18 @@
 		await loadProgress();
 		await refreshPendingCount();
 		ready = true;
+
+		// Kick off sync if online and logged in as student
+		const user = get(currentUser);
+		if (user && user.role === 'student' && get(isOnline)) {
+			syncToServer(user.id).catch(() => {});
+		}
+
+		// Re-sync whenever we come back online
+		window.addEventListener('online', () => {
+			const u = get(currentUser);
+			if (u && u.role === 'student') syncToServer(u.id).catch(() => {});
+		});
 	});
 </script>
 
