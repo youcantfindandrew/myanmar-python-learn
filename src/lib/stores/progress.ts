@@ -1,5 +1,6 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { db, type LocalProgress, type DailyActivity } from '$lib/db/schema';
+import { currentUser } from '$lib/stores/auth';
 
 export const progressMap = writable<Map<string, LocalProgress>>(new Map());
 
@@ -88,10 +89,13 @@ export async function getStreak(): Promise<number> {
 }
 
 async function addToSyncQueue(table: string, operation: 'upsert' | 'insert', data: any): Promise<void> {
+	// Only queue if a student is logged in — no point syncing anonymous activity
+	const user = get(currentUser);
+	if (!user || user.role !== 'student') return;
 	await db.syncQueue.add({
 		table,
 		operation,
-		data,
+		data: { ...data, student_id: user.id },
 		createdAt: Date.now(),
 		retries: 0
 	});

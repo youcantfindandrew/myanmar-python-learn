@@ -5,6 +5,7 @@
 	import { initOnlineListener, refreshPendingCount, isOnline } from '$lib/stores/sync';
 	import { loadProgress } from '$lib/stores/progress';
 	import { seedDatabase } from '$lib/db/seed';
+	import { db } from '$lib/db/schema';
 	import { syncToServer } from '$lib/db/sync-engine';
 	import { get } from 'svelte/store';
 	import OfflineBanner from '$lib/components/layout/OfflineBanner.svelte';
@@ -19,12 +20,18 @@
 		await seedDatabase();
 		await restoreSession();
 		await loadProgress();
+
+		// Clear any sync queue items queued without a student_id (anonymous browsing)
+		const user = get(currentUser);
+		if (!user || user.role !== 'student') {
+			await db.syncQueue.clear();
+		}
+
 		await refreshPendingCount();
 		ready = true;
 		showZawgyiWarning = detectsZawgyi();
 
 		// Kick off sync if online and logged in as student
-		const user = get(currentUser);
 		if (user && user.role === 'student' && get(isOnline)) {
 			syncToServer(user.id).catch(() => {});
 		}

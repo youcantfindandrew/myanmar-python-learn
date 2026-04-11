@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { syncStatus, pendingSyncCount } from '$lib/stores/sync';
+	import { currentUser } from '$lib/stores/auth';
 	import { locale } from '$lib/stores/locale';
 	import { t } from '$lib/i18n';
 </script>
 
-{#if $syncStatus !== 'synced'}
+{#if $syncStatus !== 'synced' && $currentUser !== null}
 	<div class="offline-banner" class:offline={$syncStatus === 'offline'} class:pending={$syncStatus === 'pending'} class:syncing={$syncStatus === 'syncing'}>
 		<span class="dot" class:pulse={$syncStatus === 'syncing'}></span>
 		{#if $syncStatus === 'offline'}
