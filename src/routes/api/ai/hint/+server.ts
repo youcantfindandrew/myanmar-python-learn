@@ -1,6 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/private';
+import { rateLimit, getClientIp } from '$lib/server/rate-limit';
 
 const GROQ_API_KEY = env.GROQ_API_KEY ?? '';
 
@@ -8,6 +9,16 @@ const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const MODEL = 'llama-3.1-8b-instant'; // free tier, ~600 tok/s
 
 export const POST: RequestHandler = async ({ request }) => {
+	// 20 AI hint requests per 15 minutes per IP
+	const ip = getClientIp(request, request.headers);
+	const rl = rateLimit(`hint:${ip}`, 20, 15 * 60 * 1000);
+	if (!rl.ok) {
+		return json({ hint: null }, {
+			status: 429,
+			headers: { 'Retry-After': String(rl.retryAfter) }
+		});
+	}
+
 	const body = await request.json().catch(() => null);
 	if (!body) throw error(400, 'Invalid body');
 

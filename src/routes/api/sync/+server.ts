@@ -1,6 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { supabase } from '$lib/db/supabase';
+import { rateLimit, getClientIp } from '$lib/server/rate-limit';
 
 interface SyncItem {
 	id: string;
@@ -10,6 +11,16 @@ interface SyncItem {
 }
 
 export const POST: RequestHandler = async ({ request }) => {
+	// 60 sync batches per 15 minutes per IP (generous for offline catch-up)
+	const ip = getClientIp(request, request.headers);
+	const rl = rateLimit(`sync:${ip}`, 60, 15 * 60 * 1000);
+	if (!rl.ok) {
+		return json({ ok: false, error: 'rate_limited' }, {
+			status: 429,
+			headers: { 'Retry-After': String(rl.retryAfter) }
+		});
+	}
+
 	const body = await request.json().catch(() => null);
 	if (!body || !Array.isArray(body.items)) {
 		throw error(400, 'Invalid payload');
