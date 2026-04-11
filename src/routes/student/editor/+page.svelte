@@ -10,11 +10,11 @@
 	let isRunning = $state(false);
 	let isInitializing = $state(false);
 
-	const statusLabel = $derived(() => {
-		if ($pyodideStatus === 'ready') return t($locale, 'editor.ready');
-		if ($pyodideStatus === 'loading') return t($locale, 'editor.loading') + ' ' + $pyodideLoadProgress + '%';
-		return '';
-	});
+	const statusLabel = $derived(
+		$pyodideStatus === 'ready' ? t($locale, 'editor.ready') :
+		$pyodideStatus === 'loading' ? t($locale, 'editor.loading') + ' ' + $pyodideLoadProgress + '%' :
+		''
+	);
 
 	async function handleRun() {
 		if ($pyodideStatus === 'idle' || $pyodideStatus === 'error') {

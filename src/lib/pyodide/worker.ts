@@ -10,9 +10,8 @@ self.onmessage = async (event: MessageEvent) => {
 
 	if (type === 'init') {
 		try {
-			// Use ESM dynamic import — importScripts is not available in module workers
 			const pyodideModule = await import(
-				// @ts-ignore — external URL import
+				// @ts-ignore — external URL import in module worker
 				'https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.mjs'
 			);
 			pyodide = await pyodideModule.loadPyodide();
@@ -30,6 +29,14 @@ self.onmessage = async (event: MessageEvent) => {
 		}
 
 		try {
+			// Normalise: ensure code is never empty so the try: block always has a body.
+			const safeCode = (code ?? '').trim() || 'pass';
+
+			// Stub input() so examples that use it don't hang — return empty string.
+			const inputStub = event.data.inputs
+				? `import builtins as _bi\n_inputs = ${JSON.stringify(String(event.data.inputs).split('\n'))}\n_idx = 0\ndef _fake_input(prompt=''):\n    global _idx\n    val = _inputs[_idx] if _idx < len(_inputs) else ''\n    _idx += 1\n    return val\n_bi.input = _fake_input\n`
+				: `import builtins as _bi\n_bi.input = lambda prompt='': ''\n`;
+
 			const wrappedCode = `
 import sys
 from io import StringIO
@@ -49,16 +56,25 @@ _stderr = _LimitedOutput()
 sys.stdout = _stdout
 sys.stderr = _stderr
 
+${inputStub}
+_err_msg = ''
 try:
-${code.split('\n').map((line: string) => '    ' + line).join('\n')}
+    pass  # sentinel — ensures try block is never empty even if user code is blank
+${safeCode.split('\n').map((line: string) => '    ' + line).join('\n')}
 except Exception as _e:
-    print(str(_e), file=sys.stderr)
+    import traceback as _tb
+    # Show only the last part of traceback (skip Pyodide internals)
+    lines = _tb.format_exc().strip().split('\\n')
+    # Find the first line that references '<exec>' (user code) or just take last 3 lines
+    user_lines = [l for l in lines if '<exec>' in l or not l.startswith('  File "/lib/')]
+    if not user_lines:
+        user_lines = lines[-3:]
+    _err_msg = '\\n'.join(user_lines)
+    print(_err_msg, file=sys.stderr)
 
-_result_stdout = _stdout.getvalue()
-_result_stderr = _stderr.getvalue()
 sys.stdout = sys.__stdout__
 sys.stderr = sys.__stderr__
-(_result_stdout, _result_stderr)
+(_stdout.getvalue(), _stderr.getvalue())
 `;
 
 			const timeoutPromise = new Promise((_, reject) =>
@@ -72,7 +88,6 @@ sys.stderr = sys.__stderr__
 			const stderr = result.get(1) || '';
 			result.destroy();
 
-			// Garbage collect
 			pyodide.runPython('import gc; gc.collect()');
 
 			self.postMessage({
@@ -83,12 +98,20 @@ sys.stderr = sys.__stderr__
 				error: stderr || null
 			});
 		} catch (err: any) {
+			// This catches wrapper-level errors (e.g. timeout, or a bug in our wrapper).
+			// Try to strip Pyodide internal paths from the message.
+			let msg = err.message || 'Unknown error';
+			// Remove long pyodide internal tracebacks from JS-level errors
+			const execIdx = msg.indexOf('File "<exec>"');
+			if (execIdx !== -1) {
+				msg = msg.slice(execIdx);
+			}
 			self.postMessage({
 				type: 'result',
 				id,
 				stdout: '',
 				stderr: '',
-				error: err.message || 'Unknown error'
+				error: msg
 			});
 		}
 	}

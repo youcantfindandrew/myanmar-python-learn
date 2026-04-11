@@ -65,7 +65,10 @@ export async function initPyodide(): Promise<void> {
 	return initPromise;
 }
 
-export async function runPython(code: string): Promise<{ stdout: string; stderr: string; error: string | null }> {
+export async function runPython(
+	code: string,
+	inputs?: string
+): Promise<{ stdout: string; stderr: string; error: string | null }> {
 	if (!worker) {
 		throw new Error('Pyodide not initialized');
 	}
@@ -73,7 +76,7 @@ export async function runPython(code: string): Promise<{ stdout: string; stderr:
 	const id = ++messageId;
 	return new Promise((resolve, reject) => {
 		pendingCallbacks.set(id, { resolve, reject });
-		worker!.postMessage({ type: 'run', code, id });
+		worker!.postMessage({ type: 'run', code, inputs: inputs ?? '', id });
 	});
 }
 

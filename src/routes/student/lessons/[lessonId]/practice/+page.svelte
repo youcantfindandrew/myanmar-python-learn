@@ -84,12 +84,8 @@
 		let passedAll = true;
 
 		for (const tc of currentProblem.testCases) {
-			let codeToRun = code;
-			if (tc.input) {
-				// Stub input() with the test input
-				codeToRun = `import builtins\n_inputs = ${JSON.stringify(tc.input.split('\n'))}\n_idx = 0\ndef input(prompt=''):\n    global _idx\n    val = _inputs[_idx] if _idx < len(_inputs) else ''\n    _idx += 1\n    return val\nbuiltins.input = input\n\n` + code;
-			}
-			const result = await runPython(codeToRun);
+			// Pass inputs to the worker — it stubs input() automatically
+			const result = await runPython(code, tc.input || '');
 			const actual = (result.stdout || '').trim();
 			const expected = tc.expectedOutput.trim();
 			const passed = actual === expected || tc.expectedOutput === '';
