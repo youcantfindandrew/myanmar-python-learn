@@ -120,7 +120,9 @@ create policy "profiles: teacher sees students"
 
 create policy "profiles: insert own"
   on profiles for insert
-  with check (auth.uid() = id or id = id); -- service-role inserts allowed
+  with check (auth.uid() = id);
+  -- Note: server-side inserts (e.g. student registration) must use the
+  -- service_role key (supabase-admin.ts) which bypasses RLS entirely.
 
 create policy "profiles: update own"
   on profiles for update

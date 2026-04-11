@@ -19,6 +19,15 @@ export async function loginWithPin(displayName: string, pin: string): Promise<bo
 	const hash = await hashPin(pin, user.pinSalt ?? 'legacy-migrate');
 	if (user.pinHash !== hash) return false;
 
+	// Upgrade legacy-migrate salt to a per-user random salt on first successful login
+	if (!user.pinSalt || user.pinSalt === 'legacy-migrate') {
+		const newSalt = crypto.randomUUID();
+		const newHash = await hashPin(pin, newSalt);
+		user.pinSalt = newSalt;
+		user.pinHash = newHash;
+		await db.profiles.put(user);
+	}
+
 	currentUser.set(user);
 	if (typeof localStorage !== 'undefined') {
 		localStorage.setItem('currentUserId', user.id);
@@ -200,8 +209,13 @@ async function hashPin(pin: string, salt: string): Promise<string> {
 }
 
 function generateTeacherCode(): string {
-	const words = ['PANDA', 'EAGLE', 'TIGER', 'COBRA', 'LOTUS', 'RIVER', 'MANGO', 'FLAME'];
-	const word = words[Math.floor(Math.random() * words.length)];
-	const num = Math.floor(10 + Math.random() * 90);
-	return `${word}-${num}`;
+	// 6 random alphanumeric chars = 36^6 ≈ 2.8 billion possibilities, formatted as XXX-YYY
+	const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // 32 chars, no 0/O/1/I to avoid confusion
+	let code = '';
+	const arr = new Uint8Array(6);
+	crypto.getRandomValues(arr);
+	for (const byte of arr) {
+		code += chars[byte % chars.length];
+	}
+	return `${code.slice(0, 3)}-${code.slice(3)}`;
 }

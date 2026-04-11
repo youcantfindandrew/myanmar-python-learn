@@ -108,6 +108,16 @@ export interface DailyActivity {
 	synced: boolean;
 }
 
+export interface CachedAssignment {
+	id: string;
+	teacher_id: string;
+	title: string;
+	problem_ids: string[];
+	assigned_to: string[] | null;
+	due_date: string | null;
+	created_at: string;
+}
+
 class AppDatabase extends Dexie {
 	lessons!: Table<LocalLesson>;
 	problems!: Table<LocalProblem>;
@@ -116,6 +126,7 @@ class AppDatabase extends Dexie {
 	syncQueue!: Table<SyncQueueItem>;
 	profiles!: Table<UserProfile>;
 	dailyActivity!: Table<DailyActivity>;
+	assignments!: Table<CachedAssignment>;
 
 	constructor() {
 		super('myanmar-python-learn');
@@ -144,6 +155,17 @@ class AppDatabase extends Dexie {
 			return tx.table('profiles').toCollection().modify((p) => {
 				if (!p.pinSalt) p.pinSalt = 'legacy-migrate';
 			});
+		});
+		// v3: add assignments cache table (replaces localStorage)
+		this.version(3).stores({
+			lessons: 'id, category, difficulty, orderIndex',
+			problems: 'id, lessonId, difficulty, orderIndex',
+			progress: 'id, status, synced',
+			attempts: 'id, problemId, attemptedAt, synced',
+			syncQueue: '++id, table, createdAt',
+			profiles: 'id, role',
+			dailyActivity: 'date, synced',
+			assignments: 'id, teacher_id, created_at'
 		});
 	}
 }

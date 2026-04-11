@@ -67,8 +67,20 @@
 		return $locale === 'en' ? obj.en : obj.mm;
 	}
 
-	function renderMarkdown(text: string): string {
+	function escapeHtml(text: string): string {
 		return text
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&#39;');
+	}
+
+	function renderMarkdown(text: string): string {
+		// Escape first so lesson content can never inject raw HTML,
+		// then apply safe markdown-to-HTML transforms on the escaped text.
+		const safe = escapeHtml(text);
+		return safe
 			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
 			.replace(/`([^`]+)`/g, '<code>$1</code>')
 			.replace(/\n/g, '<br>');

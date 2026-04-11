@@ -89,9 +89,7 @@ export async function pullFromServer(userId: string, lastSyncedAt?: number): Pro
 			.limit(20);
 
 		if (assignments) {
-			// Store assignments in a simple key-value in profiles table for now
-			// Full assignment display handled by teacher dashboard
-			localStorage.setItem('cached_assignments', JSON.stringify(assignments));
+			await db.assignments.bulkPut(assignments);
 		}
 	} catch {
 		// Network errors are silent — offline mode handles it
@@ -105,9 +103,16 @@ export async function upsertProfile(profile: {
 	age_group: string;
 	preferred_language: string;
 	teacher_id?: string;
+	teacher_code?: string;
 }): Promise<void> {
 	if (!get(isOnline)) return;
-	await supabase.from('profiles').upsert(profile, { onConflict: 'id' });
+	// Route through the server API so the admin client (service role key) performs
+	// the write — the anon key cannot insert profiles because RLS requires auth.uid().
+	await fetch('/api/auth/profile', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(profile)
+	}).catch(() => {}); // Silently fail — profile will sync later if offline
 }
 
 export async function getTeacherStudents(teacherId: string) {
