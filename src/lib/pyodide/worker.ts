@@ -82,11 +82,14 @@ sys.stderr = sys.__stderr__
 			);
 
 			const runPromise = pyodide.runPythonAsync(wrappedCode);
+			// Pyodide auto-converts a Python tuple to a JS Array via to_js(),
+			// so result is a plain JS Array — use index access, not .get().
 			const result = await Promise.race([runPromise, timeoutPromise]) as any;
 
-			const stdout = result.get(0) || '';
-			const stderr = result.get(1) || '';
-			result.destroy();
+			const stdout = (Array.isArray(result) ? result[0] : result?.get?.(0)) || '';
+			const stderr = (Array.isArray(result) ? result[1] : result?.get?.(1)) || '';
+			// Only call destroy() if it's a PyProxy (not a plain JS value)
+			if (result?.destroy) result.destroy();
 
 			pyodide.runPython('import gc; gc.collect()');
 
