@@ -27,7 +27,7 @@ function getHintForError(code: string, error: string): HintResult {
 				mm: '💡 `def` line တိုင်း နောက်မှာ colon `:` ထည့်ရမယ်! ဥပမာ: `def my_function():`'
 			};
 		}
-		if (code.includes('if ') && !code.includes('if ') === false && !/:/.test(code.split('\n').find(l => l.trim().startsWith('if ')) ?? '')) {
+		if (code.includes('if ') && !/:/.test(code.split('\n').find(l => l.trim().startsWith('if ')) ?? '')) {
 			return {
 				en: '💡 Every `if` needs a colon `:` at the end! Like: `if x > 5:`',
 				mm: '💡 `if` တိုင်း နောက်မှာ colon `:` ထည့်ရမယ်! ဥပမာ: `if x > 5:`'

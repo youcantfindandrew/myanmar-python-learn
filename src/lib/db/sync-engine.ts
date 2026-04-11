@@ -39,9 +39,15 @@ async function pushBatch(userId: string, items: typeof db.syncQueue extends impo
 		data: { ...item.data, student_id: userId }
 	}));
 
-	const { error } = await supabase.functions.invoke('sync', { body: { items: payload } }).catch(() => ({ error: new Error('network') }));
+	const resp = await fetch('/api/sync', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ items: payload })
+	}).catch(() => null);
 
-	if (!error) {
+	const syncOk = resp !== null && resp.ok;
+
+	if (syncOk) {
 		// Remove successfully synced items
 		const ids = items.map((i) => i.id!).filter(Boolean) as number[];
 		await db.syncQueue.bulkDelete(ids);

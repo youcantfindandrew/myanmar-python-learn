@@ -124,6 +124,7 @@
 			allPassed = false;
 			hintIndex = 0;
 			showHint = false;
+			aiHint = null;
 			attemptStart = Date.now();
 		}
 	}

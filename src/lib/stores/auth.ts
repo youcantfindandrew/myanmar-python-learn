@@ -55,7 +55,7 @@ export async function createStudent(
 		pinHash: hash,
 		currentDifficultyLevel: 1
 	};
-	if (teacherId) (profile as any).teacherId = teacherId;
+	if (teacherId) profile.teacherId = teacherId;
 
 	await db.profiles.put(profile);
 	currentUser.set(profile);

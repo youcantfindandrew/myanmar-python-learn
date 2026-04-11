@@ -94,6 +94,7 @@ export interface UserProfile {
 	preferredLanguage: 'en' | 'mm';
 	pinHash: string;
 	teacherCode?: string;
+	teacherId?: string;
 	currentDifficultyLevel: number;
 }
 

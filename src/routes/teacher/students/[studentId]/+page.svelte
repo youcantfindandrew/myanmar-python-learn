@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import { locale } from '$lib/stores/locale';
 	import { getStudentProgress } from '$lib/db/sync-engine';
 
-	const studentId = $derived($page.params.studentId);
+	const studentId = $derived(page.params.studentId);
 
 	interface ProgressRow { lesson_id: string; status: string; time_spent_seconds: number; completed_at: string | null }
 	interface AttemptRow { problem_id: string; passed: boolean; attempted_at: string; time_spent_seconds: number }
@@ -14,7 +14,6 @@
 	let attempts = $state<AttemptRow[]>([]);
 	let activity = $state<ActivityRow[]>([]);
 	let loading = $state(true);
-	let studentName = $state('');
 
 	onMount(async () => {
 		const result = await getStudentProgress(studentId);
