@@ -68,7 +68,7 @@
 	async function handleSubmit() {
 		if (!currentProblem) return;
 
-		if ($pyodideStatus === 'idle') {
+		if ($pyodideStatus !== 'ready') {
 			await initPyodide();
 		}
 

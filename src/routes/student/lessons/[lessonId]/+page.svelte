@@ -41,7 +41,7 @@
 	});
 
 	async function handleRunCode(sectionIndex: number, code: string) {
-		if ($pyodideStatus === 'idle') {
+		if ($pyodideStatus !== 'ready') {
 			await initPyodide();
 		}
 		isRunning[sectionIndex] = true;

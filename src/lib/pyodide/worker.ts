@@ -10,10 +10,12 @@ self.onmessage = async (event: MessageEvent) => {
 
 	if (type === 'init') {
 		try {
-			// @ts-ignore - importScripts is available in Web Workers
-			importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.js');
-			// @ts-ignore - loadPyodide is available after importScripts
-			pyodide = await loadPyodide();
+			// Use ESM dynamic import — importScripts is not available in module workers
+			const pyodideModule = await import(
+				// @ts-ignore — external URL import
+				'https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.mjs'
+			);
+			pyodide = await pyodideModule.loadPyodide();
 			self.postMessage({ type: 'ready', id });
 		} catch (err: any) {
 			self.postMessage({ type: 'error', id, error: `Failed to load Python: ${err.message}` });

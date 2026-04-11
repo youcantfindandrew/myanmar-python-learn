@@ -6,6 +6,7 @@ export const pyodideStatus = writable<PyodideStatus>('idle');
 export const pyodideLoadProgress = writable(0);
 
 let worker: Worker | null = null;
+let initPromise: Promise<void> | null = null;
 let messageId = 0;
 const pendingCallbacks = new Map<number, {
 	resolve: (value: any) => void;
@@ -13,6 +14,9 @@ const pendingCallbacks = new Map<number, {
 }>();
 
 export async function initPyodide(): Promise<void> {
+	// If already initialised or initialising, return the same promise so
+	// multiple callers all wait for the same load rather than racing.
+	if (initPromise) return initPromise;
 	if (worker) return;
 
 	pyodideStatus.set('loading');
@@ -53,11 +57,12 @@ export async function initPyodide(): Promise<void> {
 	};
 
 	const id = ++messageId;
-	return new Promise((resolve, reject) => {
+	initPromise = new Promise((resolve, reject) => {
 		pendingCallbacks.set(id, { resolve, reject });
 		worker!.postMessage({ type: 'init', id });
 		pyodideLoadProgress.set(30);
 	});
+	return initPromise;
 }
 
 export async function runPython(code: string): Promise<{ stdout: string; stderr: string; error: string | null }> {
