@@ -1,0 +1,69 @@
+{
+  "id": "comprehensions-01",
+  "titleEn": "List Comprehensions — Power Shortcut",
+  "titleMm": "List Comprehensions — အမြန်လမ်းကြောင်း",
+  "category": "Level Up",
+  "difficulty": 8,
+  "ageGroupMin": "12-14",
+  "orderIndex": 19,
+  "prerequisites": ["modules-01"],
+  "estimatedMinutes": 22,
+  "sections": [
+    {
+      "type": "explanation",
+      "content": {
+        "en": "A **list comprehension** lets you build a new list in one line instead of writing a loop. It's one of Python's most loved features!\n\n```python\n# Normal loop:\nsquares = []\nfor n in range(5):\n    squares.append(n * n)\n\n# List comprehension — same result, one line:\nsquares = [n * n for n in range(5)]\n```\n\nFormat: `[expression for item in iterable]`\n\nYou can also add a condition:\n```python\n[expression for item in iterable if condition]\n```",
+        "mm": "**List comprehension** က loop ရေးစရာမလိုဘဲ list အသစ်တစ်ခုကို တစ်ကြောင်းနဲ့ ဖောက်နိုင်ပါတယ်။ Python ကြိုက်နှစ်သက်ဆုံး features တစ်ခုပဲ!\n\n```python\n# ပုံမှန် loop:\nsquares = []\nfor n in range(5):\n    squares.append(n * n)\n\n# List comprehension — တူညီတဲ့ ရလဒ်၊ တစ်ကြောင်း:\nsquares = [n * n for n in range(5)]\n```\n\nပုံစံ: `[expression for item in iterable]`\n\nCondition ပါ ထည့်နိုင်တယ်:\n```python\n[expression for item in iterable if condition]\n```"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "# Make a list of squares for 1 to 5\nsquares = [n * n for n in range(1, 6)]\nprint(squares)\n\n# Make a list of even numbers from 1 to 10\nevens = [n for n in range(1, 11) if n % 2 == 0]\nprint(evens)",
+      "expectedOutput": "[1, 4, 9, 16, 25]\n[2, 4, 6, 8, 10]",
+      "explanation": {
+        "en": "`[n * n for n in range(1, 6)]` means: for each n from 1 to 5, compute n*n and collect the results into a list. The condition `if n % 2 == 0` filters to only even numbers.",
+        "mm": "`[n * n for n in range(1, 6)]` ဆိုတာ: n ကို 1 ကနေ 5 ထိ တစ်ခုချင်းသွားပြီး n*n တွက်ကာ list ထဲ ထည့်ပါ ဆိုတဲ့ အဓိပ္ပါယ်ပါ။ `if n % 2 == 0` condition က ကိန်းဂဏန်းများကိုသာ စစ်ထုတ်ပါတယ်။"
+      },
+      "runnable": true
+    },
+    {
+      "type": "code_example",
+      "code": "words = [\"hello\", \"python\", \"myanmar\", \"code\"]\n\n# Make all uppercase\nuppercase = [w.upper() for w in words]\nprint(uppercase)\n\n# Keep only long words (length > 4)\nlong_words = [w for w in words if len(w) > 4]\nprint(long_words)",
+      "expectedOutput": "['HELLO', 'PYTHON', 'MYANMAR', 'CODE']\n['hello', 'python', 'myanmar']",
+      "explanation": {
+        "en": "List comprehensions work on any iterable — including lists of strings! Here we transform each word to uppercase, and filter to only words longer than 4 characters.",
+        "mm": "List comprehensions က string list အပါအဝင် iterable မည်သည့်ဟာမဆို အပေါ်မှာ အလုပ်လုပ်ပါတယ်! ဒီနေရာမှာ word တစ်ခုချင်းကို uppercase ပြောင်းပြီး၊ 4 ထက်ပိုရှည်တဲ့ word တွေကိုသာ စစ်ထုတ်ပါတယ်။"
+      },
+      "runnable": true
+    },
+    {
+      "type": "try_it",
+      "prompt": {
+        "en": "Use a list comprehension to make a list of numbers from 1 to 10 that are divisible by 3. Print the result.",
+        "mm": "1 ကနေ 10 ထိ 3 ဖြင့် ပိုင်းျပတ်သော ဂဏန်းများ list comprehension ဖြင့် ဖောက်ပါ။ ရလဒ်ကို print ထုတ်ပါ။"
+      },
+      "starterCode": "# Numbers 1-10 divisible by 3\ndivisible_by_3 = [n for n in range(1, 11) if n % 3 == 0]\nprint(divisible_by_3)\n",
+      "validation": {
+        "mustContain": ["for", "in", "range", "if"],
+        "mustOutputSomething": true
+      }
+    },
+    {
+      "type": "quiz",
+      "question": {
+        "en": "What does `[x * 2 for x in [1, 2, 3]]` produce?",
+        "mm": "`[x * 2 for x in [1, 2, 3]]` က ဘာ ထုတ်ပေးသလဲ?"
+      },
+      "options": {
+        "en": ["[1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "[3, 6, 9]"],
+        "mm": ["[1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "[3, 6, 9]"]
+      },
+      "correct": 1,
+      "explanation": {
+        "en": "For each x in [1, 2, 3], we compute x*2: 1*2=2, 2*2=4, 3*2=6. So the result is [2, 4, 6].",
+        "mm": "[1, 2, 3] ထဲ x တစ်ခုချင်းကို x*2 တွက်ပါ: 1*2=2, 2*2=4, 3*2=6။ ဒါကြောင့် ရလဒ်က [2, 4, 6] ပါ။"
+      }
+    }
+  ],
+  "problemIds": ["comprehensions-01-p1", "comprehensions-01-p2", "comprehensions-01-p3"]
+}

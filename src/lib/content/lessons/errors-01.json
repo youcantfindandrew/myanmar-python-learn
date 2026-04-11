@@ -1,0 +1,86 @@
+{
+  "id": "errors-01",
+  "titleEn": "Handling Errors Gracefully",
+  "titleMm": "အမှားများကို ကောင်းမွန်စွာ ကိုင်တွယ်ခြင်း",
+  "category": "Level Up",
+  "difficulty": 7,
+  "ageGroupMin": "12-14",
+  "orderIndex": 17,
+  "prerequisites": ["dicts-01"],
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "explanation",
+      "content": {
+        "en": "## Why Do Programs Crash?\n\nSometimes your program gets unexpected input — like a user types a word when you expected a number. Without protection, Python stops with a red error message. That's not great for users!\n\n**Error handling** lets your program respond to problems without crashing.\n\n## The try/except Block\n\n```python\ntry:\n    # code that might cause an error\n    number = int(input(\"Enter a number: \"))\nexcept ValueError:\n    # what to do if there IS an error\n    print(\"That is not a valid number!\")\n```\n\n- **`try`** — put the risky code here\n- **`except ErrorType`** — runs only if that specific error happens\n- If no error happens, the `except` block is skipped entirely\n\n### Common Errors to Catch\n| Error | When it happens |\n|---|---|\n| `ValueError` | Wrong type, e.g. `int(\"hello\")` |\n| `ZeroDivisionError` | Dividing by zero |\n| `IndexError` | List index out of range |\n| `KeyError` | Dictionary key doesn't exist |",
+        "mm": "## ပရိုဂရမ်များ ဘာကြောင့် ထိပ်ကျနေသနည်း?\n\nတစ်ခါတစ်ရံ သင်၏ ပရိုဂရမ်သည် မမျှော်လင့်သော input ကို ရရှိသည် — ဥပမာ အသုံးပြုသူသည် နံပါတ်ကို မျှော်လင့်သော်လည်း စကားလုံးတစ်ခု ရိုက်ထည့်သည်။ ကာကွယ်မှုမရှိဘဲ Python သည် အနီရောင် error message ဖြင့် ရပ်တန့်မည်။ ၎င်းသည် အသုံးပြုသူများအတွက် ကောင်းမွန်ခြင်းမဟုတ်ပါ!\n\n**Error handling** သည် ပရိုဂရမ်ကို crash မဖြစ်ဘဲ ပြဿနာများကို တုံ့ပြန်နိုင်စေသည်။\n\n## try/except Block\n\n```python\ntry:\n    # အမှားဖြစ်နိုင်သော code\n    number = int(input(\"နံပါတ်တစ်ခု ထည့်ပါ: \"))\nexcept ValueError:\n    # အမှားဖြစ်ပါက ဘာလုပ်မည်\n    print(\"ထိုသည် မှန်ကန်သော နံပါတ်မဟုတ်ပါ!\")\n```\n\n- **`try`** — အန္တရာယ်ရှိသော code ကို ဤနေရာတွင် ထားပါ\n- **`except ErrorType`** — ထို specific error ဖြစ်ပါကသာ run မည်\n- Error မဖြစ်ပါက `except` block ကို လုံးဝ ကျော်သွားမည်\n\n### ဖမ်းဆီးနိုင်သော ဘုံ Error များ\n| Error | ဖြစ်သောအချိန် |\n|---|---|\n| `ValueError` | အမျိုးအစားမှားသောအခါ၊ ဥပမာ `int(\"hello\")` |\n| `ZeroDivisionError` | သုညဖြင့် စားသောအခါ |\n| `IndexError` | List index နယ်နိမိတ်ကျော်သောအခါ |\n| `KeyError` | Dictionary key မရှိသောအခါ |"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "# Safe division — catching ZeroDivisionError\ndef safe_divide(a, b):\n    try:\n        result = a / b\n        print(\"Answer:\", result)\n    except ZeroDivisionError:\n        print(\"Error: Cannot divide by zero!\")\n\nsafe_divide(10, 2)\nsafe_divide(9, 3)\nsafe_divide(5, 0)",
+      "expectedOutput": "Answer: 5.0\nAnswer: 3.0\nError: Cannot divide by zero!",
+      "explanation": {
+        "en": "We wrapped the risky division in a `try` block. The first two calls work fine and skip the `except`. The third call divides by zero — Python raises `ZeroDivisionError`, and our `except` block catches it and shows a friendly message instead of crashing.",
+        "mm": "အန္တရာယ်ရှိသော division ကို `try` block ထဲတွင် ထည့်ခဲ့သည်။ ပထမ call နှစ်ခုသည် ကောင်းမွန်စွာ အလုပ်လုပ်ကာ `except` ကို ကျော်သွားသည်။ တတိယ call သည် သုညဖြင့် စားသည် — Python က `ZeroDivisionError` ထုတ်ကာ ကျွန်ုပ်တို့၏ `except` block မှ crash မဖြစ်ဘဲ ဖော်ရွေသော message တစ်ခု ပြသည်။"
+      },
+      "runnable": true
+    },
+    {
+      "type": "explanation",
+      "content": {
+        "en": "## Catching Multiple Errors and `finally`\n\nYou can catch several different errors and handle each one differently:\n\n```python\ntry:\n    x = int(input(\"Enter a number: \"))\n    result = 100 / x\nexcept ValueError:\n    print(\"Please type a number, not a word!\")\nexcept ZeroDivisionError:\n    print(\"Please don't enter zero!\")\n```\n\n### The `finally` Clause\n\n`finally` runs **no matter what** — whether there was an error or not. It's great for cleanup tasks like closing files or showing a completion message:\n\n```python\ntry:\n    number = int(input(\"Enter age: \"))\nexcept ValueError:\n    print(\"Invalid input!\")\nfinally:\n    print(\"Thanks for using our program!\")  # always runs\n```\n\nThink of `finally` as your polite goodbye — it always happens!",
+        "mm": "## Error များစွာကို ဖမ်းဆီးခြင်းနှင့် `finally`\n\nError မျိုးမျိုးကို ဖမ်းဆီး၍ တစ်ခုချင်းစီ မတူဘဲ ကိုင်တွယ်နိုင်သည်:\n\n```python\ntry:\n    x = int(input(\"နံပါတ်တစ်ခု ထည့်ပါ: \"))\n    result = 100 / x\nexcept ValueError:\n    print(\"စကားလုံးမဟုတ်ဘဲ နံပါတ်တစ်ခု ရိုက်ပါ!\")\nexcept ZeroDivisionError:\n    print(\"သုည မထည့်ပါနှင့်!\")\n```\n\n### `finally` Clause\n\n`finally` သည် error ဖြစ်ဖြစ် မဖြစ်ဖြစ် **မည်သည့်အခါမဆို** run မည်။ File ပိတ်ခြင်း သို့မဟုတ် ပြီးဆုံးကြောင်း message ပြသခြင်းကဲ့သို့ cleanup အလုပ်များအတွက် အလွန် ကောင်းမွန်သည်:\n\n```python\ntry:\n    number = int(input(\"အသက် ထည့်ပါ: \"))\nexcept ValueError:\n    print(\"မမှန်ကန်သော input!\")\nfinally:\n    print(\"ကျွန်ုပ်တို့ ပရိုဂရမ်ကို သုံးသောအတွက် ကျေးဇူးတင်ပါသည်!\")  # အမြဲ run မည်\n```\n\n`finally` ကို သင်၏ ယဉ်ကျေးသော နုတ်ဆက်ခြင်းဟု မှတ်ယူပါ — ၎င်းသည် အမြဲဖြစ်သည်!"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "# A quiz game with error handling and finally\ndef ask_number(prompt):\n    try:\n        value = int(prompt)\n        return value\n    except ValueError:\n        print(\"Oops! That was not a number. Using 0 instead.\")\n        return 0\n    finally:\n        print(\"(Input processed)\")\n\nresult1 = ask_number(\"42\")\nresult2 = ask_number(\"hello\")\nprint(\"Result 1:\", result1)\nprint(\"Result 2:\", result2)",
+      "expectedOutput": "(Input processed)\n(Input processed)\nOops! That was not a number. Using 0 instead.\nResult 1: 42\nResult 2: 0",
+      "explanation": {
+        "en": "Notice that `(Input processed)` prints before the error message even though it comes after in the code — `finally` always runs before the function returns. The first call succeeds, the second catches a `ValueError` and returns 0 as a safe default.",
+        "mm": "Code ထဲတွင် error message ၏ နောက်တွင် ရှိသော်လည်း `(Input processed)` သည် error message မတိုင်မီ print ဖြစ်သည် — `finally` သည် function return မတိုင်မီ အမြဲ run သည်ကို သတိပြုပါ။ ပထမ call အောင်မြင်သည်၊ ဒုတိယ call သည် `ValueError` ကို ဖမ်းကာ safe default အဖြစ် 0 ပြန်ပေးသည်။"
+      },
+      "runnable": true
+    },
+    {
+      "type": "try_it",
+      "prompt": {
+        "en": "Write a function called `safe_int` that takes a string, tries to convert it to an integer with `int()`, and returns the number if it works. If a `ValueError` happens, print a friendly error message and return -1. Test it with both `\"25\"` and `\"abc\"`.",
+        "mm": "`safe_int` ဟုခေါ်သော function တစ်ခု ရေးပါ — string တစ်ခု ယူ၍ `int()` ဖြင့် integer သို့ ပြောင်းရန် ကြိုးစားပြီး အောင်မြင်ပါက နံပါတ် ပြန်ပေးပါ။ `ValueError` ဖြစ်ပါက ဖော်ရွေသော error message print ကာ -1 ပြန်ပေးပါ။ `\"25\"` နှင့် `\"abc\"` နှစ်ခုလုံးဖြင့် စမ်းသပ်ပါ။"
+      },
+      "starterCode": "def safe_int(text):\n    try:\n        # try to convert to integer\n        pass\n    except ValueError:\n        # handle the error\n        pass\n\nprint(safe_int(\"25\"))\nprint(safe_int(\"abc\"))",
+      "validation": {
+        "mustContain": ["try", "except", "ValueError"],
+        "mustOutputSomething": true
+      }
+    },
+    {
+      "type": "quiz",
+      "question": {
+        "en": "When does the `finally` block run?",
+        "mm": "`finally` block သည် မည်သည့်အခါ run သနည်း?"
+      },
+      "options": {
+        "en": [
+          "Only when an error occurs",
+          "Only when no error occurs",
+          "Always, whether or not an error occurred",
+          "Only when you use more than one except block"
+        ],
+        "mm": [
+          "Error တစ်ခု ဖြစ်သောအခါမှသာ",
+          "Error မဖြစ်သောအခါမှသာ",
+          "Error ဖြစ်ဖြစ် မဖြစ်ဖြစ် အမြဲ",
+          "except block တစ်ခုထက်ပို၍ သုံးသောအခါမှသာ"
+        ]
+      },
+      "correct": 2,
+      "explanation": {
+        "en": "`finally` always runs — that is its whole purpose! It is perfect for cleanup code you need to run no matter what happens, like printing a goodbye message or closing a file.",
+        "mm": "`finally` သည် အမြဲ run သည် — ၎င်းသည် ၎င်း၏ ရည်ရွယ်ချက်အပြည့်အဝ ဖြစ်သည်! မည်သည့်အရာ ဖြစ်ပြားပါစေ run ရမည့် cleanup code — goodbye message print ခြင်း သို့မဟုတ် file ပိတ်ခြင်းကဲ့သို့ — အတွက် အကောင်းဆုံး ဖြစ်သည်။"
+      }
+    }
+  ],
+  "problemIds": ["errors-01-p1", "errors-01-p2", "errors-01-p3"]
+}

@@ -1,0 +1,86 @@
+{
+	"id": "project-quiz-01",
+	"titleEn": "Build It! — Quiz Game",
+	"titleMm": "တည်ဆောက်မယ် — Quiz ဂိမ်း",
+	"category": "Build It!",
+	"difficulty": 10,
+	"ageGroupMin": "14-16",
+	"orderIndex": 24,
+	"prerequisites": ["recursion-01"],
+	"estimatedMinutes": 40,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Let's Build a Quiz Game!\n\nYou've learned variables, loops, functions, lists, dicts, and classes. Now put them all together to make something real: a **quiz game**.\n\nHere's the plan:\n- Store questions as a **list of dictionaries** — each dict has the question, options, and correct answer index\n- A function `ask_question(q)` shows one question and returns whether the player was right\n- A **score counter** tracks how many they get right\n- A loop runs through every question\n\nData structure for one question:\n```python\n{\n    \"question\": \"What is 7 x 8?\",\n    \"options\": [\"54\", \"56\", \"58\", \"64\"],\n    \"answer\": 1   # index of correct option (\"56\")\n}\n```\n\nThis is how real quiz apps store data — just bigger lists!",
+				"mm": "## Quiz ဂိမ်း တည်ဆောက်ကြမယ်!\n\nVariable, loop, function, list, dict နဲ့ class တွေ သင်ယူပြီးပြီ။ ခုတော့ **quiz ဂိမ်း** တစ်ခုဆောက်ရန် အားလုံးကို ပေါင်းစပ်ကြမယ်။\n\nအစီအစဉ်:\n- မေးခွန်းများကို **dictionary list** အဖြစ် သိမ်းဆည်းမည် — dict တိုင်းမှာ မေးခွန်း၊ ရွေးချယ်စရာများနဲ့ မှန်ကန်သော အဖြေ index ပါမည်\n- `ask_question(q)` function တစ်ခုက မေးခွန်းတစ်ခု ပြပြီး ကစားသူ မှန်မမှန် return ပြုမည်\n- **Score counter** က မှန်ကန်သော အဖြေဘယ်နှစ်ခုရသည် ခြေရာခံမည်\n- Loop တစ်ခုက မေးခွန်းတိုင်းကို ဖြတ်ကျော်မည်\n\nမေးခွန်းတစ်ခုအတွက် data structure:\n```python\n{\n    \"question\": \"7 x 8 = ?\",\n    \"options\": [\"54\", \"56\", \"58\", \"64\"],\n    \"answer\": 1   # မှန်ကန်သော option ၏ index (\"56\")\n}\n```\n\nReal quiz app တွေမှာ data ကို ဒီလိုပဲ သိမ်းပါတယ် — list ပိုကြီးရုံသာ!"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "questions = [\n    {\n        \"question\": \"What is 7 x 8?\",\n        \"options\": [\"54\", \"56\", \"58\", \"64\"],\n        \"answer\": 1\n    },\n    {\n        \"question\": \"Which is a Python data type?\",\n        \"options\": [\"table\", \"column\", \"list\", \"row\"],\n        \"answer\": 2\n    },\n    {\n        \"question\": \"What does len([1, 2, 3]) return?\",\n        \"options\": [\"1\", \"2\", \"3\", \"4\"],\n        \"answer\": 2\n    }\n]\n\ndef ask_question(q, number):\n    print(\"Q\" + str(number) + \": \" + q[\"question\"])\n    for i in range(len(q[\"options\"])):\n        print(\"  \" + str(i) + \") \" + q[\"options\"][i])\n    guess = int(input(\"Your answer (0-3): \"))\n    if guess == q[\"answer\"]:\n        print(\"Correct!\")\n        return True\n    else:\n        correct = q[\"options\"][q[\"answer\"]]\n        print(\"Wrong! Answer was: \" + correct)\n        return False\n\nscore = 0\nfor i in range(len(questions)):\n    if ask_question(questions[i], i + 1):\n        score += 1\n\nprint(\"---\")\nprint(\"Score: \" + str(score) + \"/\" + str(len(questions)))",
+			"expectedOutput": "Q1: What is 7 x 8?\n  0) 54\n  1) 56\n  2) 58\n  3) 64\nYour answer (0-3): 1\nCorrect!\nQ2: Which is a Python data type?\n  0) table\n  1) column\n  2) list\n  3) row\nYour answer (0-3): 2\nCorrect!\nQ3: What does len([1, 2, 3]) return?\n  0) 1\n  1) 2\n  2) 3\n  3) 4\nYour answer (0-3): 2\nCorrect!\n---\nScore: 3/3",
+			"explanation": {
+				"en": "The `questions` list holds three dicts. `ask_question` reads `q[\"question\"]`, `q[\"options\"]`, and `q[\"answer\"]` from whichever dict is passed in. The main loop iterates through every question and adds 1 to `score` each time the function returns `True`.",
+				"mm": "`questions` list မှာ dict သုံးခု ပါပါတယ်။ `ask_question` က pass ဝင်လာသော dict မည်သည်ဖြစ်စေ `q[\"question\"]`၊ `q[\"options\"]`နဲ့ `q[\"answer\"]` ကို ဖတ်ပါတယ်။ Main loop က မေးခွန်းတိုင်းကို ဖြတ်ကျော်ပြီး function က `True` return ပြုတဲ့အခါ `score` ကို 1 ထည့်ပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Improving the Quiz — Shuffle and Grade\n\nReal quiz games shuffle the questions so each play-through is different. Python's `random` module makes this easy with `random.shuffle(list)` — it rearranges the list *in place*.\n\nWe can also give a **grade** based on the score:\n\n```python\ndef get_grade(score, total):\n    percent = score / total * 100\n    if percent == 100:\n        return \"Perfect!\"\n    elif percent >= 70:\n        return \"Great job!\"\n    elif percent >= 50:\n        return \"Keep practising!\"\n    else:\n        return \"Try again!\"\n```\n\nNow the quiz feels like a real app.",
+				"mm": "## Quiz ကို ပိုကောင်းအောင် လုပ်ခြင်း — Shuffle နဲ့ Grade\n\nReal quiz ဂိမ်းတွေမှာ ကစားတဲ့အကြိမ်တိုင်း မတူညီစေရန် မေးခွန်းများကို ရောနှောပါတယ်။ Python ရဲ့ `random` module က `random.shuffle(list)` ဖြင့် ဒါကို လွယ်ကူစေပါတယ် — list ကို *in place* ပြန်စီပေးပါတယ်။\n\nScore ပေါ်မူတည်ပြီး **grade** လည်း ပေးနိုင်ပါတယ်:\n\n```python\ndef get_grade(score, total):\n    percent = score / total * 100\n    if percent == 100:\n        return \"Perfect!\"\n    elif percent >= 70:\n        return \"Great job!\"\n    elif percent >= 50:\n        return \"Keep practising!\"\n    else:\n        return \"Try again!\"\n```\n\nခုဆို quiz က real app ကဲ့သို့ ခံစားရပါပြီ။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "import random\n\nquestions = [\n    {\"question\": \"Capital of Myanmar?\", \"options\": [\"Yangon\", \"Mandalay\", \"Naypyidaw\", \"Bago\"], \"answer\": 2},\n    {\"question\": \"2 ** 10 = ?\", \"options\": [\"512\", \"1024\", \"2048\", \"256\"], \"answer\": 1},\n    {\"question\": \"len(\\\"hello\\\") = ?\", \"options\": [\"4\", \"5\", \"6\", \"3\"], \"answer\": 1}\n]\n\ndef get_grade(score, total):\n    percent = score / total * 100\n    if percent == 100:\n        return \"Perfect!\"\n    elif percent >= 67:\n        return \"Great job!\"\n    else:\n        return \"Keep practising!\"\n\nrandom.seed(42)\nrandom.shuffle(questions)\n\nscore = 0\nfor i, q in enumerate(questions):\n    print(\"Q\" + str(i + 1) + \": \" + q[\"question\"])\n    for j, opt in enumerate(q[\"options\"]):\n        print(\"  \" + str(j) + \") \" + opt)\n    guess = q[\"answer\"]   # auto-answer for demo\n    if guess == q[\"answer\"]:\n        score += 1\n\nprint(\"Score:\", score, \"/\", len(questions))\nprint(get_grade(score, len(questions)))",
+			"expectedOutput": "Q1: 2 ** 10 = ?\n  0) 512\n  1) 1024\n  2) 2048\n  3) 256\nQ2: Capital of Myanmar?\n  0) Yangon\n  1) Mandalay\n  2) Naypyidaw\n  3) Bago\nQ3: len(\"hello\") = ?\n  0) 4\n  1) 5\n  2) 6\n  3) 3\nScore: 3 / 3\nPerfect!",
+			"explanation": {
+				"en": "`random.seed(42)` makes the shuffle repeatable so the output is predictable here. `enumerate` gives both the index `i` and the value in one go — cleaner than `range(len(...))`. The `get_grade` function is completely separate from the quiz logic — that's good code organisation.",
+				"mm": "`random.seed(42)` က shuffle ကို ထပ်ခါထပ်ခါ တူညီစေပြီး output ကို ဤနေရာမှာ ကြိုတင် ခန့်မှန်းနိုင်စေပါတယ်။ `enumerate` က index `i` နဲ့ value ကို တစ်ကြိမ်တည်း ပေးပါတယ် — `range(len(...))` ထက် ပိုရှင်းပါတယ်။ `get_grade` function က quiz logic နဲ့ လုံးဝ သီးခြားဖြစ်ပါတယ် — ဒါဟာ ကောင်းသော code organization ပါ။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Build a mini 2-question quiz using a list of dicts. Each dict must have `\"question\"`, `\"options\"` (a list of 4 strings), and `\"answer\"` (the index). Write a loop that prints each question and its options. For now, auto-select the correct answer and print the final score.",
+				"mm": "Dictionary list ကိုသုံးပြီး mini 2-မေးခွန်း quiz တစ်ခု တည်ဆောက်ပါ။ Dict တိုင်းမှာ `\"question\"`၊ `\"options\"` (string 4 ခုပါ list) နဲ့ `\"answer\"` (index) ပါရမည်။ မေးခွန်းတိုင်းနဲ့ options ကို print ထုတ်သော loop ရေးပါ။ ယခုတော့ မှန်ကန်သော အဖြေကို auto-select လုပ်ပြီး နောက်ဆုံး score print ထုတ်ပါ။"
+			},
+			"starterCode": "questions = [\n    {\n        \"question\": \"Your first question here?\",\n        \"options\": [\"A\", \"B\", \"C\", \"D\"],\n        \"answer\": 0\n    },\n    {\n        \"question\": \"Your second question here?\",\n        \"options\": [\"A\", \"B\", \"C\", \"D\"],\n        \"answer\": 1\n    }\n]\n\nscore = 0\n\nfor i, q in enumerate(questions):\n    # Print the question and options\n    \n    # Auto-select the correct answer\n    guess = q[\"answer\"]\n    \n    # Check if correct and update score\n    \n\nprint(\"Score:\", score, \"/\", len(questions))\n",
+			"validation": {
+				"mustContain": ["questions", "options", "answer", "score", "for", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "Why store quiz questions as a list of dictionaries instead of many separate variables?",
+				"mm": "Quiz မေးခွန်းများကို variable များစွာ သီးခြားသတ်မှတ်မည့်အစား dictionary list အဖြစ် သိမ်းဆည်းရသည့် အကြောင်းရင်းက ဘာလဲ?"
+			},
+			"options": {
+				"en": [
+					"Dictionaries are faster than variables",
+					"You can loop through a list — you can't loop through separate variables",
+					"Python requires it for quiz apps",
+					"It uses less memory"
+				],
+				"mm": [
+					"Dictionary တွေဟာ variable တွေထက် မြန်ပါတယ်",
+					"List ကို loop ဖြင့် ဖြတ်ကျော်နိုင်သည် — သီးခြား variable တွေကို loop မလုပ်နိုင်ပါ",
+					"Quiz app များအတွက် Python က လိုအပ်ပါတယ်",
+					"Memory နည်းနည်းသုံးပါတယ်"
+				]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "A list lets you write one loop that handles any number of questions. If you had `question1`, `question2`, `question3` as separate variables, adding a 4th question means rewriting the loop. With a list, just append to it — the loop already handles it.",
+				"mm": "List က မေးခွန်းမည်မျှ ရှိစေ ကိုင်တွယ်နိုင်သော loop တစ်ခု ရေးနိုင်စေပါတယ်။ `question1`၊ `question2`၊ `question3` ကို သီးခြား variable အဖြစ် ရှိနေရင် 4th မေးခွန်း ထည့်ဖို့ loop ကို ပြန်ရေးရပါမည်။ List ဖြင့်ဆိုရင် ထည့်ရုံသာ — loop က ဒါကို ပြီးသားကိုင်တွယ်နိုင်ပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["project-quiz-01-p1", "project-quiz-01-p2", "project-quiz-01-p3"]
+}

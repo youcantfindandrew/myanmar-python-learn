@@ -1,0 +1,86 @@
+{
+  "id": "dicts-01",
+  "titleEn": "Python Dictionaries",
+  "titleMm": "Python အဘိဓာန်များ",
+  "category": "Level Up",
+  "difficulty": 7,
+  "ageGroupMin": "12-14",
+  "orderIndex": 16,
+  "prerequisites": ["functions-02"],
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "explanation",
+      "content": {
+        "en": "## What is a Dictionary?\n\nA **dictionary** stores information as **key-value pairs** — like a real dictionary where each word (key) has a meaning (value).\n\nInstead of remembering a position number like a list, you look things up by a meaningful name.\n\n```python\nstudent = {\"name\": \"Aye\", \"age\": 13, \"city\": \"Yangon\"}\n```\n\n- Keys are usually strings: `\"name\"`, `\"age\"`, `\"city\"`\n- Values can be anything: text, numbers, lists, even other dictionaries\n- Use curly braces `{}` to create a dictionary\n- Separate key-value pairs with commas\n\n### Accessing Values\nUse square brackets with the key name:\n```python\nprint(student[\"name\"])   # Aye\nprint(student[\"age\"])    # 13\n```\n\n### Adding and Updating\nJust assign to a key — if it exists, it updates; if not, it adds:\n```python\nstudent[\"grade\"] = \"7th\"   # adds new key\nstudent[\"age\"] = 14        # updates existing key\n```",
+        "mm": "## အဘိဓာန် ဆိုတာ ဘာလဲ?\n\n**Dictionary** သည် **key-value pairs** အဖြစ် သတင်းအချက်အလက်များကို သိမ်းဆည်းသည် — တကယ့် အဘိဓာန်ကဲ့သို့ မျှ၊ စကားလုံးတစ်ခုချင်းစီ (key) တွင် အဓိပ္ပာယ် (value) ရှိသည်။\n\nList ကဲ့သို့ နံပါတ်တစ်ခု မှတ်မနေဘဲ၊ အမည်တစ်ခုဖြင့် ရှာဖွေနိုင်သည်။\n\n```python\nstudent = {\"name\": \"အေး\", \"age\": 13, \"city\": \"ရန်ကုန်\"}\n```\n\n- Key များသည် များသောအားဖြင့် string ဖြစ်သည်: `\"name\"`, `\"age\"`, `\"city\"`\n- Value များသည် မည်သည့်အရာမဆို ဖြစ်နိုင်သည်\n- `{}` နှင့် dictionary တစ်ခု ဖန်တီးပါ\n- Key-value pair များကို ကော်မာဖြင့် ခွဲခြားပါ\n\n### တန်ဖိုးများကို ရယူခြင်း\nKey အမည်ဖြင့် square bracket ကို သုံးပါ:\n```python\nprint(student[\"name\"])   # အေး\nprint(student[\"age\"])    # 13\n```\n\n### ထည့်ခြင်းနှင့် ပြင်ဆင်ခြင်း\nKey တစ်ခုသို့ assign လုပ်လျှင် — ရှိပြီးသားဆိုလျှင် update ဖြစ်မည်၊ မရှိသေးလျှင် ထည့်မည်:\n```python\nstudent[\"grade\"] = \"ဆဋ္ဌမတန်း\"   # key အသစ် ထည့်သည်\nstudent[\"age\"] = 14               # ရှိပြီးသား key ကို ပြင်သည်\n```"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "# Create a dictionary about a student\nstudent = {\n    \"name\": \"Mg Mg\",\n    \"age\": 13,\n    \"city\": \"Mandalay\",\n    \"score\": 95\n}\n\n# Access values by key\nprint(student[\"name\"])\nprint(student[\"city\"])\nprint(student[\"score\"])\n\n# Add a new key\nstudent[\"grade\"] = \"8th\"\nprint(student[\"grade\"])",
+      "expectedOutput": "Mg Mg\nMandalay\n95\n8th",
+      "explanation": {
+        "en": "We created a dictionary with 4 key-value pairs. We accessed each value using its key inside square brackets. Then we added a new key `\"grade\"` — dictionaries grow easily!",
+        "mm": "Key-value pairs လေးခုဖြင့် dictionary တစ်ခု ဖန်တီးခဲ့သည်။ Square bracket ထဲတွင် key ကို သုံး၍ တန်ဖိုးတစ်ခုချင်းစီကို ရယူခဲ့သည်။ ထို့နောက် `\"grade\"` key အသစ်တစ်ခု ထည့်ခဲ့သည် — dictionary များသည် လွယ်ကူစွာ ကြီးထွားနိုင်သည်!"
+      },
+      "runnable": true
+    },
+    {
+      "type": "explanation",
+      "content": {
+        "en": "## Looping Through a Dictionary\n\nUse `.items()` to loop through all key-value pairs at once:\n\n```python\nfruit_prices = {\"apple\": 500, \"mango\": 300, \"banana\": 150}\n\nfor fruit, price in fruit_prices.items():\n    print(fruit, \"costs\", price, \"kyats\")\n```\n\nThis gives you **both** the key and value in each loop step. The variable names `fruit` and `price` are up to you — pick names that make sense!\n\nYou can also use:\n- `.keys()` — loop through just the keys\n- `.values()` — loop through just the values\n- `len(my_dict)` — count how many pairs there are",
+        "mm": "## Dictionary တစ်ခုထဲတွင် Loop ပတ်ခြင်း\n\nKey-value pairs များအားလုံးတွင် တစ်ကြိမ်တည်း loop ပတ်ရန် `.items()` ကို သုံးပါ:\n\n```python\nfruit_prices = {\"apple\": 500, \"mango\": 300, \"banana\": 150}\n\nfor fruit, price in fruit_prices.items():\n    print(fruit, \"costs\", price, \"kyats\")\n```\n\nLoop step တစ်ခုချင်းစီတွင် key နှင့် value **နှစ်ခုလုံး** ရရှိသည်။ `fruit` နှင့် `price` variable အမည်များကို သင်ကိုယ်တိုင် ရွေးနိုင်သည် — အဓိပ္ပာယ်ရှိသည့် အမည်များ ရွေးပါ!\n\nထို့ပြင် အောက်ပါတို့ကိုလည်း သုံးနိုင်သည်:\n- `.keys()` — key များတွင်သာ loop ပတ်ခြင်း\n- `.values()` — value များတွင်သာ loop ပတ်ခြင်း\n- `len(my_dict)` — pair မည်မျှ ရှိသည် ရေတွက်ခြင်း"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "# A dictionary of subject scores\nscores = {\n    \"Math\": 88,\n    \"Science\": 92,\n    \"English\": 75,\n    \"Myanmar\": 95\n}\n\n# Loop through all subjects and scores\nprint(\"--- Report Card ---\")\nfor subject, score in scores.items():\n    print(subject + \": \" + str(score))\n\n# Calculate average\ntotal = sum(scores.values())\naverage = total / len(scores)\nprint(\"Average:\", average)",
+      "expectedOutput": "--- Report Card ---\nMath: 88\nScience: 92\nEnglish: 75\nMyanmar: 95\nAverage: 87.5",
+      "explanation": {
+        "en": "We used `.items()` to print each subject and score. Then `.values()` gave us all scores to add together, and `len(scores)` gave us the count to divide by. Dictionaries make it easy to work with named data!",
+        "mm": "Subject နှင့် score တစ်ခုချင်းစီ print ရန် `.items()` ကို သုံးခဲ့သည်။ `.values()` ဖြင့် score အားလုံးကို ပေါင်းကာ၊ `len(scores)` ဖြင့် အရေအတွက်ကို ရယူ၍ ပျမ်းမျှ တွက်ခဲ့သည်။ Dictionary များသည် အမည်ရှိသော data ဖြင့် အလုပ်လုပ်ရာတွင် လွယ်ကူစေသည်!"
+      },
+      "runnable": true
+    },
+    {
+      "type": "try_it",
+      "prompt": {
+        "en": "Create a dictionary called `my_profile` with at least 3 keys: your name, your age, and your favourite subject. Then loop through it with `.items()` and print each key and value.",
+        "mm": "`my_profile` ဟုခေါ်သော dictionary တစ်ခု ဖန်တီးပါ — key အနည်းဆုံး ၃ ခု: သင်၏အမည်၊ သင်၏အသက်နှင့် သင်နှစ်သက်သော ဘာသာရပ်။ ထို့နောက် `.items()` ဖြင့် loop ပတ်ကာ key နှင့် value တစ်ခုချင်းစီ print ပါ။"
+      },
+      "starterCode": "# Create your profile dictionary\nmy_profile = {\n    # add your keys and values here\n}\n\n# Loop through and print each item\nfor key, value in my_profile.items():\n    print(key, \":\", value)",
+      "validation": {
+        "mustContain": ["my_profile", ".items()"],
+        "mustOutputSomething": true
+      }
+    },
+    {
+      "type": "quiz",
+      "question": {
+        "en": "What does the `.items()` method return when looping through a dictionary?",
+        "mm": "Dictionary တစ်ခုကို loop ပတ်သောအခါ `.items()` method သည် ဘာကို ပြန်ပေးသနည်း?"
+      },
+      "options": {
+        "en": [
+          "Only the keys",
+          "Only the values",
+          "Both the key and value as pairs",
+          "The length of the dictionary"
+        ],
+        "mm": [
+          "Key များသာ",
+          "Value များသာ",
+          "Key နှင့် value နှစ်ခုလုံးကို pair အဖြစ်",
+          "Dictionary ၏ အရှည်"
+        ]
+      },
+      "correct": 2,
+      "explanation": {
+        "en": "`.items()` returns each key-value pair together, so you can unpack them into two variables like `for key, value in my_dict.items()`. This is the most common way to loop through a dictionary!",
+        "mm": "`.items()` သည် key-value pair တစ်ခုချင်းစီကို တွဲ၍ ပြန်ပေးသည်၊ ထို့ကြောင့် `for key, value in my_dict.items()` ဟု variable နှစ်ခုသို့ ဖြန့်ထုတ်နိုင်သည်။ Dictionary ကို loop ပတ်ရာတွင် အသုံးအများဆုံး နည်းလမ်းဖြစ်သည်!"
+      }
+    }
+  ],
+  "problemIds": ["dicts-01-p1", "dicts-01-p2", "dicts-01-p3"]
+}

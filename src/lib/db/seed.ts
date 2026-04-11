@@ -15,13 +15,25 @@ import loops02 from '$lib/content/lessons/loops-02.json';
 import lists01 from '$lib/content/lessons/lists-01.json';
 import functions01 from '$lib/content/lessons/functions-01.json';
 import functions02 from '$lib/content/lessons/functions-02.json';
+import dicts01 from '$lib/content/lessons/dicts-01.json';
+import errors01 from '$lib/content/lessons/errors-01.json';
+import modules01 from '$lib/content/lessons/modules-01.json';
+import comprehensions01 from '$lib/content/lessons/comprehensions-01.json';
+import stringsAdvanced01 from '$lib/content/lessons/strings-advanced-01.json';
+import classes01 from '$lib/content/lessons/classes-01.json';
+import classes02 from '$lib/content/lessons/classes-02.json';
+import recursion01 from '$lib/content/lessons/recursion-01.json';
+import projectQuiz01 from '$lib/content/lessons/project-quiz-01.json';
+import projectStory01 from '$lib/content/lessons/project-story-01.json';
 
-const SEED_VERSION = 2;
+const SEED_VERSION = 3;
 
 const lessonData = [
 	intro01, intro02, variables01, variables02, print01,
 	input01, conditions01, conditions02, strings01, math01,
-	loops01, loops02, lists01, functions01, functions02
+	loops01, loops02, lists01, functions01, functions02,
+	dicts01, errors01, modules01, comprehensions01, stringsAdvanced01,
+	classes01, classes02, recursion01, projectQuiz01, projectStory01
 ];
 
 const lessons: LocalLesson[] = lessonData.map((l) => ({
@@ -391,6 +403,286 @@ const problems: LocalProblem[] = [
 		testCases: [{ input: '', expectedOutput: '25.0', hidden: false }],
 		hintsEn: ['return sum(nums) / len(nums)'], hintsMm: ['return sum(nums) / len(nums)'],
 		difficulty: 7, orderIndex: 3, version: 1
+	},
+	// ── dicts-01 ──────────────────────────────────────────────
+	{
+		id: 'dicts-01-p1', lessonId: 'dicts-01', titleEn: 'Student Grades', titleMm: 'ကျောင်းသား ဂုဏ်ထူး',
+		descriptionEn: 'Create a dictionary with 3 students: {"Aung": 85, "Mya": 92, "Ko": 78}. Print the grade for "Aung".',
+		descriptionMm: 'ကျောင်းသား ၃ ဦး {"Aung": 85, "Mya": 92, "Ko": 78} dictionary ဖောက်ပါ။ "Aung" ၏ ဂုဏ်ထူး print ထုတ်ပါ။',
+		starterCode: 'grades = {"Aung": 85, "Mya": 92, "Ko": 78}\nprint(grades["Aung"])\n',
+		testCases: [{ input: '', expectedOutput: '85', hidden: false }],
+		hintsEn: ['Use grades["Aung"] to look up a value by key'], hintsMm: ['grades["Aung"] ဖြင့် key ဖြင့် value ရှာပါ'],
+		difficulty: 7, orderIndex: 1, version: 1
+	},
+	{
+		id: 'dicts-01-p2', lessonId: 'dicts-01', titleEn: 'Sum of Values', titleMm: 'Values ပေါင်းလဒ်',
+		descriptionEn: 'Given d = {"a": 1, "b": 2, "c": 3}, print the sum of all values.',
+		descriptionMm: 'd = {"a": 1, "b": 2, "c": 3} ပေးထားသည်၊ values အားလုံး ပေါင်းလဒ် print ထုတ်ပါ။',
+		starterCode: 'd = {"a": 1, "b": 2, "c": 3}\nprint(sum(d.values()))\n',
+		testCases: [{ input: '', expectedOutput: '6', hidden: false }],
+		hintsEn: ['Use sum(d.values())'], hintsMm: ['sum(d.values()) သုံးပါ'],
+		difficulty: 7, orderIndex: 2, version: 1
+	},
+	{
+		id: 'dicts-01-p3', lessonId: 'dicts-01', titleEn: 'Add to Dict', titleMm: 'Dict ထဲ ထည့်မည်',
+		descriptionEn: 'Create a fruit price dictionary with 3 fruits, add "mango" with price 1.5, then print the length.',
+		descriptionMm: 'သစ်သီး ၃ မျိုး ဈေးနှုန်း dictionary ဖောက်ပြီး "mango" ကို ဈေးနှုန်း 1.5 ဖြင့် ထည့်ပါ၊ ပြီးရင် length print ထုတ်ပါ။',
+		starterCode: 'fruits = {"apple": 1.0, "banana": 0.5, "orange": 0.8}\nfruits["mango"] = 1.5\nprint(len(fruits))\n',
+		testCases: [{ input: '', expectedOutput: '4', hidden: false }],
+		hintsEn: ['fruits["mango"] = 1.5 adds a new key', 'len(fruits) counts the entries'], hintsMm: ['fruits["mango"] = 1.5 ဖြင့် key အသစ် ထည့်ပါ', 'len(fruits) ဖြင့် entries ရေတွက်ပါ'],
+		difficulty: 7, orderIndex: 3, version: 1
+	},
+	// ── errors-01 ──────────────────────────────────────────────
+	{
+		id: 'errors-01-p1', lessonId: 'errors-01', titleEn: 'Safe Convert', titleMm: 'ဘေးကင်းသော ပြောင်းလဲခြင်း',
+		descriptionEn: 'Use try/except to convert "hello" to int. If it fails, print "Not a number".',
+		descriptionMm: 'try/except ဖြင့် "hello" ကို int ပြောင်းပါ။ မအောင်မြင်ရင် "Not a number" print ထုတ်ပါ။',
+		starterCode: 'try:\n    print(int("hello"))\nexcept ValueError:\n    print("Not a number")\n',
+		testCases: [{ input: '', expectedOutput: 'Not a number', hidden: false }],
+		hintsEn: ['int("hello") raises ValueError', 'Catch it with except ValueError:'], hintsMm: ['int("hello") က ValueError ဖြစ်ပါတယ်', 'except ValueError: ဖြင့် ဖမ်းပါ'],
+		difficulty: 7, orderIndex: 1, version: 1
+	},
+	{
+		id: 'errors-01-p2', lessonId: 'errors-01', titleEn: 'No Division by Zero', titleMm: 'သုည (0) ဖြင့် မစားရ',
+		descriptionEn: 'Use try/except to divide 10 by 0. Catch ZeroDivisionError and print "Cannot divide by zero".',
+		descriptionMm: 'try/except ဖြင့် 10 ကို 0 ဖြင့် ပိုင်းပါ။ ZeroDivisionError ဖမ်းပြီး "Cannot divide by zero" print ထုတ်ပါ။',
+		starterCode: 'try:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print("Cannot divide by zero")\n',
+		testCases: [{ input: '', expectedOutput: 'Cannot divide by zero', hidden: false }],
+		hintsEn: ['10 / 0 raises ZeroDivisionError'], hintsMm: ['10 / 0 က ZeroDivisionError ဖြစ်ပါတယ်'],
+		difficulty: 7, orderIndex: 2, version: 1
+	},
+	{
+		id: 'errors-01-p3', lessonId: 'errors-01', titleEn: 'Missing Key', titleMm: 'မရှိသော Key',
+		descriptionEn: 'Try to access key "z" from {"a": 1}. Catch KeyError and print "Key not found".',
+		descriptionMm: '{"a": 1} မှ key "z" ကို ယူဖို့ ကြိုးပမ်းပါ။ KeyError ဖမ်းပြီး "Key not found" print ထုတ်ပါ။',
+		starterCode: 'try:\n    d = {"a": 1}\n    print(d["z"])\nexcept KeyError:\n    print("Key not found")\n',
+		testCases: [{ input: '', expectedOutput: 'Key not found', hidden: false }],
+		hintsEn: ['d["z"] raises KeyError when "z" is not a key'], hintsMm: ['"z" key မရှိရင် d["z"] က KeyError ဖြစ်ပါတယ်'],
+		difficulty: 7, orderIndex: 3, version: 1
+	},
+	// ── modules-01 ──────────────────────────────────────────────
+	{
+		id: 'modules-01-p1', lessonId: 'modules-01', titleEn: 'Floor and Ceil', titleMm: 'Floor နှင့် Ceil',
+		descriptionEn: 'Import math. Print math.floor(7.8), then print math.ceil(7.2).',
+		descriptionMm: 'math import ပါ။ math.floor(7.8) print ထုတ်ပါ၊ ပြီးရင် math.ceil(7.2) print ထုတ်ပါ။',
+		starterCode: 'import math\nprint(math.floor(7.8))\nprint(math.ceil(7.2))\n',
+		testCases: [{ input: '', expectedOutput: '7\n8', hidden: false }],
+		hintsEn: ['floor rounds down, ceil rounds up'], hintsMm: ['floor က အောက်သို့ ပတ်ဆင်းပြီး ceil က အပေါ်သို့ ပတ်တက်ပါတယ်'],
+		difficulty: 7, orderIndex: 1, version: 1
+	},
+	{
+		id: 'modules-01-p2', lessonId: 'modules-01', titleEn: 'Square Root', titleMm: 'နှစ်ထပ်ကိန်းရင်း',
+		descriptionEn: 'Import math. Print the square root of 144 as an integer.',
+		descriptionMm: 'math import ပါ။ 144 ၏ နှစ်ထပ်ကိန်းရင်းကို integer အဖြစ် print ထုတ်ပါ။',
+		starterCode: 'import math\nprint(round(math.sqrt(144)))\n',
+		testCases: [{ input: '', expectedOutput: '12', hidden: false }],
+		hintsEn: ['math.sqrt(144) gives 12.0', 'round() converts to 12'], hintsMm: ['math.sqrt(144) က 12.0 ပေးပါတယ်', 'round() ဖြင့် 12 ပြောင်းပါ'],
+		difficulty: 7, orderIndex: 2, version: 1
+	},
+	{
+		id: 'modules-01-p3', lessonId: 'modules-01', titleEn: 'Pi Rounded', titleMm: 'Pi ပတ်ဆင်းမည်',
+		descriptionEn: 'Import math. Print pi rounded to 2 decimal places.',
+		descriptionMm: 'math import ပါ။ Pi ကို ဒသမ ၂ ဂဏန်းထိ ပတ်ဆင်းပြီး print ထုတ်ပါ။',
+		starterCode: 'import math\nprint(round(math.pi, 2))\n',
+		testCases: [{ input: '', expectedOutput: '3.14', hidden: false }],
+		hintsEn: ['round(math.pi, 2) rounds to 2 decimal places'], hintsMm: ['round(math.pi, 2) ဒသမ ၂ ဂဏန်းထိ ပတ်ဆင်းပါတယ်'],
+		difficulty: 7, orderIndex: 3, version: 1
+	},
+	// ── comprehensions-01 ──────────────────────────────────────
+	{
+		id: 'comprehensions-01-p1', lessonId: 'comprehensions-01', titleEn: 'Squares List', titleMm: 'နှစ်ထပ်ကိန်းများ List',
+		descriptionEn: 'Use a list comprehension to print a list of squares for numbers 1 to 5.',
+		descriptionMm: 'List comprehension ဖြင့် 1 ကနေ 5 ထိ ဂဏန်းများ၏ နှစ်ထပ်ကိန်း list ကို print ထုတ်ပါ။',
+		starterCode: 'print([x**2 for x in range(1, 6)])\n',
+		testCases: [{ input: '', expectedOutput: '[1, 4, 9, 16, 25]', hidden: false }],
+		hintsEn: ['[x**2 for x in range(1, 6)]'], hintsMm: ['[x**2 for x in range(1, 6)]'],
+		difficulty: 8, orderIndex: 1, version: 1
+	},
+	{
+		id: 'comprehensions-01-p2', lessonId: 'comprehensions-01', titleEn: 'Multiples of 5', titleMm: '5 ၏ ဆပေါင်းများ',
+		descriptionEn: 'Use a list comprehension to print all multiples of 5 from 1 to 20.',
+		descriptionMm: 'List comprehension ဖြင့် 1 ကနေ 20 ထိ 5 ၏ ဆပေါင်းများ print ထုတ်ပါ။',
+		starterCode: 'print([x for x in range(1, 21) if x % 5 == 0])\n',
+		testCases: [{ input: '', expectedOutput: '[5, 10, 15, 20]', hidden: false }],
+		hintsEn: ['Add if x % 5 == 0 as a condition'], hintsMm: ['if x % 5 == 0 ကို condition အဖြစ် ထည့်ပါ'],
+		difficulty: 8, orderIndex: 2, version: 1
+	},
+	{
+		id: 'comprehensions-01-p3', lessonId: 'comprehensions-01', titleEn: 'Long Words', titleMm: 'ရှည်သော စကားလုံးများ',
+		descriptionEn: 'words = ["hi","hello","hey","howdy"]. Use a list comprehension to print words longer than 3 characters.',
+		descriptionMm: 'words = ["hi","hello","hey","howdy"] ။ List comprehension ဖြင့် ၃ ထက်ပိုရှည်သော စကားလုံးများ print ထုတ်ပါ။',
+		starterCode: 'words = ["hi", "hello", "hey", "howdy"]\nprint([w for w in words if len(w) > 3])\n',
+		testCases: [{ input: '', expectedOutput: "['hello', 'howdy']", hidden: false }],
+		hintsEn: ['Filter with if len(w) > 3'], hintsMm: ['if len(w) > 3 ဖြင့် စစ်ထုတ်ပါ'],
+		difficulty: 8, orderIndex: 3, version: 1
+	},
+	// ── strings-advanced-01 ──────────────────────────────────────
+	{
+		id: 'strings-advanced-01-p1', lessonId: 'strings-advanced-01', titleEn: 'Strip Spaces', titleMm: 'Spaces ဖယ်ရှားမည်',
+		descriptionEn: 'Print "  Python  " with leading and trailing spaces removed.',
+		descriptionMm: '"  Python  " ကို ရှေ့နောက် spaces ဖယ်ပြီး print ထုတ်ပါ။',
+		starterCode: 's = "  Python  "\nprint(s.strip())\n',
+		testCases: [{ input: '', expectedOutput: 'Python', hidden: false }],
+		hintsEn: ['.strip() removes leading and trailing spaces'], hintsMm: ['.strip() က ရှေ့နောက် spaces ဖယ်ပါတယ်'],
+		difficulty: 8, orderIndex: 1, version: 1
+	},
+	{
+		id: 'strings-advanced-01-p2', lessonId: 'strings-advanced-01', titleEn: 'Word Count', titleMm: 'စကားလုံး ရေတွက်',
+		descriptionEn: 'Split "I love coding" by spaces and print the number of words.',
+		descriptionMm: '"I love coding" ကို spaces ဖြင့် ကွဲပြီး စကားလုံးအရေအတွက် print ထုတ်ပါ။',
+		starterCode: 'sentence = "I love coding"\nwords = sentence.split(" ")\nprint(len(words))\n',
+		testCases: [{ input: '', expectedOutput: '3', hidden: false }],
+		hintsEn: ['.split(" ") splits by space', 'len() counts the items'], hintsMm: ['.split(" ") က space ဖြင့် ကွဲပြီး', 'len() ဖြင့် item ရေတွက်ပါ'],
+		difficulty: 8, orderIndex: 2, version: 1
+	},
+	{
+		id: 'strings-advanced-01-p3', lessonId: 'strings-advanced-01', titleEn: 'Join Words', titleMm: 'စကားလုံးများ ပေါင်းမည်',
+		descriptionEn: 'Join ["Hello", "Myanmar"] with a space between them and print the result.',
+		descriptionMm: '["Hello", "Myanmar"] ကို space တစ်ခုဖြင့် ကြားကာ ပေါင်းပြီး ရလဒ် print ထုတ်ပါ။',
+		starterCode: 'print(" ".join(["Hello", "Myanmar"]))\n',
+		testCases: [{ input: '', expectedOutput: 'Hello Myanmar', hidden: false }],
+		hintsEn: ['" ".join(list) joins with a space'], hintsMm: ['" ".join(list) က space ဖြင့် ပေါင်းပါတယ်'],
+		difficulty: 8, orderIndex: 3, version: 1
+	},
+	// ── classes-01 ──────────────────────────────────────────────
+	{
+		id: 'classes-01-p1', lessonId: 'classes-01', titleEn: 'Dog Class', titleMm: 'ခွေး Class',
+		descriptionEn: 'Create a class Dog with __init__(self, name). Create dog = Dog("Rex") and print dog.name.',
+		descriptionMm: '__init__(self, name) ပါ Dog class ဖောက်ပါ။ dog = Dog("Rex") ဖောက်ပြီး dog.name print ထုတ်ပါ။',
+		starterCode: 'class Dog:\n    def __init__(self, name):\n        self.name = name\n\ndog = Dog("Rex")\nprint(dog.name)\n',
+		testCases: [{ input: '', expectedOutput: 'Rex', hidden: false }],
+		hintsEn: ['self.name = name stores the name', 'Access it with dog.name'], hintsMm: ['self.name = name ဖြင့် နာမည် သိမ်းပါ', 'dog.name ဖြင့် ဝင်ယူပါ'],
+		difficulty: 9, orderIndex: 1, version: 1
+	},
+	{
+		id: 'classes-01-p2', lessonId: 'classes-01', titleEn: 'Circle Class', titleMm: 'စက်ဝိုင်း Class',
+		descriptionEn: 'Create a class Circle with __init__(self, radius). Create c = Circle(5) and print c.radius.',
+		descriptionMm: '__init__(self, radius) ပါ Circle class ဖောက်ပါ။ c = Circle(5) ဖောက်ပြီး c.radius print ထုတ်ပါ။',
+		starterCode: 'class Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\nc = Circle(5)\nprint(c.radius)\n',
+		testCases: [{ input: '', expectedOutput: '5', hidden: false }],
+		hintsEn: ['self.radius = radius in __init__'], hintsMm: ['__init__ ထဲ self.radius = radius ထည့်ပါ'],
+		difficulty: 9, orderIndex: 2, version: 1
+	},
+	{
+		id: 'classes-01-p3', lessonId: 'classes-01', titleEn: 'Student Class', titleMm: 'ကျောင်းသား Class',
+		descriptionEn: 'Create a Student class with name and grade attributes. Create s = Student("Aung", 90). Print s.name then s.grade on separate lines.',
+		descriptionMm: 'name နှင့် grade attribute ပါ Student class ဖောက်ပါ။ s = Student("Aung", 90) ဖောက်ပါ။ s.name ပြီးရင် s.grade ကို သီးခြားကြောင်းများဖြင့် print ထုတ်ပါ။',
+		starterCode: 'class Student:\n    def __init__(self, name, grade):\n        self.name = name\n        self.grade = grade\n\ns = Student("Aung", 90)\nprint(s.name)\nprint(s.grade)\n',
+		testCases: [{ input: '', expectedOutput: 'Aung\n90', hidden: false }],
+		hintsEn: ['Store both in __init__ with self.name and self.grade'], hintsMm: ['__init__ ထဲ self.name နှင့် self.grade နှစ်ခုလုံး သိမ်းပါ'],
+		difficulty: 9, orderIndex: 3, version: 1
+	},
+	// ── classes-02 ──────────────────────────────────────────────
+	{
+		id: 'classes-02-p1', lessonId: 'classes-02', titleEn: 'Counter Class', titleMm: 'ရေတွက်ကိရိယာ Class',
+		descriptionEn: 'Create a Counter class with count=0 and an increment() method that adds 1. Call increment() twice then print c.count.',
+		descriptionMm: 'count=0 နှင့် 1 ပေါင်းသော increment() method ပါ Counter class ဖောက်ပါ။ increment() ကို ၂ ကြိမ် ခေါ်ပြီး c.count print ထုတ်ပါ။',
+		starterCode: 'class Counter:\n    def __init__(self):\n        self.count = 0\n    def increment(self):\n        self.count += 1\n\nc = Counter()\nc.increment()\nc.increment()\nprint(c.count)\n',
+		testCases: [{ input: '', expectedOutput: '2', hidden: false }],
+		hintsEn: ['self.count += 1 in increment()', 'Call c.increment() twice'], hintsMm: ['increment() ထဲ self.count += 1 ထည့်ပါ', 'c.increment() ကို ၂ ကြိမ် ခေါ်ပါ'],
+		difficulty: 9, orderIndex: 1, version: 1
+	},
+	{
+		id: 'classes-02-p2', lessonId: 'classes-02', titleEn: 'Rectangle Area', titleMm: 'စတုဂံ ဧရိယာ',
+		descriptionEn: 'Create a Rectangle class with width and height, and an area() method. Create r = Rectangle(4, 5) and print r.area().',
+		descriptionMm: 'width, height နှင့် area() method ပါ Rectangle class ဖောက်ပါ။ r = Rectangle(4, 5) ဖောက်ပြီး r.area() print ထုတ်ပါ။',
+		starterCode: 'class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n    def area(self):\n        return self.width * self.height\n\nr = Rectangle(4, 5)\nprint(r.area())\n',
+		testCases: [{ input: '', expectedOutput: '20', hidden: false }],
+		hintsEn: ['return self.width * self.height in area()'], hintsMm: ['area() ထဲ return self.width * self.height ထည့်ပါ'],
+		difficulty: 9, orderIndex: 2, version: 1
+	},
+	{
+		id: 'classes-02-p3', lessonId: 'classes-02', titleEn: 'Greeter Class', titleMm: 'နှုတ်ဆက်ကိရိယာ Class',
+		descriptionEn: 'Create a Greeter class with a name attribute and a greet() method that prints "Hello, {name}!". Create g = Greeter("Mya") and call g.greet().',
+		descriptionMm: 'name attribute နှင့် "Hello, {name}!" print ထုတ်သော greet() method ပါ Greeter class ဖောက်ပါ။ g = Greeter("Mya") ဖောက်ပြီး g.greet() ခေါ်ပါ။',
+		starterCode: 'class Greeter:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f"Hello, {self.name}!")\n\ng = Greeter("Mya")\ng.greet()\n',
+		testCases: [{ input: '', expectedOutput: 'Hello, Mya!', hidden: false }],
+		hintsEn: ['print(f"Hello, {self.name}!") in greet()'], hintsMm: ['greet() ထဲ print(f"Hello, {self.name}!") ထည့်ပါ'],
+		difficulty: 9, orderIndex: 3, version: 1
+	},
+	// ── recursion-01 ──────────────────────────────────────────────
+	{
+		id: 'recursion-01-p1', lessonId: 'recursion-01', titleEn: 'Factorial', titleMm: 'ဂဏန်း အဆင့်ထပ်',
+		descriptionEn: 'Write a recursive function factorial(n) that returns n! (n factorial). Print factorial(5).',
+		descriptionMm: 'n! (n factorial) ပြန်ပေးသော recursive function factorial(n) ရေးပါ။ factorial(5) print ထုတ်ပါ။',
+		starterCode: 'def factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\nprint(factorial(5))\n',
+		testCases: [{ input: '', expectedOutput: '120', hidden: false }],
+		hintsEn: ['Base case: if n <= 1: return 1', 'Recursive: return n * factorial(n - 1)'], hintsMm: ['Base case: if n <= 1: return 1', 'Recursive: return n * factorial(n - 1)'],
+		difficulty: 9, orderIndex: 1, version: 1
+	},
+	{
+		id: 'recursion-01-p2', lessonId: 'recursion-01', titleEn: 'Sum Down', titleMm: 'ဆင်းပေါင်းလဒ်',
+		descriptionEn: 'Write a recursive function sum_down(n) that returns the sum of n + (n-1) + ... + 1. Print sum_down(4).',
+		descriptionMm: 'n + (n-1) + ... + 1 ပေါင်းလဒ် ပြန်ပေးသော recursive function sum_down(n) ရေးပါ။ sum_down(4) print ထုတ်ပါ။',
+		starterCode: 'def sum_down(n):\n    if n == 0:\n        return 0\n    return n + sum_down(n - 1)\n\nprint(sum_down(4))\n',
+		testCases: [{ input: '', expectedOutput: '10', hidden: false }],
+		hintsEn: ['sum_down(4) = 4 + sum_down(3) = 4+3+2+1+0 = 10'], hintsMm: ['sum_down(4) = 4 + sum_down(3) = 4+3+2+1+0 = 10'],
+		difficulty: 9, orderIndex: 2, version: 1
+	},
+	{
+		id: 'recursion-01-p3', lessonId: 'recursion-01', titleEn: 'Recursive Countdown', titleMm: 'Recursive ရေတွက်ဆင်းမည်',
+		descriptionEn: 'Write a recursive function countdown(n) that prints numbers from n down to 1, then prints "Go!". Call countdown(4).',
+		descriptionMm: 'n ကနေ 1 ထိ ဂဏန်းများ print ထုတ်ပြီး "Go!" print ထုတ်သော recursive function countdown(n) ရေးပါ။ countdown(4) ခေါ်ပါ။',
+		starterCode: 'def countdown(n):\n    if n <= 0:\n        print("Go!")\n    else:\n        print(n)\n        countdown(n - 1)\n\ncountdown(4)\n',
+		testCases: [{ input: '', expectedOutput: '4\n3\n2\n1\nGo!', hidden: false }],
+		hintsEn: ['Print n, then call countdown(n-1)', 'Base case: if n <= 0: print("Go!")'], hintsMm: ['n print ပြီး countdown(n-1) ခေါ်ပါ', 'Base case: if n <= 0: print("Go!")'],
+		difficulty: 9, orderIndex: 3, version: 1
+	},
+	// ── project-quiz-01 ──────────────────────────────────────────
+	{
+		id: 'project-quiz-01-p1', lessonId: 'project-quiz-01', titleEn: 'Score Counter', titleMm: 'Score ရေတွက်',
+		descriptionEn: 'Given answers = ["4", "wrong", "6"], count how many equal "4" or "6". Print the score.',
+		descriptionMm: 'answers = ["4", "wrong", "6"] ပေးထားသည်၊ "4" သို့မဟုတ် "6" နှင့် ညီသည် မည်မျှ ရှိသည်ဆိုတာ ရေတွက်ပါ။ Score print ထုတ်ပါ။',
+		starterCode: 'answers = ["4", "wrong", "6"]\ncorrect = ["4", "6"]\nscore = 0\nfor a in answers:\n    if a in correct:\n        score += 1\nprint(score)\n',
+		testCases: [{ input: '', expectedOutput: '2', hidden: false }],
+		hintsEn: ['Loop through answers and check if each is in the correct list'], hintsMm: ['answers ကို loop ဝင်ပြီး correct list ထဲ ရှိမရှိ စစ်ပါ'],
+		difficulty: 10, orderIndex: 1, version: 1
+	},
+	{
+		id: 'project-quiz-01-p2', lessonId: 'project-quiz-01', titleEn: 'Print Questions', titleMm: 'မေးခွန်းများ Print ထုတ်မည်',
+		descriptionEn: 'Create a list of 3 question dicts with a "q" key. Loop through them and print each question.',
+		descriptionMm: '"q" key ပါ question dict ၃ ခု list ဖောက်ပါ။ Loop ဝင်ပြီး question တစ်ခုချင်း print ထုတ်ပါ။',
+		starterCode: 'questions = [\n    {"q": "What is 2+2?"},\n    {"q": "What color is grass?"},\n    {"q": "How many days in a week?"}\n]\nfor q in questions:\n    print(q["q"])\n',
+		testCases: [{ input: '', expectedOutput: 'What is 2+2?\nWhat color is grass?\nHow many days in a week?', hidden: false }],
+		hintsEn: ['Access each question with q["q"]'], hintsMm: ['q["q"] ဖြင့် question တစ်ခုချင်း ဝင်ယူပါ'],
+		difficulty: 10, orderIndex: 2, version: 1
+	},
+	{
+		id: 'project-quiz-01-p3', lessonId: 'project-quiz-01', titleEn: 'Full Mini Quiz', titleMm: 'Mini Quiz အပြည့်',
+		descriptionEn: 'questions = [{"question":"2+2","answer":"4"},{"question":"3+3","answer":"6"}]. Loop and count correct answers (assume answer always matches). Print final score.',
+		descriptionMm: 'questions = [{"question":"2+2","answer":"4"},{"question":"3+3","answer":"6"}]။ Loop ဝင်ပြီး မှန်ကန်သော ဖြေဆိုချက် ရေတွက်ပါ (answer က အမြဲ ကိုက်ညီသည်ဟု ယူဆပါ)။ Final score print ထုတ်ပါ။',
+		starterCode: 'questions = [\n    {"question": "2+2", "answer": "4"},\n    {"question": "3+3", "answer": "6"}\n]\nscore = 0\nfor q in questions:\n    # Simulate correct answer\n    given = q["answer"]\n    if given == q["answer"]:\n        score += 1\nprint(score)\n',
+		testCases: [{ input: '', expectedOutput: '2', hidden: false }],
+		hintsEn: ['Loop through questions, compare given to q["answer"]'], hintsMm: ['questions ကို loop ဝင်ပြီး given ကို q["answer"] နှင့် နှိုင်းပါ'],
+		difficulty: 10, orderIndex: 3, version: 1
+	},
+	// ── project-story-01 ──────────────────────────────────────────
+	{
+		id: 'project-story-01-p1', lessonId: 'project-story-01', titleEn: 'Scene Function', titleMm: 'Scene Function',
+		descriptionEn: 'Write scene(score, choice) that returns score+10 if choice=="1", else returns score. Print scene(0,"1") and scene(0,"2").',
+		descriptionMm: 'choice=="1" ရင် score+10 ပြန်ပေးပြီး မဟုတ်ရင် score ပြန်ပေးသော scene(score, choice) ရေးပါ။ scene(0,"1") နှင့် scene(0,"2") print ထုတ်ပါ။',
+		starterCode: 'def scene(score, choice):\n    if choice == "1":\n        return score + 10\n    return score\n\nprint(scene(0, "1"))\nprint(scene(0, "2"))\n',
+		testCases: [{ input: '', expectedOutput: '10\n0', hidden: false }],
+		hintsEn: ['if choice == "1": return score + 10', 'else: return score'], hintsMm: ['if choice == "1": return score + 10', 'မဟုတ်ရင်: return score'],
+		difficulty: 10, orderIndex: 1, version: 1
+	},
+	{
+		id: 'project-story-01-p2', lessonId: 'project-story-01', titleEn: 'Battle Damage', titleMm: 'တိုက်ပွဲ ထိခိုက်မှု',
+		descriptionEn: 'health=100. Apply attacks=[15,20,10] by looping and subtracting each. Print final health.',
+		descriptionMm: 'health=100 ။ attacks=[15,20,10] ကို loop ဝင်ပြီး တစ်ခုချင်း နုတ်ပါ။ Final health print ထုတ်ပါ။',
+		starterCode: 'health = 100\nattacks = [15, 20, 10]\nfor a in attacks:\n    health -= a\nprint(health)\n',
+		testCases: [{ input: '', expectedOutput: '55', hidden: false }],
+		hintsEn: ['health -= a subtracts each attack', '100 - 15 - 20 - 10 = 55'], hintsMm: ['health -= a ဖြင့် တိုက်ခိုက်မှု တစ်ခုချင်း နုတ်ပါ', '100 - 15 - 20 - 10 = 55'],
+		difficulty: 10, orderIndex: 2, version: 1
+	},
+	{
+		id: 'project-story-01-p3', lessonId: 'project-story-01', titleEn: 'Game Over Check', titleMm: 'ဂိမ်းပြီးဆုံးမှု စစ်ဆေးမည်',
+		descriptionEn: 'Write is_game_over(hp) that returns True if hp <= 0, else False. Print is_game_over(0) and is_game_over(50).',
+		descriptionMm: 'hp <= 0 ရင် True ပြန်ပေးပြီး မဟုတ်ရင် False ပြန်ပေးသော is_game_over(hp) ရေးပါ။ is_game_over(0) နှင့် is_game_over(50) print ထုတ်ပါ။',
+		starterCode: 'def is_game_over(hp):\n    return hp <= 0\n\nprint(is_game_over(0))\nprint(is_game_over(50))\n',
+		testCases: [{ input: '', expectedOutput: 'True\nFalse', hidden: false }],
+		hintsEn: ['return hp <= 0 evaluates to True or False directly'], hintsMm: ['return hp <= 0 က True ဒါမှမဟုတ် False ကို တိုက်ရိုက် ထုတ်ပေးပါတယ်'],
+		difficulty: 10, orderIndex: 3, version: 1
 	}
 ];
 

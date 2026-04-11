@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { restoreSession, currentUser } from '$lib/stores/auth';
+	import { detectsZawgyi } from '$lib/utils/zawgyi-detect';
 	import { initOnlineListener, refreshPendingCount, isOnline } from '$lib/stores/sync';
 	import { loadProgress } from '$lib/stores/progress';
 	import { seedDatabase } from '$lib/db/seed';
@@ -11,6 +12,7 @@
 
 	let { children } = $props();
 	let ready = $state(false);
+	let showZawgyiWarning = $state(false);
 
 	onMount(async () => {
 		initOnlineListener();
@@ -19,6 +21,7 @@
 		await loadProgress();
 		await refreshPendingCount();
 		ready = true;
+		showZawgyiWarning = detectsZawgyi();
 
 		// Kick off sync if online and logged in as student
 		const user = get(currentUser);
@@ -40,6 +43,12 @@
 
 {#if ready}
 	<OfflineBanner />
+	{#if showZawgyiWarning}
+		<div class="zawgyi-banner">
+			⚠️ မြန်မာစာ မမှန်ကန်ဘဲ ပြနေပါက၊ ဤ app သည် Unicode ကို သာ သုံးပါသည်။ Zawgyi font ကို Unicode font ဖြင့် ပြောင်းပါ။
+			<button onclick={() => showZawgyiWarning = false}>✕</button>
+		</div>
+	{/if}
 	{@render children()}
 {:else}
 	<div class="loading">
@@ -70,5 +79,25 @@
 
 	@keyframes spin {
 		to { transform: rotate(360deg); }
+	}
+
+	.zawgyi-banner {
+		background: #fef3c7;
+		color: #92400e;
+		font-size: 0.82rem;
+		padding: 0.5rem 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.zawgyi-banner button {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-size: 1rem;
+		color: inherit;
+		flex-shrink: 0;
 	}
 </style>

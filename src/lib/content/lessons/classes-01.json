@@ -1,0 +1,86 @@
+{
+	"id": "classes-01",
+	"titleEn": "Introduction to Classes and Objects",
+	"titleMm": "Class နဲ့ Object မိတ်ဆက်",
+	"category": "Expert Mode",
+	"difficulty": 9,
+	"ageGroupMin": "14-16",
+	"orderIndex": 21,
+	"prerequisites": ["strings-advanced-01"],
+	"estimatedMinutes": 30,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## What is a Class?\n\nUntil now you've used Python's built-in types: `int`, `str`, `list`. A **class** lets you create your *own* type that bundles data and behaviour together.\n\nThink of a class like a **blueprint**. The blueprint for a house describes how many rooms it has. An actual house built from that blueprint is an **object** (also called an **instance**).\n\n```\nclass Blueprint  →  describes structure\nobject/instance →  the real thing built from it\n```\n\nKey words you'll learn today:\n- `class` — starts the blueprint\n- `__init__` — special method that runs when an object is created (the \"constructor\")\n- `self` — the object referring to itself\n- Attribute — a variable that belongs to an object (e.g. `self.name`)",
+				"mm": "## Class ဆိုတာ ဘာလဲ?\n\nယခုအထိ Python ရဲ့ built-in type တွေဖြစ်တဲ့ `int`, `str`, `list` တွေကို သုံးခဲ့ပါတယ်။ **class** ကတော့ data နဲ့ behavior တွေကို ပေါင်းစပ်ထားတဲ့ သင့်ရဲ့ *ကိုယ်ပိုင်* type တစ်ခု ဖန်တီးနိုင်စေပါတယ်။\n\nClass ကို **ပုံစံ** တစ်ခုလိုမြင်ပါ။ အိမ်တစ်ခုရဲ့ ပုံစံမှာ အခန်းဘယ်နှစ်ခန်း ရှိမလဲဆိုတာ ဖော်ပြထားတယ်။ ထိုပုံစံကို ယူဆောက်တဲ့ အိမ်တကယ်ကို **object** (သို့) **instance** လို့ ခေါ်ပါတယ်။\n\nဒီနေ့ သင်ယူမည့် keyword များ:\n- `class` — ပုံစံကို စတင်သည်\n- `__init__` — object တစ်ခု ဖန်တီးတဲ့အခါ ဆောင်ရွက်တဲ့ special method\n- `self` — object ကိုယ်တိုင်ကို ညွှန်းသည်\n- Attribute — object တစ်ခုနဲ့ ဆက်စပ်သော variable (ဥပမာ `self.name`)"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "class Student:\n    def __init__(self, name, grade):\n        self.name = name\n        self.grade = grade\n\n# Create two Student objects (instances)\nstudent1 = Student(\"Aung Min\", 90)\nstudent2 = Student(\"Nilar Kyaw\", 85)\n\n# Access attributes with a dot\nprint(student1.name)\nprint(student1.grade)\nprint(student2.name)\nprint(student2.grade)",
+			"expectedOutput": "Aung Min\n90\nNilar Kyaw\n85",
+			"explanation": {
+				"en": "`__init__` is called automatically when you write `Student(\"Aung Min\", 90)`. Python passes the new object as `self` for you — you never write it in the call. Each instance keeps its own copy of `name` and `grade`.",
+				"mm": "`Student(\"Aung Min\", 90)` ဟု ရေးသောအခါ `__init__` က အလိုလျောက် ဆောင်ရွက်ပါတယ်။ Python က object အသစ်ကို `self` အဖြစ် ကိုယ်တိုင် ပေးပို့ပါတယ် — ခေါ်တဲ့အခါ သင် ရေးစရာမလိုပါ။ Instance တိုင်းမှာ `name` နဲ့ `grade` ကိုယ်စီ ထိန်းသိမ်းထားပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Attributes Can Be Anything\n\nAn attribute is just a variable attached to `self`. You can set as many as you need inside `__init__`, and you can also give them **default values**.\n\nYou can even **update** an attribute after the object is created:\n\n```python\nstudent1.grade = 95   # update the grade\n```\n\nAnd you can add calculated attributes:\n\n```python\nself.passing = grade >= 50   # True or False\n```",
+				"mm": "## Attribute တွေ ဘာမဆို ဖြစ်နိုင်တယ်\n\nAttribute ဆိုတာ `self` နဲ့ ချိတ်ဆက်ထားတဲ့ variable တစ်ခုသာ ဖြစ်ပါတယ်။ `__init__` ထဲမှာ လိုသလောက် သတ်မှတ်နိုင်ပြီး **default value** တွေလည်း ပေးနိုင်ပါတယ်။\n\nObject ဖန်တီးပြီးနောက် attribute ကို **update** လည်း လုပ်နိုင်ပါတယ်:\n\n```python\nstudent1.grade = 95   # grade ကို update လုပ်\n```\n\nတွက်ချက်မှုနဲ့ attribute တွေလည်း ထည့်နိုင်ပါတယ်:\n\n```python\nself.passing = grade >= 50   # True သို့ False\n```"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "class Student:\n    def __init__(self, name, grade, school=\"Unknown\"):\n        self.name = name\n        self.grade = grade\n        self.school = school\n        self.passing = grade >= 50\n\ns1 = Student(\"Ko Zin\", 72, \"Yangon High School\")\ns2 = Student(\"Ma Aye\", 45)   # school gets default value\n\nprint(s1.name, \"-\", s1.school)\nprint(\"Passing:\", s1.passing)\nprint(s2.name, \"-\", s2.school)\nprint(\"Passing:\", s2.passing)\n\n# Update a grade\ns2.grade = 55\ns2.passing = s2.grade >= 50\nprint(\"After update, passing:\", s2.passing)",
+			"expectedOutput": "Ko Zin - Yangon High School\nPassing: True\nMa Aye - Unknown\nPassing: False\nAfter update, passing: True",
+			"explanation": {
+				"en": "Default parameter values work the same way as in regular functions. `s2` gets `school=\"Unknown\"` because no school was passed. Attributes are just variables — you can reassign them any time.",
+				"mm": "Default parameter value တွေက ပုံမှန် function တွေနဲ့ အတူတူပင်ဖြစ်ပါတယ်။ school မပေးသောကြောင့် `s2` မှာ `school=\"Unknown\"` ရပါတယ်။ Attribute တွေဟာ variable သာဖြစ်ပြီး ဘယ်အချိန်မဆို ပြန်သတ်မှတ်နိုင်ပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Create a `Pet` class with `__init__` that takes `name` and `animal_type` (e.g. \"dog\", \"cat\"). Create two Pet objects and print both their names and types.",
+				"mm": "`name` နဲ့ `animal_type` (ဥပမာ \"dog\", \"cat\") ကို ယူသော `__init__` ပါတဲ့ `Pet` class တစ်ခု ဖန်တီးပါ။ Pet object နှစ်ခု ဖန်တီးပြီး နာမည်နဲ့ အမျိုးအစားတွေ print ထုတ်ပါ။"
+			},
+			"starterCode": "class Pet:\n    def __init__(self, name, animal_type):\n        # Store name and animal_type as attributes\n        \n\n# Create two pets\npet1 = Pet(\"Mya\", \"cat\")\npet2 = Pet(\"Rex\", \"dog\")\n\n# Print their info\n",
+			"validation": {
+				"mustContain": ["class Pet", "self.name", "self.animal_type", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "In a class definition, what does `self` refer to?",
+				"mm": "Class definition ထဲမှာ `self` က ဘာကို ညွှန်းလဲ?"
+			},
+			"options": {
+				"en": [
+					"The class blueprint itself",
+					"The specific object (instance) being used",
+					"The __init__ function",
+					"The first attribute defined"
+				],
+				"mm": [
+					"Class blueprint ကိုယ်တိုင်",
+					"အသုံးပြုနေသော တိကျသော object (instance)",
+					"__init__ function",
+					"သတ်မှတ်ထားသော ပထမဆုံး attribute"
+				]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`self` is always the specific instance — the actual object in memory — that the method is operating on. When you write `student1.name`, Python translates that to `Student.name(student1)` behind the scenes.",
+				"mm": "`self` ဆိုတာ method က ဆောင်ရွက်နေတဲ့ memory ထဲရှိ တကယ်တမ်း object ဖြစ်တဲ့ တိကျသော instance ကိုသာ ညွှန်းပါတယ်။ `student1.name` ဟု ရေးသောအခါ Python က နောက်ကွယ်မှာ `Student.name(student1)` အဖြစ် ပြောင်းပေးပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["classes-01-p1", "classes-01-p2", "classes-01-p3"]
+}

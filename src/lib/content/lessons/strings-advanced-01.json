@@ -1,0 +1,69 @@
+{
+  "id": "strings-advanced-01",
+  "titleEn": "String Powers — Split, Join & More",
+  "titleMm": "String အစွမ်းများ — Split, Join နှင့် အခြားများ",
+  "category": "Level Up",
+  "difficulty": 8,
+  "ageGroupMin": "12-14",
+  "orderIndex": 20,
+  "prerequisites": ["comprehensions-01"],
+  "estimatedMinutes": 22,
+  "sections": [
+    {
+      "type": "explanation",
+      "content": {
+        "en": "Strings have many built-in methods that make text processing easy:\n\n| Method | What it does |\n|--------|-------------|\n| `.upper()` | ALL CAPS |\n| `.lower()` | all lowercase |\n| `.strip()` | remove leading/trailing spaces |\n| `.replace(old, new)` | swap text |\n| `.split(sep)` | break into a list |\n| `sep.join(list)` | merge list into string |\n\nAnd **f-strings** let you embed variables directly:\n```python\nname = \"Aung\"\nage = 12\nprint(f\"My name is {name} and I am {age} years old.\")\n```",
+        "mm": "String တွေမှာ text processing ကို လွယ်ကူစေတဲ့ built-in methods အများကြီး ရှိပါတယ်:\n\n| Method | ဘာလုပ်သလဲ |\n|--------|----------|\n| `.upper()` | အကြီးအကျား |\n| `.lower()` | အသေး |\n| `.strip()` | ရှေ့နောက် spaces ဖယ်ရှားမည် |\n| `.replace(old, new)` | စာလုံးလဲမည် |\n| `.split(sep)` | list ဖြင့် ကွဲမည် |\n| `sep.join(list)` | list ကို string ဖြစ်အောင် ပေါင်းမည် |\n\n**f-strings** ကတော့ variables တွေကို တိုက်ရိုက် ထည့်ခွင့်ပါတယ်:\n```python\nname = \"Aung\"\nage = 12\nprint(f\"ကျွန်တော်အမည် {name}၊ အသက် {age} နှစ်ပါ။\")\n```"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "sentence = \"  Hello, Python World!  \"\n\nprint(sentence.strip())\nprint(sentence.strip().lower())\nprint(sentence.strip().upper())\nprint(sentence.strip().replace(\"World\", \"Myanmar\"))",
+      "expectedOutput": "Hello, Python World!\nhello, python world!\nHELLO, PYTHON WORLD!\nHello, Python Myanmar!",
+      "explanation": {
+        "en": "Methods can be **chained** — called one after another. `.strip()` first removes the spaces, then `.lower()` converts to lowercase. Each method returns a new string, so the original is unchanged.",
+        "mm": "Methods တွေကို **chain** လုပ်နိုင်ပါတယ် — တစ်ခုပြီးတစ်ခု ခေါ်နိုင်ပါတယ်။ `.strip()` က spaces ဦးစွာ ဖယ်ရှားပြီး `.lower()` က အသေးပြောင်းပါတယ်။ Method တစ်ခုချင်းက string အသစ် ပြန်ပေးပါတယ်၊ ဒါကြောင့် မူရင်းမပြောင်းဘူး။"
+      },
+      "runnable": true
+    },
+    {
+      "type": "code_example",
+      "code": "# Split a sentence into words\nsentence = \"I love Python programming\"\nwords = sentence.split(\" \")\nprint(words)\nprint(\"Word count:\", len(words))\n\n# Join a list back into a string\njoined = \" - \".join(words)\nprint(joined)\n\n# f-string formatting\nscore = 95\nprint(f\"Your score is {score}/100. {'Excellent!' if score >= 90 else 'Keep going!'}\")",
+      "expectedOutput": "['I', 'love', 'Python', 'programming']\nWord count: 4\nI - love - Python - programming\nYour score is 95/100. Excellent!",
+      "explanation": {
+        "en": "`.split(\" \")` breaks the sentence at every space, creating a list of words. `\" - \".join(words)` puts the words back together with \" - \" between them. F-strings can even contain expressions like `if/else`!",
+        "mm": "`.split(\" \")` က space တိုင်းမှာ ကြောင်းကို ကွဲပြီး word list ဖောက်ပါတယ်။ `\" - \".join(words)` က words တွေကို \" - \" နဲ့ ကြားကာ ပြန်ပေါင်းပါတယ်။ F-strings မှာ `if/else` ကဲ့သို့ expressions တောင် ထည့်နိုင်ပါတယ်!"
+      },
+      "runnable": true
+    },
+    {
+      "type": "try_it",
+      "prompt": {
+        "en": "Take the string `\"python is awesome\"` and print it: (1) in ALL CAPS, (2) with the first letter of each word capitalized using `.title()`, (3) with 'awesome' replaced by 'fun'.",
+        "mm": "`\"python is awesome\"` string ကို: (1) ALL CAPS ဖြင့်၊ (2) `.title()` ဖြင့် word တစ်ခုချင်း ပထမ စာလုံး ကြီးပြီး၊ (3) 'awesome' ကို 'fun' ဖြင့် အစားထိုးပြီး print ထုတ်ပါ။"
+      },
+      "starterCode": "text = \"python is awesome\"\nprint(text.upper())\nprint(text.title())\nprint(text.replace(\"awesome\", \"fun\"))\n",
+      "validation": {
+        "mustContain": ["upper", "replace"],
+        "mustOutputSomething": true
+      }
+    },
+    {
+      "type": "quiz",
+      "question": {
+        "en": "What does `\"hello world\".split(\" \")` return?",
+        "mm": "`\"hello world\".split(\" \")` က ဘာ ပြန်ပေးသလဲ?"
+      },
+      "options": {
+        "en": ["\"hello world\"", "[\"hello world\"]", "[\"hello\", \"world\"]", "(\"hello\", \"world\")"],
+        "mm": ["\"hello world\"", "[\"hello world\"]", "[\"hello\", \"world\"]", "(\"hello\", \"world\")"]
+      },
+      "correct": 2,
+      "explanation": {
+        "en": "`.split(\" \")` splits the string at every space and returns a **list** of the parts: `[\"hello\", \"world\"]`.",
+        "mm": "`.split(\" \")` က space တိုင်းမှာ ကြောင်းကို ကြဲပြီး **list** ပြန်ပေးပါတယ်: `[\"hello\", \"world\"]`။"
+      }
+    }
+  ],
+  "problemIds": ["strings-advanced-01-p1", "strings-advanced-01-p2", "strings-advanced-01-p3"]
+}

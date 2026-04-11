@@ -1,0 +1,86 @@
+{
+  "id": "modules-01",
+  "titleEn": "Using Python's Built-in Modules",
+  "titleMm": "Python ၏ Built-in Module များကို သုံးခြင်း",
+  "category": "Level Up",
+  "difficulty": 7,
+  "ageGroupMin": "12-14",
+  "orderIndex": 18,
+  "prerequisites": ["errors-01"],
+  "estimatedMinutes": 25,
+  "sections": [
+    {
+      "type": "explanation",
+      "content": {
+        "en": "## What is a Module?\n\nPython comes with a huge **standard library** — a collection of ready-made tools you can use in any program. Instead of writing everything from scratch, you **import** these tools.\n\n```python\nimport math\nimport random\n```\n\nThat one line gives you access to dozens of useful functions!\n\n## The `math` Module\n\n| Function | What it does | Example |\n|---|---|---|\n| `math.sqrt(x)` | Square root of x | `math.sqrt(9)` → `3.0` |\n| `math.floor(x)` | Round DOWN to integer | `math.floor(3.7)` → `3` |\n| `math.ceil(x)` | Round UP to integer | `math.ceil(3.2)` → `4` |\n| `math.pi` | The value of π | `3.141592...` |\n\n```python\nimport math\nprint(math.sqrt(25))   # 5.0\nprint(math.pi)         # 3.141592653589793\n```",
+        "mm": "## Module ဆိုတာ ဘာလဲ?\n\nPython သည် ကြီးမားသော **standard library** နှင့် အတူ လာသည် — မည်သည့် ပရိုဂရမ်တွင်မဆို သုံးနိုင်သော အသင့်ပြုလုပ်ထားသည့် tools များ စုဆောင်းမှု တစ်ခု ဖြစ်သည်။ အရာအားလုံးကို အစကနဦး ရေးမနေဘဲ ဤ tools များကို **import** လုပ်ပါ။\n\n```python\nimport math\nimport random\n```\n\nထိုစာကြောင်းတစ်ကြောင်းတည်းဖြင့် အသုံးဝင်သော function ဒါဇင်များစွာကို ရယူနိုင်သည်!\n\n## `math` Module\n\n| Function | ဘာလုပ်သနည်း | ဥပမာ |\n|---|---|---|\n| `math.sqrt(x)` | x ၏ နှစ်ထပ်ကိန်းဒုတိယ |\t`math.sqrt(9)` → `3.0` |\n| `math.floor(x)` | Integer သို့ အောက်သို့ ပတ်ဝိုင်း | `math.floor(3.7)` → `3` |\n| `math.ceil(x)` | Integer သို့ အပေါ်သို့ ပတ်ဝိုင်း | `math.ceil(3.2)` → `4` |\n| `math.pi` | π ၏ တန်ဖိုး | `3.141592...` |\n\n```python\nimport math\nprint(math.sqrt(25))   # 5.0\nprint(math.pi)         # 3.141592653589793\n```"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "import math\n\n# Calculate the area of a circle\nradius = 7\narea = math.pi * math.pow(radius, 2)\nprint(\"Radius:\", radius)\nprint(\"Area:\", math.floor(area))\n\n# Find the square root of several numbers\nnumbers = [16, 25, 100]\nfor n in numbers:\n    print(\"sqrt(\" + str(n) + \") =\", math.sqrt(n))",
+      "expectedOutput": "Radius: 7\nArea: 153\nSquare root of 16 = 4.0\nSquare root of 25 = 5.0\nSquare root of 100 = 10.0",
+      "explanation": {
+        "en": "We used `math.pi` for an accurate value of π, `math.pow()` to square the radius, and `math.floor()` to get a clean whole number for the area. Then we looped through a list and used `math.sqrt()` on each value.",
+        "mm": "π ၏ တိကျသော တန်ဖိုးအတွက် `math.pi` ကို၊ radius ကို နှစ်ထပ်ရန် `math.pow()` ကို၊ area အတွက် သပ်ရပ်သော ကိန်းပြည့် ရရှိရန် `math.floor()` ကို သုံးခဲ့သည်။ ထို့နောက် list တစ်ခုကို loop ပတ်ကာ တန်ဖိုးတစ်ခုချင်းစီတွင် `math.sqrt()` ကို သုံးခဲ့သည်။"
+      },
+      "runnable": false
+    },
+    {
+      "type": "explanation",
+      "content": {
+        "en": "## The `random` Module\n\nThe `random` module lets you add chance and variety to your programs!\n\n| Function | What it does | Example |\n|---|---|---|\n| `random.randint(a, b)` | Random integer from a to b (inclusive) | `random.randint(1, 6)` |\n| `random.choice(list)` | Pick one random item from a list | `random.choice([\"a\",\"b\",\"c\"])` |\n| `random.shuffle(list)` | Shuffle a list in place | changes the list order |\n\n```python\nimport random\n\n# Roll a dice!\ndice = random.randint(1, 6)\nprint(\"You rolled:\", dice)\n\n# Pick a random winner\nstudents = [\"Aye\", \"Bo\", \"Chit\", \"Daw\"]\nwinner = random.choice(students)\nprint(\"Winner:\", winner)\n```\n\nEvery time you run this, you might get a different result — that's what makes it fun!",
+        "mm": "## `random` Module\n\n`random` module သည် သင်၏ ပရိုဂရမ်များသို့ အကြောင်းအကျိုးနှင့် မျိုးကွဲမှုကို ထည့်သွင်းနိုင်စေသည်!\n\n| Function | ဘာလုပ်သနည်း | ဥပမာ |\n|---|---|---|\n| `random.randint(a, b)` | a မှ b အထိ ကျပန်း integer (အပါအဝင်) | `random.randint(1, 6)` |\n| `random.choice(list)` | List မှ ကျပန်း item တစ်ခု ရွေးချယ်ခြင်း | `random.choice([\"a\",\"b\",\"c\"])` |\n| `random.shuffle(list)` | List ကို နေရာချင်းလဲ ရောမွှေခြင်း | list အစီအစဉ် ပြောင်းလဲသည် |\n\n```python\nimport random\n\n# အန်စာတုံး လှိမ့်ပါ!\ndice = random.randint(1, 6)\nprint(\"သင် လှိမ့်မိသည်:\", dice)\n\n# ကျပန်း အနိုင်ရသူ ရွေးချယ်ပါ\nstudents = [\"အေး\", \"ဘို\", \"ချစ်\", \"ဒေါ်\"]\nwinner = random.choice(students)\nprint(\"အနိုင်ရသူ:\", winner)\n```\n\nဤကို run တိုင်း မတူညီသော ရလဒ် ရနိုင်သည် — ၎င်းသည် ၎င်းကို ပျော်ရွှင်ဖွယ် ဖြစ်စေသည်!"
+      }
+    },
+    {
+      "type": "code_example",
+      "code": "import random\n\n# Simulate drawing quiz questions randomly\nquestions = [\n    \"What is 7 x 8?\",\n    \"Name the capital of Myanmar.\",\n    \"What is the square root of 49?\",\n    \"How many days in a week?\"\n]\n\n# Shuffle and pick the first 2\nrandom.shuffle(questions)\npicked = questions[:2]\n\nprint(\"Today's quiz questions:\")\nfor i, q in enumerate(picked, 1):\n    print(str(i) + \".\", q)\n\nprint(\"Lucky number:\", random.randint(1, 100))",
+      "expectedOutput": "Today's quiz questions:\n1. Name the capital of Myanmar.\n2. What is 7 x 8?\nLucky number: 73",
+      "explanation": {
+        "en": "We shuffled the list of questions randomly, then sliced off the first two. The output will look different every time you run it because `random.shuffle()` changes the order. The lucky number at the end also changes every run!",
+        "mm": "မေးခွန်းများ list ကို ကျပန်း ရောမွှေ၍ ပထမနှစ်ခုကို ဖြတ်ယူခဲ့သည်။ `random.shuffle()` သည် အစီအစဉ်ကို ပြောင်းလဲသောကြောင့် run တိုင်း output မတူနိုင်သည်။ အဆုံးတွင် lucky number သည်လည်း run တိုင်း ပြောင်းလဲသည်!"
+      },
+      "runnable": true
+    },
+    {
+      "type": "try_it",
+      "prompt": {
+        "en": "Import both `math` and `random`. Use `random.randint()` to generate two random numbers between 1 and 20. Then use `math.sqrt()` to print the square root of each number. Round each square root down using `math.floor()`.",
+        "mm": "`math` နှင့် `random` နှစ်ခုလုံး import ပါ။ 1 မှ 20 ကြားရှိ ကျပန်း နံပါတ်နှစ်ခု ထုတ်ရန် `random.randint()` ကို သုံးပါ။ ထို့နောက် နံပါတ်တစ်ခုချင်းစီ၏ နှစ်ထပ်ကိန်းဒုတိယ print ရန် `math.sqrt()` ကို သုံးပါ။ `math.floor()` ဖြင့် နှစ်ထပ်ကိန်းဒုတိယ တစ်ခုချင်းစီကို အောက်သို့ ပတ်ဝိုင်းပါ။"
+      },
+      "starterCode": "import math\nimport random\n\n# Generate two random numbers\nnum1 = random.randint(1, 20)\nnum2 = random.randint(1, 20)\n\n# Print each number and its floored square root\nprint(\"Number 1:\", num1, \"-> sqrt:\", math.floor(math.sqrt(num1)))\n# Add the second number below\n",
+      "validation": {
+        "mustContain": ["import math", "import random", "math.sqrt", "math.floor", "random.randint"],
+        "mustOutputSomething": true
+      }
+    },
+    {
+      "type": "quiz",
+      "question": {
+        "en": "Which function would you use to pick one random item from a list?",
+        "mm": "List မှ ကျပန်း item တစ်ခု ရွေးရန် မည်သည့် function ကို သုံးမည်နည်း?"
+      },
+      "options": {
+        "en": [
+          "random.randint(list)",
+          "random.pick(list)",
+          "random.choice(list)",
+          "random.select(list)"
+        ],
+        "mm": [
+          "random.randint(list)",
+          "random.pick(list)",
+          "random.choice(list)",
+          "random.select(list)"
+        ]
+      },
+      "correct": 2,
+      "explanation": {
+        "en": "`random.choice(list)` picks one random element from a list. `randint` generates a random number in a range, and `pick`/`select` are not real Python functions.",
+        "mm": "`random.choice(list)` သည် list မှ ကျပန်း element တစ်ခုကို ရွေးချယ်သည်။ `randint` သည် range တစ်ခုတွင် ကျပန်း နံပါတ် ထုတ်ပေးသည်၊ `pick`/`select` များသည် တကယ့် Python function မဟုတ်ပါ။"
+      }
+    }
+  ],
+  "problemIds": ["modules-01-p1", "modules-01-p2", "modules-01-p3"]
+}

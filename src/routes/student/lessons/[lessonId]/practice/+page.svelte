@@ -5,6 +5,7 @@
 	import { locale } from '$lib/stores/locale';
 	import { t } from '$lib/i18n';
 	import { initPyodide, runPython, pyodideStatus } from '$lib/pyodide/bridge';
+	import { offlineHint } from '$lib/ai/fallback';
 	import CodeEditor from '$lib/components/editor/CodeEditor.svelte';
 	import OutputPanel from '$lib/components/editor/OutputPanel.svelte';
 
@@ -20,6 +21,36 @@
 	let hintIndex = $state(0);
 	let showHint = $state(false);
 	let attemptStart = Date.now();
+
+	// AI hint
+	let aiHint = $state<string | null>(null);
+	let aiLoading = $state(false);
+
+	async function askAI() {
+		if (!currentProblem) return;
+		aiLoading = true;
+		aiHint = null;
+		const code = editors[currentIdx]?.getCode() ?? currentProblem.starterCode;
+		const desc = $locale === 'en' ? currentProblem.descriptionEn : currentProblem.descriptionMm;
+		const errorMsg = output?.error ?? null;
+
+		try {
+			const res = await fetch('/api/ai/hint', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ code, errorMsg, problemDesc: desc, language: $locale })
+			});
+			if (res.ok) {
+				const data = await res.json();
+				aiHint = data.hint ?? offlineHint(code, errorMsg, $locale);
+			} else {
+				aiHint = offlineHint(code, errorMsg, $locale);
+			}
+		} catch {
+			aiHint = offlineHint(code, errorMsg, $locale);
+		}
+		aiLoading = false;
+	}
 
 	onMount(async () => {
 		problems = await db.problems.where('lessonId').equals(lessonId).sortBy('orderIndex');
@@ -123,8 +154,11 @@
 		/>
 
 		<div class="action-row">
-			<button class="btn btn-secondary" onclick={() => showHint = !showHint}>
+			<button class="btn btn-secondary" onclick={() => { showHint = !showHint; aiHint = null; }}>
 				💡 {t($locale, 'problem.hint')}
+			</button>
+			<button class="btn btn-secondary" onclick={askAI} disabled={aiLoading}>
+				{aiLoading ? '⏳' : '🤖'} {$locale === 'en' ? 'AI Help' : 'AI အကူ'}
 			</button>
 			<button class="btn btn-primary" onclick={handleSubmit} disabled={isRunning}>
 				{isRunning ? '...' : t($locale, 'problem.submit')}
@@ -143,6 +177,13 @@
 			</div>
 		{/if}
 
+		{#if aiHint}
+			<div class="hint-box ai-hint card">
+				<strong>🤖 {$locale === 'en' ? 'AI Hint' : 'AI အကြံပေး'}:</strong>
+				<p>{aiHint}</p>
+			</div>
+		{/if}
+
 		{#if output !== null}
 			<OutputPanel stdout={output.stdout} error={output.error} {isRunning} />
 		{/if}
@@ -152,7 +193,7 @@
 				<h3 class:passed={allPassed} class:failed={!allPassed}>
 					{allPassed ? '🎉 ' + t($locale, 'problem.passed') : t($locale, 'problem.failed')}
 				</h3>
-				{#each testResults as result, i}
+				{#each testResults as result}
 					<div class="test-case" class:pass={result.passed} class:fail={!result.passed}>
 						<span class="test-icon">{result.passed ? '✅' : '❌'}</span>
 						<div class="test-detail">
@@ -214,6 +255,7 @@
 
 	.hint-box { font-size: 0.9rem; }
 	.hint-box p { margin-top: 0.25rem; }
+	.ai-hint { border-left: 3px solid var(--color-primary); }
 
 	.btn-sm { padding: 0.3rem 0.75rem; font-size: 0.8rem; min-height: 32px; margin-top: 0.5rem; }
 

@@ -1,0 +1,86 @@
+{
+	"id": "classes-02",
+	"titleEn": "Class Methods and __str__",
+	"titleMm": "Class Method များနဲ့ __str__",
+	"category": "Expert Mode",
+	"difficulty": 9,
+	"ageGroupMin": "14-16",
+	"orderIndex": 22,
+	"prerequisites": ["classes-01"],
+	"estimatedMinutes": 30,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Adding Behaviour with Methods\n\nLast lesson you stored *data* in a class using attributes. Today you add **behaviour** using **methods** — functions that live inside the class.\n\nRules for class methods:\n1. Always defined with `def` inside the class body\n2. The first parameter is always `self`\n3. Called with a dot on an instance: `account.deposit(500)`\n\n## The Special `__str__` Method\n\n`__str__` is called automatically when you `print()` an object or use `str()` on it. Without it, printing an object shows ugly memory addresses like `<__main__.BankAccount object at 0x...>`.\n\nWith `__str__` you control exactly what appears.",
+				"mm": "## Method တွေနဲ့ Behavior ထည့်ခြင်း\n\nပြီးခဲ့သောသင်ခန်းစာမှာ attribute တွေကို သုံးပြီး class ထဲမှာ *data* သိမ်းဆည်းခဲ့ပါတယ်။ ဒီနေ့မှာ **method** — class ထဲမှာ နေထိုင်တဲ့ function — တွေကို သုံးပြီး **behavior** ထည့်ပါမယ်။\n\nClass method ရဲ့ စည်းမျဉ်းများ:\n1. Class body ထဲမှာ `def` နဲ့ သတ်မှတ်ရမည်\n2. ပထမဆုံး parameter က အမြဲ `self` ဖြစ်ရမည်\n3. Instance ပေါ်မှာ dot ကိုသုံးပြီး ခေါ်ရမည်: `account.deposit(500)`\n\n## `__str__` Special Method\n\n`__str__` က object တစ်ခုကို `print()` လုပ်တဲ့အခါ သို့မဟုတ် `str()` သုံးတဲ့အခါ အလိုလျောက် ဆောင်ရွက်ပါတယ်။ သူမရှိဘဲ object ကို print ထုတ်ရင် `<__main__.BankAccount object at 0x...>` ဆိုတဲ့ ရုပ်ဆိုးသော memory address ပေါ်လာပါတယ်။\n\n`__str__` ဖြင့် ဘာပေါ်မလဲကို သင်ကိုယ်တိုင် ထိန်းချုပ်နိုင်ပါတယ်။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n        print(\"Deposited:\", amount)\n\n    def withdraw(self, amount):\n        if amount > self.balance:\n            print(\"Not enough money!\")\n        else:\n            self.balance = self.balance - amount\n            print(\"Withdrew:\", amount)\n\n    def __str__(self):\n        return self.owner + \"'s balance: \" + str(self.balance) + \" Ks\"\n\naccount = BankAccount(\"Aung Min\", 1000)\nprint(account)\naccount.deposit(500)\nprint(account)\naccount.withdraw(200)\nprint(account)\naccount.withdraw(2000)",
+			"expectedOutput": "Aung Min's balance: 1000 Ks\nDeposited: 500\nAung Min's balance: 1500 Ks\nWithdrew: 200\nAung Min's balance: 1300 Ks\nNot enough money!",
+			"explanation": {
+				"en": "Each method gets `self` so it can read and update `self.balance`. The `__str__` method must `return` a string — that string is what `print()` shows. Notice how `deposit` and `withdraw` permanently change the balance stored in the object.",
+				"mm": "Method တိုင်းက `self.balance` ကို ဖတ်နဲ့ update လုပ်နိုင်ရန် `self` ကို ရရှိပါတယ်။ `__str__` method က string တစ်ခုကို `return` ရမည် — ထို string ကို `print()` က ပြပါတယ်။ `deposit` နဲ့ `withdraw` တို့က object ထဲ သိမ်းဆည်းထားသော balance ကို အမြဲတမ်း ပြောင်းလဲပုံ သတိပြုပါ။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Chaining Multiple Methods\n\nMethods can call **other methods** on the same object using `self.method_name()`. This keeps your code organised — each method does one job.\n\nYou can also have methods that **return a value** instead of (or as well as) printing:\n\n```python\ndef get_summary(self):\n    return self.owner + \": \" + str(self.balance)\n```\n\nThen use it like: `text = account.get_summary()`",
+				"mm": "## Method များကို ဆက်တိုက် သုံးခြင်း\n\nMethod တွေက `self.method_name()` ကိုသုံးပြီး တူညီသော object ပေါ်ရှိ **method အခြားတွေ** ကိုလည်း ခေါ်နိုင်ပါတယ်။ ဒါက သင့် code ကို ကြည်လင်စေပါတယ် — method တိုင်းက အလုပ်တစ်ခုသာ လုပ်ပါတယ်။\n\nPrint လုပ်တဲ့အစား (သို့မဟုတ် အပြင်) **value တစ်ခု return** ပြုသော method တွေလည်း ရှိနိုင်ပါတယ်:\n\n```python\ndef get_summary(self):\n    return self.owner + \": \" + str(self.balance)\n```\n\nပြီးတော့ ဒီလို သုံးနိုင်ပါတယ်: `text = account.get_summary()`"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def is_rich(self):\n        return self.balance >= 10000\n\n    def __str__(self):\n        status = \"Rich!\" if self.is_rich() else \"Normal\"\n        return self.owner + \" | \" + str(self.balance) + \" Ks | \" + status\n\na = BankAccount(\"Nilar\", 5000)\nprint(a)\na.deposit(6000)\nprint(a)\nsuccess = a.withdraw(500)\nprint(\"Withdraw worked:\", success)\nprint(a)",
+			"expectedOutput": "Nilar | 5000 Ks | Normal\nNilar | 11000 Ks | Rich!\nWithdraw worked: True\nNilar | 10500 Ks | Rich!",
+			"explanation": {
+				"en": "`__str__` calls `self.is_rich()` — a method calling another method on the same object. `withdraw` returns `True` or `False` so the caller knows whether it worked. The `+=` shorthand means `self.balance = self.balance + amount`.",
+				"mm": "`__str__` က တူညီသော object ပေါ်မှာ method တစ်ခုက method အခြားတစ်ခု ခေါ်ခြင်းဖြစ်တဲ့ `self.is_rich()` ကို ခေါ်ပါတယ်။ `withdraw` က `True` သို့ `False` ပြန်ပေးပြီး ခေါ်သူသိနိုင်ပါတယ်။ `+=` shorthand က `self.balance = self.balance + amount` ဟု အဓိပ္ပာယ်ရပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Create a `ScoreBoard` class with `__init__(self, player_name)` that sets `self.score = 0`. Add an `add_points(self, points)` method and a `__str__` that returns something like `\"Aung: 50 points\"`. Test it by adding points and printing.",
+				"mm": "`self.score = 0` ကို သတ်မှတ်သော `__init__(self, player_name)` ပါသည့် `ScoreBoard` class တစ်ခု ဖန်တီးပါ။ `add_points(self, points)` method နဲ့ `\"Aung: 50 points\"` ကဲ့သို့ return ပြုသော `__str__` ထည့်ပါ။ Points ထည့်ပြီး print လုပ်ကာ စမ်းကြည့်ပါ။"
+			},
+			"starterCode": "class ScoreBoard:\n    def __init__(self, player_name):\n        self.player_name = player_name\n        self.score = 0\n\n    def add_points(self, points):\n        # Add points to self.score\n        \n\n    def __str__(self):\n        # Return a string like \"Aung: 50 points\"\n        \n\n# Test it\nboard = ScoreBoard(\"Aung\")\nboard.add_points(30)\nboard.add_points(20)\nprint(board)\n",
+			"validation": {
+				"mustContain": ["class ScoreBoard", "self.score", "def add_points", "def __str__", "return"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What is the purpose of the `__str__` method?",
+				"mm": "`__str__` method ရဲ့ ရည်ရွယ်ချက်က ဘာလဲ?"
+			},
+			"options": {
+				"en": [
+					"To store text as an attribute",
+					"To control what print() shows for an object",
+					"To convert numbers to strings",
+					"To name the class"
+				],
+				"mm": [
+					"Text ကို attribute အဖြစ် သိမ်းဆည်းရန်",
+					"object တစ်ခုကို print() လုပ်သောအခါ ပြသည်ကို ထိန်းချုပ်ရန်",
+					"ဂဏန်းများကို string အဖြစ် ပြောင်းရန်",
+					"class ကို အမည်ပေးရန်"
+				]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "`__str__` must return a string, and Python calls it automatically whenever `print(obj)` or `str(obj)` is used. It gives you a human-friendly view of your object.",
+				"mm": "`__str__` က string တစ်ခု return ရမည်ဖြစ်ပြီး `print(obj)` သို့မဟုတ် `str(obj)` ကို သုံးသောအခါ Python က အလိုလျောက် ခေါ်ပါတယ်။ ၎င်းက သင့် object ကို လူနားလည်နိုင်သော ပုံစံဖြင့် ပြပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["classes-02-p1", "classes-02-p2", "classes-02-p3"]
+}

@@ -1,0 +1,86 @@
+{
+	"id": "recursion-01",
+	"titleEn": "Recursion — Functions That Call Themselves",
+	"titleMm": "Recursion — ကိုယ်ကိုယ်ကို ခေါ်တဲ့ Function များ",
+	"category": "Expert Mode",
+	"difficulty": 9,
+	"ageGroupMin": "14-16",
+	"orderIndex": 23,
+	"prerequisites": ["classes-02"],
+	"estimatedMinutes": 30,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## What is Recursion?\n\nA **recursive** function is a function that calls *itself*. This sounds like it would loop forever — and it would, without a **base case**.\n\nEvery recursive function needs two parts:\n1. **Base case** — the stopping condition. When this is true, the function returns immediately without calling itself.\n2. **Recursive case** — where the function calls itself with a *smaller* or *simpler* version of the problem.\n\nThink of it like Russian dolls: each doll opens to reveal a smaller doll, until you reach the tiniest doll that doesn't open — that's your base case!\n\n```\nfactorial(4)\n  → 4 × factorial(3)\n        → 3 × factorial(2)\n              → 2 × factorial(1)\n                    → 1   ← base case!\n```",
+				"mm": "## Recursion ဆိုတာ ဘာလဲ?\n\n**Recursive** function ဆိုတာ ကိုယ်ကိုယ်ကို ခေါ်တဲ့ function တစ်ခု ဖြစ်ပါတယ်။ ဒါဆို အဆုံးမရှိ loop ဖြစ်မှာလားဟု ထင်ရနိုင်ပါတယ် — **base case** မရှိရင် တကယ်ဖြစ်ပါလိမ့်မယ်။\n\nRecursive function တိုင်းမှာ အပိုင်း နှစ်ခု လိုပါတယ်:\n1. **Base case** — ရပ်ရမည့် အခြေအနေ။ ဒါ true ဖြစ်ရင် function က ကိုယ်ကိုယ်ကို မခေါ်ဘဲ ချက်ချင်း return ပြုသည်။\n2. **Recursive case** — function က ပြဿနာရဲ့ *သေးငယ်သော* သို့မဟုတ် *ရိုးရှင်းသော* version ဖြင့် ကိုယ်ကိုယ်ကို ခေါ်သည်။\n\nRussian doll တွေကဲ့သို့ မြင်ပါ: doll တိုင်းကို ဖွင့်ရင် သေးငယ်သော doll ပေါ်လာပြီး ဖွင့်မရတော့သော အသေးဆုံး doll ကိုမတွေ့မချင်း ဆက်ဖွင့်ပါတယ် — ဒါပဲ သင့် base case ဖြစ်ပါတယ်!"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "def countdown(n):\n    if n <= 0:           # base case\n        print(\"Go!\")\n    else:                # recursive case\n        print(n)\n        countdown(n - 1) # call itself with smaller n\n\ncountdown(5)",
+			"expectedOutput": "5\n4\n3\n2\n1\nGo!",
+			"explanation": {
+				"en": "Each call to `countdown` prints `n` then calls `countdown(n-1)`. When `n` reaches 0 the base case fires and prints `\"Go!\"`. The key insight: each recursive call gets a *smaller* value, so it must eventually reach the base case.",
+				"mm": "`countdown` ကို ခေါ်တိုင်း `n` ကို print ထုတ်ပြီး `countdown(n-1)` ကို ခေါ်ပါတယ်။ `n` က 0 ရောက်သောအခါ base case အလုပ်လုပ်ပြီး `\"Go!\"` print ထုတ်ပါတယ်။ အဓိကနားလည်ချက်: recursive call တိုင်းက *သေးငယ်သော* value ရပြီး နောက်ဆုံးတွင် base case ကို ရောက်ရမည်သာ ဖြစ်သည်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Factorial — A Classic Recursive Problem\n\n**Factorial** of a number n (written n!) means:\n```\n5! = 5 × 4 × 3 × 2 × 1 = 120\n4! = 4 × 3 × 2 × 1 = 24\n1! = 1\n0! = 1  (by definition)\n```\n\nThe recursive pattern:\n- If `n` is 0 or 1 → return 1 (base case)\n- Otherwise → return `n * factorial(n - 1)`\n\n## Visualising the Call Stack\n\nWhen Python runs `factorial(4)`:\n```\nfactorial(4) = 4 × factorial(3)\n                   factorial(3) = 3 × factorial(2)\n                                      factorial(2) = 2 × factorial(1)\n                                                         factorial(1) = 1\n```\nThen the answers \"bubble up\":\n```\nfactorial(1) = 1\nfactorial(2) = 2 × 1 = 2\nfactorial(3) = 3 × 2 = 6\nfactorial(4) = 4 × 6 = 24\n```",
+				"mm": "## Factorial — ရိပ်မြောက်သော Recursive ပြဿနာ\n\nn ရဲ့ **Factorial** (n! ဟုရေး) ဆိုတာ:\n```\n5! = 5 × 4 × 3 × 2 × 1 = 120\n4! = 4 × 3 × 2 × 1 = 24\n1! = 1\n0! = 1  (အဓိပ္ပာယ်အားဖြင့်)\n```\n\nRecursive ပုံစံ:\n- `n` က 0 သို့မဟုတ် 1 ဆိုရင် → 1 return ပြု (base case)\n- မဟုတ်ရင် → `n * factorial(n - 1)` return ပြု\n\n## Call Stack ကို မြင်ယောင်ကြည့်ခြင်း\n\nPython က `factorial(4)` ကို run သောအခါ:\n```\nfactorial(4) = 4 × factorial(3)\n                   factorial(3) = 3 × factorial(2)\n                                      factorial(2) = 2 × factorial(1)\n                                                         factorial(1) = 1\n```\nပြီးတော့ အဖြေများ \"အပေါ်သို့ ပြန်တက်\" ပါတယ်:\n```\nfactorial(1) = 1\nfactorial(2) = 2 × 1 = 2\nfactorial(3) = 3 × 2 = 6\nfactorial(4) = 4 × 6 = 24\n```"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "def factorial(n):\n    if n <= 1:              # base case\n        return 1\n    else:                   # recursive case\n        return n * factorial(n - 1)\n\nprint(\"1! =\", factorial(1))\nprint(\"4! =\", factorial(4))\nprint(\"5! =\", factorial(5))\nprint(\"6! =\", factorial(6))",
+			"expectedOutput": "1! = 1\n4! = 24\n5! = 120\n6! = 720",
+			"explanation": {
+				"en": "Notice the function has only 4 lines but handles any number. The return value travels back up through every waiting call. `return n * factorial(n-1)` means: \"pause here, compute factorial(n-1), then multiply by n, then return the result.\"",
+				"mm": "Function မှာ line လေးကြောင်းသာ ရှိသော်လည်း မည်သည့် ဂဏန်းမဆို ကိုင်တွယ်နိုင်ကြောင်း သတိပြုပါ။ Return value က စောင့်နေသော ခေါ်ဆိုမှု တိုင်းအတွင်းကို ပြန်ဖြတ်ကျော်ပါတယ်။ `return n * factorial(n-1)` ဆိုတာ \"ဒီမှာ ခဏရပ်၊ factorial(n-1) တွက်၊ n နဲ့ မြှောက်ပြီး result ပြန်ပေး\" ဟု အဓိပ္ပာယ်ရပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Write a recursive function `power(base, exp)` that computes `base` to the power of `exp` without using `**`. Base case: `exp == 0` returns `1`. Recursive case: `base * power(base, exp - 1)`. Test with `power(2, 8)` which should give 256.",
+				"mm": "`**` ကို မသုံးဘဲ `base` ကို `exp` အစွမ်းသို့ တွက်ချက်သော recursive function `power(base, exp)` တစ်ခု ရေးပါ။ Base case: `exp == 0` က `1` ပြန်ပေး။ Recursive case: `base * power(base, exp - 1)`။ 256 ထွက်ရမည့် `power(2, 8)` ဖြင့် စမ်းပါ။"
+			},
+			"starterCode": "def power(base, exp):\n    if exp == 0:\n        # base case: anything to the power 0 is 1\n        \n    else:\n        # recursive case: base * power(base, exp - 1)\n        \n\nprint(power(2, 8))   # should print 256\nprint(power(3, 3))   # should print 27\n",
+			"validation": {
+				"mustContain": ["def power", "return", "power(base", "exp - 1"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "What happens if you write a recursive function with NO base case?",
+				"mm": "Base case မပါသော recursive function တစ်ခု ရေးလျှင် ဘာဖြစ်မလဲ?"
+			},
+			"options": {
+				"en": [
+					"It returns 0 automatically",
+					"Python skips the function",
+					"It calls itself forever until Python raises a RecursionError",
+					"It works fine for small inputs"
+				],
+				"mm": [
+					"ကိုယ်တိုင် 0 ပြန်ပေးသည်",
+					"Python က function ကို ကျော်သွားသည်",
+					"Python က RecursionError တင်ပေးသည်အထိ ကိုယ်ကိုယ်ကို အဆုံးမရှိ ခေါ်သည်",
+					"သေးငယ်သော input များအတွက် ကောင်းစွာ အလုပ်လုပ်သည်"
+				]
+			},
+			"correct": 2,
+			"explanation": {
+				"en": "Without a base case the function never stops calling itself. Python limits how deep recursion can go (usually ~1000 levels) and then raises a `RecursionError: maximum recursion depth exceeded`. Always write the base case first!",
+				"mm": "Base case မရှိဘဲ function က ကိုယ်ကိုယ်ကို ခေါ်ခြင်း ဘယ်တော့မှ မရပ်ပါ။ Python က recursion မည်မျှ နက်နိုင်မလဲကို ကန့်သတ်ထားပြီး (ပုံမှန်အားဖြင့် ~1000 level) `RecursionError: maximum recursion depth exceeded` ဟု raise ပါတယ်။ Base case ကို အမြဲ ဦးစွာ ရေးပါ!"
+			}
+		}
+	],
+	"problemIds": ["recursion-01-p1", "recursion-01-p2", "recursion-01-p3"]
+}

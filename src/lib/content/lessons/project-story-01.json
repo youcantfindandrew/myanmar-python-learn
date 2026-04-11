@@ -1,0 +1,86 @@
+{
+	"id": "project-story-01",
+	"titleEn": "Build It! — Text Adventure Game",
+	"titleMm": "တည်ဆောက်မယ် — စာသား စွန့်စားချက် ဂိမ်း",
+	"category": "Build It!",
+	"difficulty": 10,
+	"ageGroupMin": "14-16",
+	"orderIndex": 25,
+	"prerequisites": ["project-quiz-01"],
+	"estimatedMinutes": 45,
+	"sections": [
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## Build a Text Adventure Game!\n\nText adventure games are programs where the player reads a story and types choices. Games like Zork ran on early computers and people loved them.\n\nOur game will have:\n- A **game loop** (`while playing`) that keeps running until the player quits or loses\n- **Scene functions** — each location is its own function that returns what happens next\n- **if/elif** for player choices inside each scene\n- A **score** that changes based on decisions\n\nHere is the overall structure:\n\n```\nmain game loop\n  ↓\ncall scene function  →  player picks choice\n  ↓                         ↓\nscene returns next     score changes\n  ↓\ngo to next scene or end\n```\n\nWe'll build it step by step — first a single scene, then the full loop.",
+				"mm": "## စာသား စွန့်စားချက် ဂိမ်း တည်ဆောက်ကြမယ်!\n\nစာသား adventure ဂိမ်းများဟာ ကစားသူ ဇာတ်လမ်းဖတ်ပြီး ရွေးချယ်မှုများ ရိုက်ထည့်သော program များ ဖြစ်ပါတယ်။ Zork ကဲ့သို့သော ဂိမ်းများ ရှေးကွန်ပျူတာများပေါ်တွင် run ခဲ့ပြီး လူများ ချစ်နှစ်သက်ခဲ့ပါတယ်။\n\nဂိမ်းတွင် ရှိမည်:\n- ကစားသူ ထွက်သွားသည် သို့မဟုတ် ရှုံးသည်အထိ run နေမည့် **game loop** (`while playing`)\n- **Scene function** — နေရာတိုင်းက နောက်ဖြစ်ပေါ်မည်ကို return ပြုသော ကိုယ်ပိုင် function\n- Scene တိုင်းထဲ ကစားသူ ရွေးချယ်မှုများအတွက် **if/elif**\n- ဆုံးဖြတ်ချက်များ ပေါ်မူတည်ပြောင်းလဲမည့် **score**\n\nဒါဟာ overall structure:\n\n```\nmain game loop\n  ↓\nscene function ခေါ် → ကစားသူ ရွေးချယ်\n  ↓                       ↓\nscene က နောက်ကို return   score ပြောင်း\n  ↓\nနောက် scene သို့ သွား သို့မဟုတ် ပြီးဆုံး\n```\n\nတစ်ဆင့်ချင်း တည်ဆောက်မည် — ဦးစွာ scene တစ်ခုတည်း၊ ပြီးတော့ full loop။"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "def scene_forest(score):\n    print(\"\\n=== Dark Forest ===\")\n    print(\"You stand at a fork in the path.\")\n    print(\"1) Go left toward the light\")\n    print(\"2) Go right into the shadows\")\n    print(\"3) Climb a tree to look around\")\n\n    choice = input(\"Choose (1/2/3): \")\n\n    if choice == \"1\":\n        print(\"You find a village! People give you food.\")\n        return \"village\", score + 10\n    elif choice == \"2\":\n        print(\"A wolf growls. You run back!\")\n        return \"forest\", score - 5\n    elif choice == \"3\":\n        print(\"You spot a river to the east. Useful!\")\n        return \"river\", score + 5\n    else:\n        print(\"You stand still. Nothing happens.\")\n        return \"forest\", score\n\n# Test one scene\nnext_scene, new_score = scene_forest(0)\nprint(\"Next:\", next_scene, \"| Score:\", new_score)",
+			"expectedOutput": "\n=== Dark Forest ===\nYou stand at a fork in the path.\n1) Go left toward the light\n2) Go right into the shadows\n3) Climb a tree to look around\nChoose (1/2/3): 1\nYou find a village! People give you food.\nNext: village | Score: 10",
+			"explanation": {
+				"en": "The scene function returns **two values**: the name of the next scene and the updated score. Python lets you return a tuple `(value1, value2)` and unpack it with `next_scene, new_score = ...`. Each scene is completely independent — easy to add more later.",
+				"mm": "Scene function က **value နှစ်ခု** ပြန်ပေးပါတယ်: နောက် scene ၏ နာမည်နဲ့ update လုပ်ပြီးသော score။ Python က tuple `(value1, value2)` return ပြုပြီး `next_scene, new_score = ...` ဖြင့် unpack လုပ်နိုင်စေပါတယ်။ Scene တိုင်းက လုံးဝ သီးခြားဖြစ်ပြီး — နောက်ပိုင်း ထပ်ထည့်ရလွယ်ကူပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "explanation",
+			"content": {
+				"en": "## The Game Loop\n\nNow connect scenes with a `while` loop. The loop checks what scene to run next and calls the right function:\n\n```python\ncurrent_scene = \"forest\"\nplaying = True\n\nwhile playing:\n    if current_scene == \"forest\":\n        current_scene, score = scene_forest(score)\n    elif current_scene == \"village\":\n        current_scene, score = scene_village(score)\n    elif current_scene == \"end\":\n        playing = False\n```\n\nThis pattern is called a **game state machine** — the scene name is the state, and each scene decides the next state.\n\nThe player wins by reaching `\"end\"` with a good score. You can also end with `playing = False` inside a scene if the player \"dies\".\n\n**Tips for good adventure games:**\n- Give meaningful consequences to choices (score change)\n- Let players recover from bad choices (don't dead-end too fast)\n- Each scene should give a vivid picture in one or two sentences",
+				"mm": "## Game Loop\n\nခု `while` loop ဖြင့် scene တွေကို ချိတ်ဆက်ပါမည်။ Loop က နောက်ပိုင်း run မည့် scene ကို စစ်ဆေးပြီး မှန်ကန်သော function ကို ခေါ်ပါတယ်:\n\n```python\ncurrent_scene = \"forest\"\nplaying = True\n\nwhile playing:\n    if current_scene == \"forest\":\n        current_scene, score = scene_forest(score)\n    elif current_scene == \"village\":\n        current_scene, score = scene_village(score)\n    elif current_scene == \"end\":\n        playing = False\n```\n\nဤ pattern ကို **game state machine** ဟုခေါ်ပါတယ် — scene နာမည်ဟာ state ဖြစ်ပြီး scene တိုင်းက နောက် state ကို ဆုံးဖြတ်ပါတယ်။\n\nကစားသူ ကောင်းသော score ဖြင့် `\"end\"` ရောက်ရင် အနိုင်ရပါတယ်။ ကစားသူ \"သေဆုံး\" ပါက scene ထဲမှာ `playing = False` ဖြင့်လည်း ဆုံးနိုင်ပါတယ်။\n\n**ကောင်းသော adventure ဂိမ်းအတွက် အကြံများ:**\n- ရွေးချယ်မှုများကို မှတ်မှတ်ရရ သက်ရောက်မှုပေး (score ပြောင်း)\n- မကောင်းသော ရွေးချယ်မှုများမှ ကစားသူ ပြန်ဆုတ် နိုင်ဖွယ် ဖြစ်စေပါ\n- Scene တိုင်းက ကြောင်း တစ်ကြောင်း သို့ နှစ်ကြောင်းဖြင့် ရှင်းရှင်းလင်းလင်း ပုံဆွဲပေးရမည်"
+			}
+		},
+		{
+			"type": "code_example",
+			"code": "def scene_start(score):\n    print(\"\\n=== Village Gate ===\")\n    print(\"A traveller offers you a map or a sword.\")\n    print(\"1) Take the map\")\n    print(\"2) Take the sword\")\n    choice = input(\"Choose (1/2): \")\n    if choice == \"1\":\n        print(\"Smart! The map shows a safe path.\")\n        return \"cave\", score + 10\n    else:\n        print(\"Brave! The sword feels heavy but good.\")\n        return \"cave\", score + 5\n\ndef scene_cave(score):\n    print(\"\\n=== Mysterious Cave ===\")\n    print(\"You hear water dripping. Two tunnels ahead.\")\n    print(\"1) Follow the sound of water\")\n    print(\"2) Take the tunnel with torchlight\")\n    choice = input(\"Choose (1/2): \")\n    if choice == \"1\":\n        print(\"The water leads to a hidden treasure room!\")\n        return \"end\", score + 20\n    else:\n        print(\"The torch goes out. You find another path.\")\n        return \"end\", score + 10\n\ndef scene_end(score):\n    print(\"\\n=== Journey Complete ===\")\n    print(\"You made it out of the cave.\")\n    if score >= 25:\n        print(\"HERO! Score:\", score)\n    else:\n        print(\"Adventurer. Score:\", score)\n\n# Run the game with pre-set choices for demo\nimport builtins\nanswers = [\"1\", \"1\"]\nidx = 0\n\ndef fake_input(prompt):\n    global idx\n    print(prompt + answers[idx])\n    val = answers[idx]\n    idx += 1\n    return val\n\nbuiltins.input = fake_input\n\nscore = 0\ncurrent = \"start\"\nplaying = True\n\nwhile playing:\n    if current == \"start\":\n        current, score = scene_start(score)\n    elif current == \"cave\":\n        current, score = scene_cave(score)\n    elif current == \"end\":\n        scene_end(score)\n        playing = False",
+			"expectedOutput": "\n=== Village Gate ===\nA traveller offers you a map or a sword.\n1) Take the map\n2) Take the sword\nChoose (1/2): 1\nSmart! The map shows a safe path.\n\n=== Mysterious Cave ===\nYou hear water dripping. Two tunnels ahead.\n1) Follow the sound of water\n2) Take the tunnel with torchlight\nChoose (1/2): 1\nThe water leads to a hidden treasure room!\n\n=== Journey Complete ===\nYou made it out of the cave.\nHERO! Score: 30",
+			"explanation": {
+				"en": "Each scene function is independent. The `while playing` loop is the engine — it just checks the current scene name and calls the right function. Adding a new scene is as simple as writing a new function and adding one `elif` to the loop. This is clean, expandable code.",
+				"mm": "Scene function တိုင်းက သီးခြားဖြစ်ပါတယ်။ `while playing` loop ဟာ engine ဖြစ်ပြီး — current scene နာမည်ကို စစ်ပြီး မှန်ကန်သော function ကို ခေါ်ရုံသာ ဖြစ်ပါတယ်။ Scene အသစ်တစ်ခု ထည့်ဖို့ function အသစ်တစ်ခု ရေးပြီး loop မှာ `elif` တစ်ကြောင်း ထည့်ရုံပင် ဖြစ်ပါတယ်။ ဒါဟာ ရှင်းလင်းပြီး တိုးချဲ့နိုင်သော code ဖြစ်ပါတယ်။"
+			},
+			"runnable": true
+		},
+		{
+			"type": "try_it",
+			"prompt": {
+				"en": "Write your own mini adventure with at least 2 scenes. Scene 1 should offer 2 choices and lead to different outcomes. Both outcomes should end with `return \"end\", score`. Print a final message based on the score. Use a `while` loop to run the game.",
+				"mm": "Scene အနည်းဆုံး 2 ခုပါသော မိမိကိုယ်ပိုင် mini adventure တစ်ခု ရေးပါ။ Scene 1 တွင် ရွေးချယ်မှု 2 ခု ပေးပြီး ကွဲပြားသော ရလဒ်သို့ ဦးတည်ရမည်။ ရလဒ်နှစ်ခုလုံး `return \"end\", score` ဖြင့် ဆုံးရမည်။ Score ပေါ်မူတည်ပြီး နောက်ဆုံး message print ထုတ်ပါ။ `while` loop ကိုသုံးပြီး ဂိမ်း run ပါ။"
+			},
+			"starterCode": "def scene_one(score):\n    print(\"\\n=== Scene One ===\")\n    print(\"You are at the start of your adventure.\")\n    print(\"1) Choice A\")\n    print(\"2) Choice B\")\n    choice = input(\"Choose (1/2): \")\n    if choice == \"1\":\n        print(\"Something good happens!\")\n        return \"end\", score + 10\n    else:\n        print(\"Something tricky happens.\")\n        return \"end\", score + 5\n\ndef scene_end(score):\n    print(\"\\n=== The End ===\")\n    # Print a message based on score\n    if score >= 10:\n        print(\"Great adventurer! Score:\", score)\n    else:\n        print(\"You survived. Score:\", score)\n\n# Game loop\nscore = 0\ncurrent = \"one\"\nplaying = True\n\nwhile playing:\n    if current == \"one\":\n        current, score = scene_one(score)\n    elif current == \"end\":\n        scene_end(score)\n        playing = False\n",
+			"validation": {
+				"mustContain": ["def scene_", "while playing", "return", "score", "print"],
+				"mustOutputSomething": true
+			}
+		},
+		{
+			"type": "quiz",
+			"question": {
+				"en": "Why does each scene function return the next scene name as a string instead of calling the next scene directly?",
+				"mm": "Scene function တိုင်းက နောက် scene ကို တိုက်ရိုက် ခေါ်မည့်အစား နောက် scene ၏ နာမည်ကို string အဖြစ် return ပြုရသောကြောင်းက ဘာကြောင့်?"
+			},
+			"options": {
+				"en": [
+					"Strings are faster than function calls",
+					"The main loop stays in control — scenes don't need to know about each other",
+					"Python can't call functions from inside functions",
+					"It saves memory"
+				],
+				"mm": [
+					"String တွေဟာ function call တွေထက် မြန်ပါတယ်",
+					"Main loop က ထိန်းချုပ်မှု ဆက်ထားသည် — scene တွေ အချင်းချင်း သိစရာမလို",
+					"Python က function ထဲမှ function ခေါ်မရပါ",
+					"Memory ချွေတာပါတယ်"
+				]
+			},
+			"correct": 1,
+			"explanation": {
+				"en": "When scenes return a name and the main loop decides what runs next, no scene needs to import or know about any other scene. This is called **loose coupling** — it makes the game easy to expand. You can add 10 new scenes without touching any existing scene code.",
+				"mm": "Scene တွေ နာမည် return ပြုပြီး main loop က နောက်ပိုင်း ဘာ run မလဲ ဆုံးဖြတ်သောအခါ scene တစ်ခုမျှ အခြား scene တစ်ခုကို import သို့မဟုတ် သိစရာ မလိုပါ။ ဒါကို **loose coupling** ဟုခေါ်ပါတယ် — ဂိမ်းကို တိုးချဲ့ရ လွယ်ကူစေပါတယ်။ ရှိနှင့်ပြီးသော scene code တစ်ကြောင်းမျှ မထိဘဲ scene အသစ် 10 ခု ထည့်နိုင်ပါတယ်။"
+			}
+		}
+	],
+	"problemIds": ["project-story-01-p1", "project-story-01-p2", "project-story-01-p3"]
+}
