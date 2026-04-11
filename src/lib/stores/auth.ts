@@ -16,7 +16,7 @@ export async function loginWithPin(displayName: string, pin: string): Promise<bo
 	);
 	if (!user) return false;
 
-	const hash = await hashPin(pin);
+	const hash = await hashPin(pin, user.pinSalt ?? 'legacy-migrate');
 	if (user.pinHash !== hash) return false;
 
 	currentUser.set(user);
@@ -33,7 +33,8 @@ export async function createStudent(
 	ageGroup: string,
 	teacherCode?: string
 ): Promise<UserProfile> {
-	const hash = await hashPin(pin);
+	const salt = crypto.randomUUID();
+	const hash = await hashPin(pin, salt);
 
 	// Resolve teacher from class code (online only)
 	let teacherId: string | undefined;
@@ -53,6 +54,7 @@ export async function createStudent(
 		ageGroup,
 		preferredLanguage: 'mm',
 		pinHash: hash,
+		pinSalt: salt,
 		currentDifficultyLevel: 1
 	};
 	if (teacherId) profile.teacherId = teacherId;
@@ -105,6 +107,7 @@ export async function teacherSignUp(email: string, password: string, name: strin
 		ageGroup: '',
 		preferredLanguage: 'en',
 		pinHash: '',
+		pinSalt: '',
 		teacherCode,
 		currentDifficultyLevel: 0
 	};
@@ -140,6 +143,7 @@ export async function teacherLogin(email: string, password: string): Promise<{ e
 		ageGroup: profile.age_group ?? '',
 		preferredLanguage: profile.preferred_language ?? 'en',
 		pinHash: '',
+		pinSalt: '',
 		teacherCode: profile.teacher_code,
 		currentDifficultyLevel: 0
 	};
@@ -186,9 +190,9 @@ export function logout(): void {
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-async function hashPin(pin: string): Promise<string> {
+async function hashPin(pin: string, salt: string): Promise<string> {
 	const encoder = new TextEncoder();
-	const data = encoder.encode(pin + 'myanmar-python-learn-salt');
+	const data = encoder.encode(salt + ':' + pin);
 	const buf = await crypto.subtle.digest('SHA-256', data);
 	return Array.from(new Uint8Array(buf))
 		.map((b) => b.toString(16).padStart(2, '0'))

@@ -93,6 +93,7 @@ export interface UserProfile {
 	ageGroup: string;
 	preferredLanguage: 'en' | 'mm';
 	pinHash: string;
+	pinSalt: string; // random per-user salt, stored alongside the hash
 	teacherCode?: string;
 	teacherId?: string;
 	currentDifficultyLevel: number;
@@ -126,6 +127,23 @@ class AppDatabase extends Dexie {
 			syncQueue: '++id, table, createdAt',
 			profiles: 'id, role',
 			dailyActivity: 'date, synced'
+		});
+		// v2: add pinSalt column to profiles for per-user PIN hashing
+		this.version(2).stores({
+			lessons: 'id, category, difficulty, orderIndex',
+			problems: 'id, lessonId, difficulty, orderIndex',
+			progress: 'id, status, synced',
+			attempts: 'id, problemId, attemptedAt, synced',
+			syncQueue: '++id, table, createdAt',
+			profiles: 'id, role',
+			dailyActivity: 'date, synced'
+		}).upgrade((tx) => {
+			// Existing profiles get a fixed migration salt so their
+			// stored pinHash stays valid. They will be re-hashed on
+			// next PIN change. New profiles always use crypto.randomUUID().
+			return tx.table('profiles').toCollection().modify((p) => {
+				if (!p.pinSalt) p.pinSalt = 'legacy-migrate';
+			});
 		});
 	}
 }
